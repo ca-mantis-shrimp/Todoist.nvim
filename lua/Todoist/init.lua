@@ -10,6 +10,6 @@ function M.setup(opts)
 end
 
 M.open_project_list =
-	api.open_project_list(query.get_project_list, ui.show_project_list, config.api_key, config.options.ui)
+	api.open_project_list(query.get_all_projects, ui.show_project_list, config.api_key, config.options.ui)
 
 return M

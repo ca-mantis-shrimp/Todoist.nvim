@@ -18,3 +18,5 @@ end
 function M.append_node_to_list(tree, node)
 	return tree.append(tree.Node(node))
 end
+
+return M

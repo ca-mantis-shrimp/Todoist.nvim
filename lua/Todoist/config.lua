@@ -13,13 +13,13 @@ M.defaults = {
 
 function M.get_api_key(api_key_opts)
 	M.api_key = nil
-	if api_key_opts.env_variable ~= nil then
+	if api_key_opts.env_variable ~= "" then
 		M.api_key = os.getenv(api_key_opts.env_variable)
 	end
-	if api_key_opts.file_path ~= nil then
+	if api_key_opts.file_path ~= "" then
 		M.api_key = vim.fn.readfile(api_key_opts.file_path)[1]
 	end
-	if api_key_opts.cmd ~= nil then
+	if api_key_opts.cmd ~= "" then
 		M.api_key = vim.fn.system(api_key_opts.cmd)
 	end
 end

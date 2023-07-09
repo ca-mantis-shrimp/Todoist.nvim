@@ -1,4 +1,4 @@
-local nui = require("nui")
+local tree = require("nui.tree")
 local M = {}
 
 function M.show_project_list(ui_opts, data)
@@ -7,7 +7,7 @@ function M.show_project_list(ui_opts, data)
 	for project in data do
 		M.append_node_to_list(project_list, project)
 	end
-	local project_tree = nui.tree.NuiTree({
+	local project_tree = tree.NuiTree({
 		bufnr = vim.api.nvim_create_buf(false, true),
 		data = project_list,
 	})
@@ -16,5 +16,5 @@ function M.show_project_list(ui_opts, data)
 end
 
 function M.append_node_to_list(tree, node)
-	return tree.append(nui.tree.Node(node))
+	return tree.append(tree.Node(node))
 end

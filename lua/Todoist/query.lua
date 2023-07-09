@@ -8,7 +8,7 @@ function M.get_all_projects(api_key)
 	local authorization = "Bearer " .. api_key
 	local data = { sync_token = "*", resource_types = "projects" }
 
-	local response = curl.get(M.url, {
+	local response = curl.request(M.url, {
 		auth = authorization,
 		query = data,
 	})

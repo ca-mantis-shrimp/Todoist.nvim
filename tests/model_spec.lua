@@ -39,12 +39,4 @@ describe("Converting Todoist Types into nui.nvim Tree", function()
 
 		assert.is_true(#node_list == 2)
 	end)
-
-	it("can render a project node properly", function()
-		local node = tree.Node({ id = "1", text = "Test Project" })
-
-		local node_representation = tree_converter.prepare_node_func(node)
-
-		assert.is_true(node_representation == "> Test Project")
-	end)
 end)

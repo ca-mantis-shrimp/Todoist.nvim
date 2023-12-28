@@ -27,7 +27,17 @@ M.convert_to_node = function(node_data)
 end
 
 M.prepare_node_func = function(node)
-	return "> " .. node.text
+	local line = sring.rep("  ", node:get_depth() - 1)
+
+	if node:has_children() and node:is_expanded() then
+		local line = line .. "* "
+	elseif not node:is_expanded() then
+		local line = line .. "> "
+	else
+		local line = line .. "  "
+	end
+
+	return line .. "  " .. node.text
 end
 
 M.get_node_id = function(node)

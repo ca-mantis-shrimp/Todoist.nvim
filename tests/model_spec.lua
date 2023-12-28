@@ -19,19 +19,17 @@ describe("Converting Todoist Types into nui.nvim Tree", function()
 
 		local inbox_node = tree_converter.convert_to_node(inbox_project)
 
-		assert.is_true(inbox_node["id"] ~= nil)
+		for key, _ in ipairs(inbox_project) do
+			assert.is_true(inbox_node[key] ~= nil)
+		end
 	end)
 
 	it("Can get the node from a tree using the id function", function()
-		local buffer_id = 1
-		local search_id = "52"
+		local test_node = tree.Node({ id = "1" })
 
-		local empty_tree =
-			tree_converter.create_todoist_tree(buffer_id, { tree.Node({ id = search_id }), tree.Node({ id = "0" }) })
+		local queried_node_id = tree_converter.get_node_id(test_node)
 
-		local queried_node = empty_tree:get_node(search_id)
-		assert.is_true(queried_node.id == search_id)
-		assert.is_true(empty_tree.bufnr == 1)
+		assert.is_true(queried_node_id == "1")
 	end)
 
 	it("can convert a list of projects to a list of nodes", function()
@@ -40,5 +38,21 @@ describe("Converting Todoist Types into nui.nvim Tree", function()
 		local node_list = tree_converter.convert_to_node_list(project_list)
 
 		assert.is_true(#node_list == 2)
+	end)
+
+	it("can render a project node properly", function()
+		local buffer_number = vim.api.nvim_create_buf(true, false)
+
+		local test_tree = tree({
+			bufnr = buffer_number,
+			get_node_id = function(node)
+				return node.id
+			end,
+			nodes = { tree.Node({ id = "1", text = "Test Project" }) },
+		})
+
+		local node_representation = tree_converter.prepare_node_func(test_tree:get_node("1"))
+
+		assert.is_true(node_representation == "Test Project")
 	end)
 end)

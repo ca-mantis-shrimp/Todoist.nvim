@@ -41,18 +41,10 @@ describe("Converting Todoist Types into nui.nvim Tree", function()
 	end)
 
 	it("can render a project node properly", function()
-		local buffer_number = vim.api.nvim_create_buf(true, false)
+		local node = tree.Node({ id = "1", text = "Test Project" })
 
-		local test_tree = tree({
-			bufnr = buffer_number,
-			get_node_id = function(node)
-				return node.id
-			end,
-			nodes = { tree.Node({ id = "1", text = "Test Project" }) },
-		})
+		local node_representation = tree_converter.prepare_node_func(node)
 
-		local node_representation = tree_converter.prepare_node_func(test_tree:get_node("1"))
-
-		assert.is_true(node_representation == "Test Project")
+		assert.is_true(node_representation == "> Test Project")
 	end)
 end)

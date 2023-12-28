@@ -27,7 +27,7 @@ M.convert_to_node = function(node_data)
 end
 
 M.prepare_node_func = function(node)
-	return node.text
+	return "> " .. node.text
 end
 
 M.get_node_id = function(node)

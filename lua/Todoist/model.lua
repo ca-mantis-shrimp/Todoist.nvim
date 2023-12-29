@@ -6,7 +6,7 @@ M.convert_projects_to_dictionary = function(projects)
 	for _, project in ipairs(projects) do
 		dictionary[tonumber(project.id)] = {
 			name = project.name,
-			parent_id = project.parent_id,
+			parent_id = tonumber(project.parent_id),
 			inbox_project = project.inbox_project,
 			collapsed = project.collapsed,
 			color = project.color,

@@ -1,7 +1,7 @@
 local tree_converter = require("Todoist.model")
 
-describe("Converting Todoist Lists into Trees", function()
-	it("can convert some projects into a dictionary", function()
+describe("Modeling Todoist for Display by", function()
+	it("converting a Project List to Tree Nodes", function()
 		local minimal_projects = {
 			{
 				is_archived = false,
@@ -36,12 +36,55 @@ describe("Converting Todoist Lists into Trees", function()
 		assert.are.equal(vim.inspect(example_output), vim.inspect(converted_dictionary))
 	end)
 
-	it("can create a tree from dictionary of nodes", function()
+	it("converting a Node Dictionary into a Tree", function()
 		local nodes = { [1] = { parent_id = 2, children = {} }, [2] = { children = {} } }
 		local expected_output = { [2] = { children = { [1] = { parent_id = 2, children = {} } } } }
 
 		local tree = tree_converter.convert_to_todoist_tree(nodes)
 
 		assert.are.equal(vim.inspect(tree), vim.inspect(expected_output))
+	end)
+
+	it("updating a root node to calculate depth on each node", function()
+		local layered_node = {
+			[1] = {
+				parent_id = nil,
+				children = {
+					[2] = {
+						parent_id = 1,
+						children = {
+							[3] = {
+								parent_id = 2,
+								children = {},
+							},
+						},
+					},
+				},
+			},
+		}
+
+		local expected_node = {
+			[1] = {
+				parent_id = nil,
+				depth = 0,
+				children = {
+					[2] = {
+						parent_id = 1,
+						depth = 1,
+						children = {
+							[3] = {
+								parent_id = 2,
+								depth = 2,
+								children = {},
+							},
+						},
+					},
+				},
+			},
+		}
+
+		tree_converter.set_node_depth(layered_node[1], 0)
+
+		assert.are.equal(vim.inspect(expected_node), vim.inspect(layered_node))
 	end)
 end)

@@ -1,7 +1,7 @@
 local tree_converter = require("Todoist.model")
 
-describe("Modeling Todoist for Display by", function()
-	it("converting a Project List to Tree Nodes", function()
+describe("Modeling Todoist for Display:", function()
+	it("can convert a Project List to Tree Nodes", function()
 		local minimal_projects = {
 			{
 				is_archived = false,
@@ -35,8 +35,7 @@ describe("Modeling Todoist for Display by", function()
 
 		assert.are.equal(vim.inspect(example_output), vim.inspect(converted_dictionary))
 	end)
-
-	it("converting a Node Dictionary into a Tree", function()
+	it("can convert a dictionary into a tree", function()
 		local nodes = { [1] = { parent_id = 2, children = {} }, [2] = { children = {} } }
 		local expected_output = { [2] = { children = { [1] = { parent_id = 2, children = {} } } } }
 
@@ -44,8 +43,7 @@ describe("Modeling Todoist for Display by", function()
 
 		assert.are.equal(vim.inspect(tree), vim.inspect(expected_output))
 	end)
-
-	it("updating a root node to calculate depth on each node", function()
+	it("can can add the depth of a root node and its' children", function()
 		local layered_node = {
 			[1] = {
 				parent_id = nil,
@@ -86,5 +84,67 @@ describe("Modeling Todoist for Display by", function()
 		tree_converter.set_node_depth(layered_node[1], 0)
 
 		assert.are.equal(vim.inspect(expected_node), vim.inspect(layered_node))
+	end)
+	it("can update a tree with depth", function()
+		local layered_tree = {
+			[1] = {
+				parent_id = nil,
+				children = {
+					[2] = {
+						parent_id = 1,
+						children = {
+							[3] = {
+								parent_id = 2,
+								children = {},
+							},
+						},
+					},
+				},
+			},
+			[4] = {
+				parent_id = nil,
+				children = {
+					[5] = {
+						parent_id = 4,
+						children = {},
+					},
+				},
+			},
+		}
+
+		local expected_node = {
+			[1] = {
+				parent_id = nil,
+				depth = 0,
+				children = {
+					[2] = {
+						parent_id = 1,
+						depth = 1,
+						children = {
+							[3] = {
+								parent_id = 2,
+								depth = 2,
+								children = {},
+							},
+						},
+					},
+				},
+			},
+			[4] = {
+				parent_id = nil,
+				depth = 0,
+				children = {
+					[5] = {
+						parent_id = 4,
+						depth = 1,
+						children = {},
+					},
+				},
+			},
+		}
+
+		tree_converter.set_tree_depth(layered_tree)
+
+		assert.are.equal(vim.inspect(expected_node), vim.inspect(layered_tree))
 	end)
 end)

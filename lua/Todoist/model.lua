@@ -37,6 +37,12 @@ M.convert_to_todoist_tree = function(nodes)
 	return root_nodes
 end
 
+M.set_tree_depth = function(tree)
+	for id, node in pairs(tree) do
+		M.set_node_depth(tree[id], 0)
+	end
+end
+
 M.set_node_depth = function(node, depth)
 	node.depth = depth
 	for _, child in pairs(node.children) do

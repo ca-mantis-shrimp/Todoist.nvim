@@ -29,6 +29,7 @@ describe("Modeling Todoist for Display:", function()
 				is_deleted = false,
 				view_style = "list",
 				children = {},
+				type = "project",
 			},
 		}
 		local converted_dictionary = tree_converter.convert_projects_to_dictionary(minimal_projects)
@@ -81,7 +82,7 @@ describe("Modeling Todoist for Display:", function()
 			},
 		}
 
-		tree_converter.set_node_depth(layered_node[1], 0)
+		tree_converter.set_node_depth_from_root(layered_node[1], 0)
 
 		assert.are.equal(vim.inspect(expected_node), vim.inspect(layered_node))
 	end)

@@ -1,7 +1,7 @@
 M = {}
 
 M.convert_projects_to_dictionary = function(projects)
-	local project_copy = vim.deepcopy(projects)
+	local project_copy = projects
 
 	local dictionary = {}
 
@@ -17,6 +17,7 @@ M.convert_projects_to_dictionary = function(projects)
 			is_deleted = project.is_deleted,
 			view_style = project.view_style,
 			children = {},
+			type = "project",
 		}
 	end
 
@@ -39,14 +40,14 @@ end
 
 M.set_tree_depth = function(tree)
 	for id, node in pairs(tree) do
-		M.set_node_depth(tree[id], 0)
+		M.set_node_depth_from_root(tree[id], 0)
 	end
 end
 
-M.set_node_depth = function(node, depth)
+M.set_node_depth_from_root = function(node, depth)
 	node.depth = depth
 	for _, child in pairs(node.children) do
-		M.set_node_depth(child, depth + 1)
+		M.set_node_depth_from_root(child, depth + 1)
 	end
 end
 

@@ -1,11 +1,9 @@
 M = {}
 
 M.convert_projects_to_dictionary = function(projects)
-	local project_copy = projects
-
 	local dictionary = {}
 
-	for _, project in ipairs(project_copy) do
+	for _, project in ipairs(projects) do
 		dictionary[tonumber(project.id)] = {
 			name = project.name,
 			parent_id = tonumber(project.parent_id),
@@ -24,6 +22,33 @@ M.convert_projects_to_dictionary = function(projects)
 	return dictionary
 end
 
+M.convert_tasks_to_dictionary = function(tasks)
+	local dictionary = {}
+
+	for _, task in ipairs(tasks) do
+		dictionary[tonumber(task.id)] = {
+			sync_id = task.sync_id,
+			day_order = task.day_order,
+			parent_id = tonumber(task.parent_id),
+			all_day = task.all_day,
+			child_order = task.child_order,
+			collapsed = task.collapsed,
+			date_added = task.date_added,
+			priority = task.priority,
+			content = task.content,
+			description = task.description,
+			in_history = task.in_history,
+			is_deleted = task.is_deleted,
+			due = task.due,
+			project_id = tonumber(task.project_id),
+			checked = task.checked,
+			labels = task.labels,
+		}
+
+		return dictionary
+	end
+end
+
 M.convert_to_todoist_tree = function(nodes)
 	local root_nodes = {}
 
@@ -39,7 +64,7 @@ M.convert_to_todoist_tree = function(nodes)
 end
 
 M.set_tree_depth = function(tree)
-	for id, node in pairs(tree) do
+	for id, _ in pairs(tree) do
 		M.set_node_depth_from_root(tree[id], 0)
 	end
 end

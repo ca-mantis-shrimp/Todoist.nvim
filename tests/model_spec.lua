@@ -36,6 +36,64 @@ describe("Modeling Todoist for Display:", function()
 
 		assert.are.equal(vim.inspect(example_output), vim.inspect(converted_dictionary))
 	end)
+
+	it("can convert a list of tasks into a dictionary", function()
+		local task = {
+			{
+				user_id = 1,
+				responsible_uid = nil,
+				sync_id = nil,
+				added_by_uid = 1,
+				assigned_by_uid = 1,
+				day_order = -1,
+				parent_id = nil,
+				all_day = false,
+				child_order = 1,
+				collapsed = 0,
+				date_added = "2016-08-01T13:19:45Z",
+				priority = 1,
+				id = 102835615,
+				content = "Task1",
+				description = "",
+				in_history = 0,
+				is_deleted = 0,
+				due = nil,
+				project_id = 176637191,
+				checked = 0,
+				labels = {},
+			},
+		}
+
+		local expected_output = {
+			[102835615] = {
+				user_id = 1,
+				responsible_uid = nil,
+				sync_id = nil,
+				added_by_uid = 1,
+				assigned_by_uid = 1,
+				day_order = -1,
+				parent_id = nil,
+				all_day = false,
+				child_order = 1,
+				collapsed = 0,
+				date_added = "2016-08-01T13:19:45Z",
+				priority = 1,
+				id = 102835615,
+				content = "Task1",
+				description = "",
+				in_history = 0,
+				is_deleted = 0,
+				due = nil,
+				project_id = 176637191,
+				checked = 0,
+				labels = {},
+			},
+		}
+
+		local converted_dictionary = tree_converter.convert_tasks_to_dictionary(task)
+
+		assert.are.equal(vim.inspect(expected_output), vim.inspect(converted_dictionary))
+	end)
 	it("can convert a dictionary into a tree", function()
 		local nodes = { [1] = { parent_id = 2, children = {} }, [2] = { children = {} } }
 		local expected_output = { [2] = { children = { [1] = { parent_id = 2, children = {} } } } }

@@ -35,14 +35,14 @@ M.convert_tasks_to_dictionary = function(tasks)
 			all_day = task.all_day,
 			day_order = task.day_order,
 			labels = task.labels,
-			project_id = tonumber(task.project_id),
-			parent_id = tonumber(task.parent_id),
+			parent_id = task.parent_id or task.project_id,
 			child_order = task.child_order,
 			collapsed = task.collapsed,
 			date_added = task.date_added,
 			in_history = task.in_history,
 			is_deleted = task.is_deleted,
 			sync_id = task.sync_id,
+			type = "task",
 		}
 
 		return dictionary

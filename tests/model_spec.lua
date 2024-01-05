@@ -74,14 +74,14 @@ describe("Modeling Todoist for Display:", function()
 				all_day = false,
 				day_order = -1,
 				labels = {},
-				project_id = 176637191,
-				parent_id = nil,
+				parent_id = 176637191,
 				child_order = 1,
 				collapsed = 0,
 				date_added = "2016-08-01T13:19:45Z",
 				in_history = 0,
 				is_deleted = 0,
 				sync_id = nil,
+				type = "task",
 			},
 		}
 
@@ -89,7 +89,7 @@ describe("Modeling Todoist for Display:", function()
 
 		assert.are.equal(vim.inspect(expected_output), vim.inspect(converted_dictionary))
 	end)
-	it("can convert a dictionary into a tree", function()
+	it("can convert a project dictionary into a tree", function()
 		local nodes = { [1] = { parent_id = 2, children = {} }, [2] = { children = {} } }
 		local expected_output = { [2] = { children = { [1] = { parent_id = 2, children = {} } } } }
 
@@ -139,6 +139,7 @@ describe("Modeling Todoist for Display:", function()
 
 		assert.are.equal(vim.inspect(expected_node), vim.inspect(layered_node))
 	end)
+
 	it("can update a tree with depth", function()
 		local layered_tree = {
 			[1] = {

@@ -3,6 +3,7 @@ local query = require("Todoist.query")
 local ui = require("Todoist.ui")
 local config = require("Todoist.config")
 local model = require("Todoist.model")
+local display = require("Todoist.display")
 
 local M = {}
 

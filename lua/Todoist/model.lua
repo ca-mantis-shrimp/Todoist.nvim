@@ -1,15 +1,5 @@
 M = {}
 
-M.create_node_dictionary = function(types, conversions)
-	local nodes = {}
-
-	for type, data in pairs(types) do
-		nodes = conversions[type](data, nodes)
-	end
-
-	return nodes
-end
-
 M.create_tree = function(nodes)
 	local root_nodes = {}
 
@@ -22,6 +12,33 @@ M.create_tree = function(nodes)
 	end
 
 	return root_nodes
+end
+
+M.set_tree_depth_immutably = function(tree)
+	local copy = vim.deepcopy(tree)
+
+	for id, _ in pairs(tree) do
+		M.set_node_depth_from_root(copy[id], 0)
+	end
+
+	return copy
+end
+
+M.set_node_depth_from_root = function(node, depth)
+	node.depth = depth
+	for _, child in pairs(node.children) do
+		M.set_node_depth_from_root(child, depth + 1)
+	end
+end
+
+M.create_node_dictionary = function(types, conversions)
+	local nodes = {}
+
+	for type, data in pairs(types) do
+		nodes = conversions[type](data, nodes)
+	end
+
+	return nodes
 end
 
 M.type_conversion_table =
@@ -74,23 +91,6 @@ M.add_tasks_to_nodes_immutably = function(tasks, nodes)
 	end
 
 	return copy
-end
-
-M.set_tree_depth_immutably = function(tree)
-	local copy = vim.deepcopy(tree)
-
-	for id, _ in pairs(tree) do
-		M.set_node_depth_from_root(copy[id], 0)
-	end
-
-	return copy
-end
-
-M.set_node_depth_from_root = function(node, depth)
-	node.depth = depth
-	for _, child in pairs(node.children) do
-		M.set_node_depth_from_root(child, depth + 1)
-	end
 end
 
 return M

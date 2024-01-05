@@ -1,6 +1,118 @@
 local tree_converter = require("Todoist.model")
 
 describe("Modeling Todoist for Display:", function()
+	it("can convert a project dictionary into a tree", function()
+		local nodes = { [1] = { parent_id = 2, children = {} }, [2] = { children = {} } }
+		local expected_output = { [2] = { children = { [1] = { parent_id = 2, children = {} } } } }
+
+		local tree = tree_converter.create_tree(nodes)
+
+		assert.are.equal(vim.inspect(tree), vim.inspect(expected_output))
+	end)
+	it("can update a tree with depth", function()
+		local layered_tree = {
+			[1] = {
+				parent_id = nil,
+				children = {
+					[2] = {
+						parent_id = 1,
+						children = {
+							[3] = {
+								parent_id = 2,
+								children = {},
+							},
+						},
+					},
+				},
+			},
+			[4] = {
+				parent_id = nil,
+				children = {
+					[5] = {
+						parent_id = 4,
+						children = {},
+					},
+				},
+			},
+		}
+
+		local expected_node = {
+			[1] = {
+				parent_id = nil,
+				depth = 0,
+				children = {
+					[2] = {
+						parent_id = 1,
+						depth = 1,
+						children = {
+							[3] = {
+								parent_id = 2,
+								depth = 2,
+								children = {},
+							},
+						},
+					},
+				},
+			},
+			[4] = {
+				parent_id = nil,
+				depth = 0,
+				children = {
+					[5] = {
+						parent_id = 4,
+						depth = 1,
+						children = {},
+					},
+				},
+			},
+		}
+
+		local updated_tree = tree_converter.set_tree_depth_immutably(layered_tree)
+
+		assert.are.equal(vim.inspect(expected_node), vim.inspect(updated_tree))
+	end)
+	it("can can add the depth of a root node and its' children", function()
+		local layered_node = {
+			[1] = {
+				parent_id = nil,
+				children = {
+					[2] = {
+						parent_id = 1,
+						children = {
+							[3] = {
+								parent_id = 2,
+								children = {},
+							},
+						},
+					},
+				},
+			},
+		}
+
+		local expected_node = {
+			[1] = {
+				parent_id = nil,
+				depth = 0,
+				children = {
+					[2] = {
+						parent_id = 1,
+						depth = 1,
+						children = {
+							[3] = {
+								parent_id = 2,
+								depth = 2,
+								children = {},
+							},
+						},
+					},
+				},
+			},
+		}
+
+		tree_converter.set_node_depth_from_root(layered_node[1], 0)
+
+		assert.are.equal(vim.inspect(expected_node), vim.inspect(layered_node))
+	end)
 	it("can convert a dictionary of types into a dictionary of nodes", function()
 		local types = {
 			["test_1"] = { "something", "something else" },
@@ -74,8 +186,7 @@ describe("Modeling Todoist for Display:", function()
 
 		assert.are.equal(vim.inspect(example_output), vim.inspect(converted_dictionary))
 	end)
-
-	it("can convert a list of tasks into a dictionary", function()
+	it("can convert a list of tasks into a Tree Nodes", function()
 		local task = {
 			{
 				user_id = 1,
@@ -126,118 +237,5 @@ describe("Modeling Todoist for Display:", function()
 		local nodes = tree_converter.add_tasks_to_nodes_immutably(task, {})
 
 		assert.are.equal(vim.inspect(expected_output), vim.inspect(nodes))
-	end)
-	it("can convert a project dictionary into a tree", function()
-		local nodes = { [1] = { parent_id = 2, children = {} }, [2] = { children = {} } }
-		local expected_output = { [2] = { children = { [1] = { parent_id = 2, children = {} } } } }
-
-		local tree = tree_converter.create_tree(nodes)
-
-		assert.are.equal(vim.inspect(tree), vim.inspect(expected_output))
-	end)
-	it("can can add the depth of a root node and its' children", function()
-		local layered_node = {
-			[1] = {
-				parent_id = nil,
-				children = {
-					[2] = {
-						parent_id = 1,
-						children = {
-							[3] = {
-								parent_id = 2,
-								children = {},
-							},
-						},
-					},
-				},
-			},
-		}
-
-		local expected_node = {
-			[1] = {
-				parent_id = nil,
-				depth = 0,
-				children = {
-					[2] = {
-						parent_id = 1,
-						depth = 1,
-						children = {
-							[3] = {
-								parent_id = 2,
-								depth = 2,
-								children = {},
-							},
-						},
-					},
-				},
-			},
-		}
-
-		tree_converter.set_node_depth_from_root(layered_node[1], 0)
-
-		assert.are.equal(vim.inspect(expected_node), vim.inspect(layered_node))
-	end)
-
-	it("can update a tree with depth", function()
-		local layered_tree = {
-			[1] = {
-				parent_id = nil,
-				children = {
-					[2] = {
-						parent_id = 1,
-						children = {
-							[3] = {
-								parent_id = 2,
-								children = {},
-							},
-						},
-					},
-				},
-			},
-			[4] = {
-				parent_id = nil,
-				children = {
-					[5] = {
-						parent_id = 4,
-						children = {},
-					},
-				},
-			},
-		}
-
-		local expected_node = {
-			[1] = {
-				parent_id = nil,
-				depth = 0,
-				children = {
-					[2] = {
-						parent_id = 1,
-						depth = 1,
-						children = {
-							[3] = {
-								parent_id = 2,
-								depth = 2,
-								children = {},
-							},
-						},
-					},
-				},
-			},
-			[4] = {
-				parent_id = nil,
-				depth = 0,
-				children = {
-					[5] = {
-						parent_id = 4,
-						depth = 1,
-						children = {},
-					},
-				},
-			},
-		}
-
-		local updated_tree = tree_converter.set_tree_depth_immutably(layered_tree)
-
-		assert.are.equal(vim.inspect(expected_node), vim.inspect(updated_tree))
 	end)
 end)

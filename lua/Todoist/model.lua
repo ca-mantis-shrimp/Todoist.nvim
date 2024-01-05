@@ -1,6 +1,31 @@
 M = {}
 
-M.conversion_table = { ["projects"] = M.convert_projects_to_dictionary, ["items"] = M.add_tasks_to_nodes }
+M.create_node_dictionary = function(types, conversions)
+	local nodes = {}
+
+	for type, data in pairs(types) do
+		nodes = conversions[type](data, nodes)
+	end
+
+	return nodes
+end
+
+M.create_tree = function(nodes)
+	local root_nodes = {}
+
+	for id, node in ipairs(nodes) do
+		if node.parent_id then
+			nodes[node.parent_id].children[id] = node
+		else
+			root_nodes[id] = node
+		end
+	end
+
+	return root_nodes
+end
+
+M.type_conversion_table =
+	{ ["projects"] = M.add_projects_to_nodes_immutably, ["items"] = M.add_tasks_to_nodes_immutably }
 
 M.add_projects_to_nodes_immutably = function(projects, nodes)
 	local copy = vim.deepcopy(nodes)
@@ -24,7 +49,7 @@ M.add_projects_to_nodes_immutably = function(projects, nodes)
 	return copy
 end
 
-M.add_tasks_to_nodes = function(tasks, nodes)
+M.add_tasks_to_nodes_immutably = function(tasks, nodes)
 	local copy = vim.deepcopy(nodes)
 
 	for _, task in ipairs(tasks) do
@@ -51,24 +76,14 @@ M.add_tasks_to_nodes = function(tasks, nodes)
 	return copy
 end
 
-M.convert_to_todoist_tree = function(nodes)
-	local root_nodes = {}
+M.set_tree_depth_immutably = function(tree)
+	local copy = vim.deepcopy(tree)
 
-	for id, node in ipairs(nodes) do
-		if node.parent_id then
-			nodes[node.parent_id].children[id] = node
-		else
-			root_nodes[id] = node
-		end
-	end
-
-	return root_nodes
-end
-
-M.set_tree_depth = function(tree)
 	for id, _ in pairs(tree) do
-		M.set_node_depth_from_root(tree[id], 0)
+		M.set_node_depth_from_root(copy[id], 0)
 	end
+
+	return copy
 end
 
 M.set_node_depth_from_root = function(node, depth)

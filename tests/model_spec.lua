@@ -1,6 +1,44 @@
 local tree_converter = require("Todoist.model")
 
 describe("Modeling Todoist for Display:", function()
+	it("can convert a dictionary of types into a dictionary of nodes", function()
+		local types = {
+			["test_1"] = { "something", "something else" },
+			["test_2"] = { "another thing", "a fourth thing!" },
+		}
+
+		local conversions = {
+			["test_1"] = function(list, nodes)
+				local copy = vim.deepcopy(nodes)
+
+				for _, item in ipairs(list) do
+					copy[item] = "variant 1"
+				end
+
+				return copy
+			end,
+			["test_2"] = function(list, nodes)
+				local copy = vim.deepcopy(nodes)
+
+				for _, item in ipairs(list) do
+					copy[item] = "variant 2"
+				end
+
+				return copy
+			end,
+		}
+
+		local converted_nodes = tree_converter.create_node_dictionary(types, conversions)
+
+		local expected_nodes = {
+			["something"] = "variant 1",
+			["something else"] = "variant 1",
+			["another thing"] = "variant 2",
+			["a fourth thing!"] = "variant 2",
+		}
+
+		assert.are.equal(vim.inspect(expected_nodes), vim.inspect(converted_nodes))
+	end)
 	it("can convert a Project List to Tree Nodes", function()
 		local minimal_projects = {
 			{
@@ -85,7 +123,7 @@ describe("Modeling Todoist for Display:", function()
 			},
 		}
 
-		local nodes = tree_converter.add_tasks_to_nodes(task, {})
+		local nodes = tree_converter.add_tasks_to_nodes_immutably(task, {})
 
 		assert.are.equal(vim.inspect(expected_output), vim.inspect(nodes))
 	end)
@@ -93,7 +131,7 @@ describe("Modeling Todoist for Display:", function()
 		local nodes = { [1] = { parent_id = 2, children = {} }, [2] = { children = {} } }
 		local expected_output = { [2] = { children = { [1] = { parent_id = 2, children = {} } } } }
 
-		local tree = tree_converter.convert_to_todoist_tree(nodes)
+		local tree = tree_converter.create_tree(nodes)
 
 		assert.are.equal(vim.inspect(tree), vim.inspect(expected_output))
 	end)
@@ -198,8 +236,8 @@ describe("Modeling Todoist for Display:", function()
 			},
 		}
 
-		tree_converter.set_tree_depth(layered_tree)
+		local updated_tree = tree_converter.set_tree_depth_immutably(layered_tree)
 
-		assert.are.equal(vim.inspect(expected_node), vim.inspect(layered_tree))
+		assert.are.equal(vim.inspect(expected_node), vim.inspect(updated_tree))
 	end)
 end)

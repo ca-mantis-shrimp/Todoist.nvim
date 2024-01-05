@@ -12,4 +12,12 @@ M.get_task_icon = function(task_checked)
 	end
 end
 
+M.get_collapsed_icon = function(collapsed)
+	if collapsed then
+		return ">"
+	else
+		return "v"
+	end
+end
+
 return M

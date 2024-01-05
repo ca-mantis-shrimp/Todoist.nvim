@@ -1,10 +1,12 @@
 M = {}
 
-M.convert_projects_to_dictionary = function(projects)
-	local dictionary = {}
+M.conversion_table = { ["projects"] = M.convert_projects_to_dictionary, ["items"] = M.add_tasks_to_nodes }
+
+M.add_projects_to_nodes_immutably = function(projects, nodes)
+	local copy = vim.deepcopy(nodes)
 
 	for _, project in ipairs(projects) do
-		dictionary[tonumber(project.id)] = {
+		copy[tonumber(project.id)] = {
 			name = project.name,
 			parent_id = tonumber(project.parent_id),
 			inbox_project = project.inbox_project,
@@ -19,14 +21,14 @@ M.convert_projects_to_dictionary = function(projects)
 		}
 	end
 
-	return dictionary
+	return copy
 end
 
-M.convert_tasks_to_dictionary = function(tasks)
-	local dictionary = {}
+M.add_tasks_to_nodes = function(tasks, nodes)
+	local copy = vim.deepcopy(nodes)
 
 	for _, task in ipairs(tasks) do
-		dictionary[tonumber(task.id)] = {
+		copy[tonumber(task.id)] = {
 			content = task.content,
 			description = task.description,
 			checked = task.checked,
@@ -44,9 +46,9 @@ M.convert_tasks_to_dictionary = function(tasks)
 			sync_id = task.sync_id,
 			type = "task",
 		}
-
-		return dictionary
 	end
+
+	return copy
 end
 
 M.convert_to_todoist_tree = function(nodes)

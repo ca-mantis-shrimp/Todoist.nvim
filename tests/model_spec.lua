@@ -32,7 +32,7 @@ describe("Modeling Todoist for Display:", function()
 				type = "project",
 			},
 		}
-		local converted_dictionary = tree_converter.convert_projects_to_dictionary(minimal_projects)
+		local converted_dictionary = tree_converter.add_projects_to_nodes_immutably(minimal_projects, {})
 
 		assert.are.equal(vim.inspect(example_output), vim.inspect(converted_dictionary))
 	end)
@@ -85,9 +85,9 @@ describe("Modeling Todoist for Display:", function()
 			},
 		}
 
-		local converted_dictionary = tree_converter.convert_tasks_to_dictionary(task)
+		local nodes = tree_converter.add_tasks_to_nodes(task, {})
 
-		assert.are.equal(vim.inspect(expected_output), vim.inspect(converted_dictionary))
+		assert.are.equal(vim.inspect(expected_output), vim.inspect(nodes))
 	end)
 	it("can convert a project dictionary into a tree", function()
 		local nodes = { [1] = { parent_id = 2, children = {} }, [2] = { children = {} } }

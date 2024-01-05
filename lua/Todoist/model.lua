@@ -27,22 +27,22 @@ M.convert_tasks_to_dictionary = function(tasks)
 
 	for _, task in ipairs(tasks) do
 		dictionary[tonumber(task.id)] = {
-			sync_id = task.sync_id,
-			day_order = task.day_order,
-			parent_id = tonumber(task.parent_id),
+			content = task.content,
+			description = task.description,
+			checked = task.checked,
+			priority = task.priority,
+			due = task.due,
 			all_day = task.all_day,
+			day_order = task.day_order,
+			labels = task.labels,
+			project_id = tonumber(task.project_id),
+			parent_id = tonumber(task.parent_id),
 			child_order = task.child_order,
 			collapsed = task.collapsed,
 			date_added = task.date_added,
-			priority = task.priority,
-			content = task.content,
-			description = task.description,
 			in_history = task.in_history,
 			is_deleted = task.is_deleted,
-			due = task.due,
-			project_id = tonumber(task.project_id),
-			checked = task.checked,
-			labels = task.labels,
+			sync_id = task.sync_id,
 		}
 
 		return dictionary

@@ -14,11 +14,11 @@ M.create_tree = function(nodes)
 	return root_nodes
 end
 
-M.set_tree_depth_immutably = function(tree)
+M.set_tree_depth_immutably = function(tree, root_node_depth_function)
 	local copy = vim.deepcopy(tree)
 
-	for id, _ in pairs(tree) do
-		M.set_node_depth_from_root(copy[id], 0)
+	for id, root_node in pairs(tree) do
+		root_node_depth_function(copy[id], 0)
 	end
 
 	return copy

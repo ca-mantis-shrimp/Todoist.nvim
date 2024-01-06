@@ -21,41 +21,33 @@ describe("displaying the todoist tree as buffer lines", function()
 			},
 		}
 
-		local indentation_function = function(node)
-			return vim.fn["repeat"]("| ", node.depth * 1)
-		end
-
-		local collapsed_icon_converter = function(node)
-			if util.length(node.children) > 0 then
-				if node.collapsed then
-					return "> "
+		local functions = {
+			indentation = function(node)
+				return vim.fn["repeat"]("| ", node.depth * 1)
+			end,
+			collapsed = function(node)
+				if util.length(node.children) > 0 then
+					if node.collapsed then
+						return "> "
+					else
+						return "v "
+					end
 				else
-					return "v "
+					return ""
 				end
-			else
-				return ""
-			end
-		end
-
-		local icon_function_table = {
+			end,
 			task = function(node)
 				return "[ ] "
 			end,
 			project = function(node)
-				return "* "
+				return " * "
 			end,
 		}
 
-		local buffer_lines = tree_converter.add_buffer_lines_from_node(
-			lines,
-			project,
-			indentation_function,
-			collapsed_icon_converter,
-			icon_function_table
-		)
+		local buffer_lines = tree_converter.add_buffer_lines_from_node(lines, project, functions)
 
 		local expected_output = {
-			"v * Inbox",
+			"v  * Inbox",
 			"| [ ] Test Task",
 		}
 		assert.are.equal(vim.inspect(lines), vim.inspect(expected_output))
@@ -87,7 +79,7 @@ describe("displaying the todoist tree as buffer lines", function()
 		local archived_icon = tree_converter.get_project_icon({ archived = true })
 		local unarchived_icon = tree_converter.get_project_icon({ archived = false })
 
-		assert.are.equal(archived_icon, "->")
-		assert.are.equal(unarchived_icon, "*")
+		assert.are.equal(archived_icon, "-> ")
+		assert.are.equal(unarchived_icon, " * ")
 	end)
 end)

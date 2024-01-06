@@ -1,6 +1,95 @@
 local tree_converter = require("Todoist.display")
 local util = require("Todoist.util")
+
+local functions = {
+	indentation = function(node)
+		return vim.fn["repeat"]("| ", node.depth * 1)
+	end,
+	collapsed = function(node)
+		if util.length(node.children) > 0 then
+			if node.collapsed then
+				return "> "
+			else
+				return "v "
+			end
+		else
+			return ""
+		end
+	end,
+	task = function(node)
+		return "[ ] "
+	end,
+	project = function(node)
+		return " * "
+	end,
+}
 describe("displaying the todoist tree as buffer lines", function()
+	it("can return a list of buffer lines given a full tree", function()
+		local lines = {}
+
+		local projects = {
+			{
+				name = "Inbox",
+				type = "project",
+				depth = 0,
+				collapsed = false,
+				children = {
+					{
+						name = "Test Task",
+						type = "task",
+						checked = false,
+						depth = 1,
+						collapsed = false,
+						children = {},
+					},
+				},
+			},
+			{
+				name = "Test Project",
+				type = "project",
+				depth = 0,
+				collapsed = true,
+				children = {
+					{
+						name = "Test Task",
+						type = "task",
+						checked = false,
+						depth = 1,
+						collapsed = false,
+						children = {},
+					},
+				},
+			},
+		}
+
+		local function node_function(input_lines, node, functions)
+			local indentation = functions["indentation"](node)
+			local collapsed_icon = functions["collapsed"](node)
+			local icon = functions[node.type](node)
+
+			table.insert(lines, indentation .. collapsed_icon .. icon .. node.name)
+
+			if util.length(node.children) == 0 or node.collapsed then
+				return lines
+			else
+				for _, child in pairs(node.children) do
+					node_function(lines, child, functions)
+				end
+			end
+
+			return input_lines
+		end
+
+		local buffer_lines = tree_converter.get_buffer_lines_from_tree(projects, node_function, functions)
+
+		local expected_output = {
+			"v  * Inbox",
+			"| [ ] Test Task",
+			">  * Test Project",
+		}
+
+		assert.are.equal(vim.inspect(lines), vim.inspect(expected_output))
+	end)
 	it("can return a project with a task as an array of buffer lines", function()
 		local lines = {}
 
@@ -19,29 +108,6 @@ describe("displaying the todoist tree as buffer lines", function()
 					children = {},
 				},
 			},
-		}
-
-		local functions = {
-			indentation = function(node)
-				return vim.fn["repeat"]("| ", node.depth * 1)
-			end,
-			collapsed = function(node)
-				if util.length(node.children) > 0 then
-					if node.collapsed then
-						return "> "
-					else
-						return "v "
-					end
-				else
-					return ""
-				end
-			end,
-			task = function(node)
-				return "[ ] "
-			end,
-			project = function(node)
-				return " * "
-			end,
 		}
 
 		local buffer_lines = tree_converter.add_buffer_lines_from_node(lines, project, functions)

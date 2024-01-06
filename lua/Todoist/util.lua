@@ -9,5 +9,15 @@ M.length = function(table)
 
 	return count
 end
+M.merge_tables = function(t1, t2)
+	local mergedTable = {}
+	for k, v in pairs(t1) do
+		mergedTable[k] = v
+	end
+	for k, v in pairs(t2) do
+		mergedTable[k] = v
+	end
+	return mergedTable
+end
 
 return M

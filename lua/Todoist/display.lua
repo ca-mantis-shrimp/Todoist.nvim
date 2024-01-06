@@ -2,6 +2,16 @@ M = {}
 
 local util = require("Todoist.util")
 
+M.get_buffer_lines_from_tree = function(tree, node_function, functions)
+	local lines = {}
+
+	for _, node in pairs(tree) do
+		lines = node_function(lines, node, functions)
+	end
+
+	return lines
+end
+
 M.add_buffer_lines_from_node = function(lines, node, functions)
 	local indentation = functions["indentation"](node)
 	local collapsed_icon = functions["collapsed"](node)
@@ -10,14 +20,14 @@ M.add_buffer_lines_from_node = function(lines, node, functions)
 	table.insert(lines, indentation .. collapsed_icon .. icon .. node.name)
 
 	if util.length(node.children) == 0 or node.collapsed then
-		return line_copy
+		return lines
 	else
 		for _, child in pairs(node.children) do
 			M.add_buffer_lines_from_node(lines, child, functions)
 		end
 	end
 
-	return line_copy
+	return lines
 end
 
 M.calculate_indentation = function(node)

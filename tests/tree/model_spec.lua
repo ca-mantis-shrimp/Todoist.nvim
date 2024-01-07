@@ -1,4 +1,4 @@
-local tree_converter = require("Todoist.model")
+local tree_converter = require("Todoist.tree")
 
 describe("Modeling Todoist for Display:", function()
 	it("can convert a project dictionary into a tree", function()

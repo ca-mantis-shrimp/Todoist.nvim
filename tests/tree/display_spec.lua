@@ -1,4 +1,4 @@
-local tree_converter = require("Todoist.display")
+local tree_converter = require("Todoist.tree.display")
 local util = require("Todoist.util")
 
 local functions = {

@@ -62,10 +62,10 @@ describe("displaying the todoist tree as buffer lines", function()
 			},
 		}
 
-		local function node_function(input_lines, node, functions)
-			local indentation = functions["indentation"](node)
-			local collapsed_icon = functions["collapsed"](node)
-			local icon = functions[node.type](node)
+		local function node_function(input_lines, node, display_functions)
+			local indentation = display_functions["indentation"](node)
+			local collapsed_icon = display_functions["collapsed"](node)
+			local icon = display_functions[node.type](node)
 
 			table.insert(lines, indentation .. collapsed_icon .. icon .. node.name)
 
@@ -73,7 +73,7 @@ describe("displaying the todoist tree as buffer lines", function()
 				return lines
 			else
 				for _, child in pairs(node.children) do
-					node_function(lines, child, functions)
+					node_function(lines, child, display_functions)
 				end
 			end
 

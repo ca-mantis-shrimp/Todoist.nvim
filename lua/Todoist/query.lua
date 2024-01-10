@@ -8,7 +8,7 @@ function M.get_all_projects(api_key, request_engine)
 		headers = { Authorization = "Bearer " .. api_key },
 		data = {
 			sync_token = "*",
-			resource_types = "['projects', 'items']",
+			resource_types = '["projects", "items"]',
 		},
 	})
 

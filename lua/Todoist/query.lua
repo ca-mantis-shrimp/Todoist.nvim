@@ -19,4 +19,8 @@ function M.get_all_projects(api_key, request_engine)
 	end
 end
 
+M.reduce_response = function(response)
+	return { ["projects"] = response.projects, ["items"] = response.items }
+end
+
 return M

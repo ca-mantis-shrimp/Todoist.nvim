@@ -47,4 +47,24 @@ describe("unit tests for todoist requests", function()
 			vim.inspect(projects)
 		)
 	end)
+
+	it("should be able to reduce a successful response down to a table with only todoist types", function()
+		local response = {
+			full_synce = true,
+			temp_id_mapping = {},
+			projects = { { id = 1, name = "test_project" } },
+			items = { { id = 1, content = "test_task" } },
+			tasks = {},
+		}
+
+		local reduced_response = requests.reduce_response(response)
+
+		assert.are.same(
+			vim.inspect({
+				projects = { { id = 1, name = "test_project" } },
+				items = { { id = 1, content = "test_task" } },
+			}),
+			vim.inspect(reduced_response)
+		)
+	end)
 end)

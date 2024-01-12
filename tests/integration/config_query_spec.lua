@@ -29,6 +29,11 @@ describe("integrating the curl wrapper with the config module", function()
 
 		local reduced_response = query.reduce_response(projects)
 
-		assert(#reduced_response.projects > 0 and #reduced_response.items > 0)
+		assert(
+			#reduced_response.projects > 0
+				and #reduced_response.items > 0
+				and reduced_response.full_sync == nil
+				and reduced_response.temp_id_mapping == nil
+		)
 	end)
 end)

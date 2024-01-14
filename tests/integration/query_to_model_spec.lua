@@ -7,7 +7,7 @@ describe("integration between the query module and the todoist model", function(
 		local response = query.get_all_projects("e0007362ae4002e7ce38bc9cf5f17b71f3fc6750", curl)
 		local reduced_response = query.reduce_response(response)
 
-		local node_dictionary = model.create_node_dictionary(reduced_response, model.type_conversions)
+		local node_dictionary = model.create_node_dictionary(reduced_response)
 
 		local expected_dictionary = {
 			[2326329373] = {

@@ -3,11 +3,10 @@ M = {}
 M.create_node_dictionary = function(types, conversions)
 	local nodes = {}
 
-	for type, data in pairs(types) do
-		nodes = conversions[type](data, nodes)
-	end
+	local project_nodes = M.add_projects_to_nodes_immutably(types.projects, nodes)
+	local all_nodes = M.add_tasks_to_nodes_immutably(types.items, project_nodes)
 
-	return nodes
+	return all_nodes
 end
 
 M.type_conversions = { ["projects"] = M.add_projects_to_nodes_immutably, ["items"] = M.add_tasks_to_nodes_immutably }

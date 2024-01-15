@@ -1,6 +1,6 @@
 M = {}
 
-local add_projects_to_nodes = function(projects, nodes)
+local function add_projects_to_nodes(projects, nodes)
 	for _, project in ipairs(projects) do
 		nodes[tonumber(project.id)] = {
 			name = project.name,
@@ -18,7 +18,7 @@ local add_projects_to_nodes = function(projects, nodes)
 	end
 end
 
-local add_tasks_to_nodes = function(tasks, nodes)
+local function add_tasks_to_nodes(tasks, nodes)
 	for _, task in ipairs(tasks) do
 		nodes[tonumber(task.id)] = {
 			content = task.content,

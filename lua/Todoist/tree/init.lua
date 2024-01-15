@@ -1,5 +1,19 @@
 M = {}
 
+local function set_node_depth_from_root(node, depth)
+	node.depth = depth
+
+	for _, child in pairs(node.children) do
+		set_node_depth_from_root(child, depth + 1)
+	end
+end
+
+local function set_tree_depth(tree)
+	for _, root_node in pairs(tree) do
+		set_node_depth_from_root(root_node, 0)
+	end
+end
+
 M.create_tree = function(nodes)
 	local root_nodes = {}
 
@@ -11,24 +25,9 @@ M.create_tree = function(nodes)
 		end
 	end
 
+	set_tree_depth(root_nodes)
+
 	return root_nodes
-end
-
-M.set_tree_depth_immutably = function(tree, root_node_depth_function)
-	local copy = vim.deepcopy(tree)
-
-	for _, root_node in pairs(copy) do
-		root_node_depth_function(root_node, 0)
-	end
-
-	return copy
-end
-
-M.set_node_depth_from_root = function(node, depth)
-	node.depth = depth
-	for _, child in pairs(node.children) do
-		M.set_node_depth_from_root(child, depth + 1)
-	end
 end
 
 return M

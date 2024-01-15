@@ -138,8 +138,7 @@ describe("integration between todoist model and the tree converter", function()
 		local nodes = model.create_node_dictionary(todoist_items)
 
 		local new_tree = tree.create_tree(nodes)
-		local updated_tree = tree.set_tree_depth_immutably(new_tree, tree.set_node_depth_from_root)
 
-		assert(util.length(updated_tree) == 2)
+		assert(util.length(new_tree) == 2)
 	end)
 end)

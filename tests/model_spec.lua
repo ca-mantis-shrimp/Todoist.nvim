@@ -60,6 +60,7 @@ describe("converting Todoist Data into the Node Model", function()
 				view_style = "list",
 				children = {},
 				type = "project",
+				children = {},
 			},
 			[102835615] = {
 				content = "Task1",
@@ -78,6 +79,7 @@ describe("converting Todoist Data into the Node Model", function()
 				is_deleted = 0,
 				sync_id = nil,
 				type = "task",
+				children = {},
 			},
 		}
 

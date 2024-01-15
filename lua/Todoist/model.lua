@@ -1,19 +1,10 @@
 M = {}
 
-M.create_node_dictionary = function(types)
-	local nodes = {}
-
-	M.add_projects_to_nodes_immutably(types.projects, nodes)
-	M.add_tasks_to_nodes_immutably(types.items, nodes)
-
-	return nodes
-end
-
-M.add_projects_to_nodes_immutably = function(projects, nodes)
+local add_projects_to_nodes = function(projects, nodes)
 	for _, project in ipairs(projects) do
 		nodes[tonumber(project.id)] = {
 			name = project.name,
-			parent_id = tonumber(project.parent_id),
+			parent_id = tonumber(project.parent_id) or nil, -- captures the parent id if a subproject, sets nil otherwise
 			inbox_project = project.inbox_project,
 			collapsed = project.collapsed,
 			color = project.color,
@@ -27,7 +18,7 @@ M.add_projects_to_nodes_immutably = function(projects, nodes)
 	end
 end
 
-M.add_tasks_to_nodes_immutably = function(tasks, nodes)
+local add_tasks_to_nodes = function(tasks, nodes)
 	for _, task in ipairs(tasks) do
 		nodes[tonumber(task.id)] = {
 			content = task.content,
@@ -38,16 +29,26 @@ M.add_tasks_to_nodes_immutably = function(tasks, nodes)
 			all_day = task.all_day,
 			day_order = task.day_order,
 			labels = task.labels,
-			parent_id = task.parent_id or task.project_id,
+			parent_id = tonumber(task.parent_id) or tonumber(task.project_id), -- cpatures the parent id if a subtask, sets project otherwise
 			child_order = task.child_order,
 			collapsed = task.collapsed,
 			date_added = task.date_added,
 			in_history = task.in_history,
 			is_deleted = task.is_deleted,
 			sync_id = task.sync_id,
+			children = {},
 			type = "task",
 		}
 	end
+end
+
+M.create_node_dictionary = function(types)
+	local nodes = {}
+
+	add_projects_to_nodes(types.projects, nodes)
+	add_tasks_to_nodes(types.items, nodes)
+
+	return nodes
 end
 
 return M

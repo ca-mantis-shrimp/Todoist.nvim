@@ -1,6 +1,7 @@
 local model = require("Todoist.model")
 
 local tree = require("Todoist.tree")
+local tree_display = require("Todoist.tree.display")
 
 local util = require("Todoist.util")
 
@@ -138,7 +139,9 @@ describe("integration between todoist model and the tree converter", function()
 		local nodes = model.create_node_dictionary(todoist_items)
 
 		local new_tree = tree.create_tree(nodes)
+		local tree_lines = tree_display.get_buffer_lines_from_tree(new_tree)
 
 		assert(util.length(new_tree) == 2)
+		assert(util.length(tree_lines) == 5)
 	end)
 end)

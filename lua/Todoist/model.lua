@@ -21,7 +21,7 @@ end
 local function add_tasks_to_nodes(tasks, nodes)
 	for _, task in ipairs(tasks) do
 		nodes[tonumber(task.id)] = {
-			content = task.content,
+			name = task.content,
 			description = task.description,
 			checked = task.checked,
 			priority = task.priority,

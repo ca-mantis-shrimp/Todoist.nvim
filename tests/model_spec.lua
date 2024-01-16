@@ -63,7 +63,7 @@ describe("converting Todoist Data into the Node Model", function()
 				children = {},
 			},
 			[102835615] = {
-				content = "Task1",
+				name = "Task1",
 				description = "",
 				checked = 0,
 				priority = 1,

@@ -10,7 +10,7 @@ describe("initial plugin config", function()
 	it("should set the options for the module with the table in question", function()
 		local opts = { api_key = "some key", default_window_type = "float" }
 
-		config.setup(opts)
+		config.config(opts)
 
 		assert.are.same(opts.api_key, config.api_key)
 		assert.are.same(opts.default_window_type, config.default_window_type)

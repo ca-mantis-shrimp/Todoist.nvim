@@ -41,7 +41,7 @@ describe("displaying the todoist tree as buffer lines", function()
 
 		local expected_output = {
 			"v  * Inbox",
-			"|  [ ]Test Task",
+			"| [ ] Test Task",
 			">  * Test Project",
 		}
 

@@ -7,14 +7,14 @@ local function calculate_indentation(node)
 end
 
 local function get_collapsed_icon(node)
-	if #node.children > 0 then
+	if util.length(node.children) > 0 then
 		if node.collapsed then
 			return "> "
 		else
 			return "v "
 		end
 	else
-		return " "
+		return ""
 	end
 end
 
@@ -28,9 +28,9 @@ end
 
 local function get_task_icon(node)
 	if node.checked then
-		return "[x]"
+		return "[x] "
 	else
-		return "[ ]"
+		return "[ ] "
 	end
 end
 

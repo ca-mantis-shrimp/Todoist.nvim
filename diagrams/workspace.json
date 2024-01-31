@@ -1,0 +1,223 @@
+{
+  "id" : 1,
+  "name" : "Name",
+  "description" : "Description",
+  "lastModifiedDate" : "2024-01-29T04:17:00Z",
+  "lastModifiedAgent" : "structurizr-javascript",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlIHsKICAgIG1vZGVsIHsKICAgICAgICB1c2VyID0gcGVyc29uICJOZW92aW0gRW5qb3llciIKICAgICAgICBuZW92aW1fcGxhdGZvcm0gPSBzb2Z0d2FyZVN5c3RlbSAiTmVvdmltIiB7CiAgICAgICAgICAgIGVkaXRvciA9IGNvbnRhaW5lciAiTmVvdmltIEJhc2UiIHsKICAgICAgICAgICAgICAgIHVzZXIgLT4gdGhpcyAiVXNlcyIKICAgICAgICAgICAgfQogICAgICAgICAgICBwbHVnaW4gPSBjb250YWluZXIgIlRvZG9pc3QubnZpbSIgewogICAgICAgICAgICAgICAgZmlsZXR5cGUgPSBjb21wb25lbnQgIkN1c3RvbSBUb2RvaXN0IEZpbGV0eXBlIiAKICAgICAgICAgICAgICAgIHJlcXVlc3QgPSBjb21wb25lbnQgIkN1cmwgUmVxdWVzdHMiIAogICAgICAgICAgICAgICAgZGljdGlvbmFyeV9tb2RlbCA9IGNvbXBvbmVudCAiRGljdGlvbmFyeS1CYXNlZCBpbnRlcm5hbCBSZXByZXNlbnRhdGlvbiBvZiBUb2RvaXN0IEl0ZW1zIgogICAgICAgICAgICAgICAgdHJlZSA9IGNvbXBvbmVudCAiVHJlZSBNb2RlbCBhbmQgVmlldyBGdW5jdGlvbnMiCiAgICAgICAgICAgICAgICAKCiAgICAgICAgICAgICAgICBlZGl0b3IgLT4gdGhpcyAiVXRpbGl6ZXMgQ29tbWFuZHMiCiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9CgogICAgdmlld3MgewogICAgICAgIHN5c3RlbUNvbnRleHQgbmVvdmltX3BsYXRmb3JtIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9sYXlvdXQgbHIKICAgICAgICB9CgogICAgICAgIGNvbnRhaW5lciBuZW92aW1fcGxhdGZvcm0gewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b2xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgY29tcG9uZW50IHBsdWdpbiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvbGF5b3V0IGxyCiAgICAgICAgfQoKICAgICAgICB0aGVtZSBkZWZhdWx0CiAgICB9Cgp9Cg=="
+  },
+  "configuration" : { },
+  "model" : {
+    "people" : [ {
+      "id" : "1",
+      "tags" : "Element,Person",
+      "properties" : {
+        "structurizr.dsl.identifier" : "user"
+      },
+      "name" : "Neovim Enjoyer",
+      "relationships" : [ {
+        "id" : "5",
+        "sourceId" : "1",
+        "destinationId" : "2",
+        "description" : "Uses",
+        "linkedRelationshipId" : "4"
+      }, {
+        "id" : "4",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "3956a332-04ba-4fde-b181-55cd433a03ff"
+        },
+        "sourceId" : "1",
+        "destinationId" : "3",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    } ],
+    "softwareSystems" : [ {
+      "id" : "2",
+      "tags" : "Element,Software System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "neovim_platform"
+      },
+      "name" : "Neovim",
+      "location" : "Unspecified",
+      "containers" : [ {
+        "id" : "3",
+        "tags" : "Element,Container",
+        "properties" : {
+          "structurizr.dsl.identifier" : "editor"
+        },
+        "name" : "Neovim Base",
+        "relationships" : [ {
+          "id" : "11",
+          "tags" : "Relationship",
+          "properties" : {
+            "structurizr.dsl.identifier" : "a2ebf4d0-0574-47fc-a274-417652cbbade"
+          },
+          "sourceId" : "3",
+          "destinationId" : "6",
+          "description" : "Utilizes Commands"
+        } ],
+        "documentation" : { }
+      }, {
+        "id" : "6",
+        "tags" : "Element,Container",
+        "properties" : {
+          "structurizr.dsl.identifier" : "plugin"
+        },
+        "name" : "Todoist.nvim",
+        "components" : [ {
+          "id" : "9",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "dictionary_model"
+          },
+          "name" : "Dictionary-Based internal Representation of Todoist Items",
+          "documentation" : { }
+        }, {
+          "id" : "10",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "tree"
+          },
+          "name" : "Tree Model and View Functions",
+          "documentation" : { }
+        }, {
+          "id" : "8",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "request"
+          },
+          "name" : "Curl Requests",
+          "documentation" : { }
+        }, {
+          "id" : "7",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "filetype"
+          },
+          "name" : "Custom Todoist Filetype",
+          "documentation" : { }
+        } ],
+        "documentation" : { }
+      } ],
+      "documentation" : { }
+    } ]
+  },
+  "documentation" : { },
+  "views" : {
+    "systemContextViews" : [ {
+      "key" : "SystemContext-001",
+      "order" : 1,
+      "softwareSystemId" : "2",
+      "dimensions" : {
+        "width" : 1600,
+        "height" : 800
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false,
+        "applied" : true
+      },
+      "enterpriseBoundaryVisible" : true,
+      "elements" : [ {
+        "id" : "1",
+        "x" : 200,
+        "y" : 200
+      }, {
+        "id" : "2",
+        "x" : 950,
+        "y" : 200
+      } ],
+      "relationships" : [ {
+        "id" : "5"
+      } ]
+    } ],
+    "containerViews" : [ {
+      "key" : "Container-001",
+      "order" : 2,
+      "softwareSystemId" : "2",
+      "dimensions" : {
+        "width" : 2370,
+        "height" : 820
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false,
+        "applied" : true
+      },
+      "externalSoftwareSystemBoundariesVisible" : true,
+      "elements" : [ {
+        "id" : "1",
+        "x" : 199,
+        "y" : 220
+      }, {
+        "id" : "3",
+        "x" : 949,
+        "y" : 220
+      }, {
+        "id" : "6",
+        "x" : 1699,
+        "y" : 220
+      } ],
+      "relationships" : [ {
+        "id" : "4"
+      }, {
+        "id" : "11"
+      } ]
+    } ],
+    "componentViews" : [ {
+      "key" : "Component-001",
+      "order" : 3,
+      "dimensions" : {
+        "width" : 990,
+        "height" : 2611
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false,
+        "applied" : true
+      },
+      "containerId" : "6",
+      "externalContainerBoundariesVisible" : true,
+      "elements" : [ {
+        "id" : "7",
+        "x" : 269,
+        "y" : 819
+      }, {
+        "id" : "8",
+        "x" : 269,
+        "y" : 1419
+      }, {
+        "id" : "9",
+        "x" : 269,
+        "y" : 2019
+      }, {
+        "id" : "10",
+        "x" : 269,
+        "y" : 219
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "styles" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ],
+      "terminology" : { },
+      "metadataSymbols" : "SquareBrackets",
+      "lastSavedView" : "Container-001"
+    }
+  }
+}

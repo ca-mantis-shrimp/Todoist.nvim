@@ -41,3 +41,4 @@ luac.out
 
 # Folders with Generated Data
 data/*
+diagrams/.structurizr/*

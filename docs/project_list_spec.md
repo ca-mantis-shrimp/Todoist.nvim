@@ -96,7 +96,7 @@ So a single level project with a single comment might look like:
 `+ This is a comment`
 
 While a comment for a child project might look like :
-`> # Project`
+`v # Project`
 `  ## Child Project`
 `  ++ This is a comment`
 
@@ -112,4 +112,6 @@ While an archived project would look like:
 
 ## Markdown In Project Descriptions and Comments
 Todoinst supports a subset of the markdown specification in both the project description as well as the comments themselves, and therefore, these fields should keep in lock-step with the list of [https://www.markdownguide.org/tools/todoist/](The list of supported Markdown)
+
+Anything New?
 

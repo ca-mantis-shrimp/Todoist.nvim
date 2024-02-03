@@ -82,22 +82,22 @@ This was chosen because the projects are often going to be shown as a small spli
 ### Collapsed Projects
 the specification should support both an expanded and collapsed variant of a project list, using the `>` character to denote a collapsed project and the `v` character to denote an expanded project
 - Projects with no children should lack this icon entirely and simply start with two `<SPC>`(Space) characters followed by the appropriate project icon, or nothing at all if more white space is desired
-- if we are talking about whether or not childen projects are collapsed, they will be represented by multiple `>` or `v` characters respectively
+- This icon must show up immediately after the last `#` character of the project to ensure visual consistency
 
 Therefore, the following is a valid project with a child:
-`v # Parent Project`
-`  ## Child Project`
+`#v Parent Project`
+`## Child Project`
 - notice that this continues until the leaf project which has no children and therefore, does not contain the collapsed character
 
 However, if this project were collapsed it would simply be expressed as:
-`> # Parent Project`
+`#> Parent Project`
 - This allows the reader to know there is atleast one child project without needing to explicitly expand a node
 
 Therefore, this shows a good example of a complex project hierarchy:
-`v # Grandparent Project`
-`vv ## Parent Project`
-`>>> ### Child Project`
-`>> ## Aunt Project`
+`#v Grandparent Project`
+`##v Parent Project`
+`###> Child Project`
+`##> Aunt Project`
 
 ### Comments
 Todoist Projects can have 0 or more comments attached to them after creation
@@ -106,12 +106,12 @@ Todoist Projects can have 0 or more comments attached to them after creation
 comments are represented by the `+` character, followed by the comment string, and should mirror the hierarchy level of the parent project to ensure visual consistency
 
 So a single level project with a single comment might look like:
-`# v Project`
+`#v Project`
 `+ This is a comment`
 
 While a comment for a child project might look like :
-`v # Project`
-`vv ## Child Project`
+`#v Project`
+`##v Child Project`
 `++ This is a comment`
 
 Like projects, comments should be shown using the collapsed character when relevant so that users can see if a parent has either a child project or comment attached to it

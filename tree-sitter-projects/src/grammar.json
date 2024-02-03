@@ -12,20 +12,20 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "#"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "root_collapsed_icon"
+              "name": "collapsed_icon"
             },
             {
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "STRING",
-          "value": "#"
         },
         {
           "type": "SYMBOL",
@@ -52,20 +52,20 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "##"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "child_collapsed_icon"
+              "name": "collapsed_icon"
             },
             {
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "STRING",
-          "value": "##"
         },
         {
           "type": "SYMBOL",
@@ -92,20 +92,20 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "###"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "grandchild_collapsed_icon"
+              "name": "collapsed_icon"
             },
             {
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "STRING",
-          "value": "###"
         },
         {
           "type": "SYMBOL",
@@ -132,20 +132,20 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "####"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "great_grandchild_collapsed_icon"
+              "name": "collapsed_icon"
             },
             {
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "STRING",
-          "value": "####"
         },
         {
           "type": "SYMBOL",
@@ -172,20 +172,20 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "#####"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "leaf_collapsed_icon"
+              "name": "collapsed_icon"
             },
             {
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "STRING",
-          "value": "#####"
         },
         {
           "type": "SYMBOL",
@@ -329,110 +329,34 @@
       "type": "PATTERN",
       "value": "[a-zA-Z0-9_ ]+"
     },
-    "root_collapsed_icon": {
+    "collapsed_icon": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "root_collapsed"
+          "name": "collapsed"
         },
         {
           "type": "SYMBOL",
-          "name": "root_not_collapsed"
-        }
-      ]
-    },
-    "child_collapsed_icon": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "child_collapsed"
+          "name": "not_collapsed"
         },
         {
           "type": "SYMBOL",
-          "name": "child_not_collapsed"
+          "name": "no_children"
         }
       ]
     },
-    "grandchild_collapsed_icon": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "grandchild_collapsed"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "grandchild_not_collapsed"
-        }
-      ]
-    },
-    "great_grandchild_collapsed_icon": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "great_grandchild_collapsed"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "great_grandchild_not_collapsed"
-        }
-      ]
-    },
-    "leaf_collapsed_icon": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "leaf_collapsed"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "leaf_not_collapsed"
-        }
-      ]
-    },
-    "root_collapsed": {
+    "collapsed": {
       "type": "STRING",
       "value": "> "
     },
-    "root_not_collapsed": {
+    "not_collapsed": {
       "type": "STRING",
       "value": "v "
     },
-    "child_collapsed": {
+    "no_children": {
       "type": "STRING",
-      "value": ">> "
-    },
-    "child_not_collapsed": {
-      "type": "STRING",
-      "value": "vv "
-    },
-    "grandchild_collapsed": {
-      "type": "STRING",
-      "value": ">>> "
-    },
-    "grandchild_not_collapsed": {
-      "type": "STRING",
-      "value": "vvv "
-    },
-    "great_grandchild_collapsed": {
-      "type": "STRING",
-      "value": ">>>> "
-    },
-    "great_grandchild_not_collapsed": {
-      "type": "STRING",
-      "value": "vvvv "
-    },
-    "leaf_collapsed": {
-      "type": "STRING",
-      "value": ">>>>> "
-    },
-    "leaf_not_collapsed": {
-      "type": "STRING",
-      "value": "vvvvv "
+      "value": " "
     }
   },
   "extras": [

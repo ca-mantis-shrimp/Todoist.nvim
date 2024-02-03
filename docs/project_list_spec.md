@@ -29,6 +29,20 @@ This means we can start small with the spec and gradually add functionality, wit
 
 For example, while I currently have no plans to accomodate tasks within this filetype, this functionality could be added due to popular demand with a non-breaking change to the specification later down the line.
 
+### Verbage
+To that point, since Todoist only allows 5 levels of nesting when it comes to projects, meaning that we can easily distinguish between the 5 levels:
+- Root
+- Child
+- Grandchild
+- Great Grandchild
+- Leaf
+
+The first and last levels are calling back to the fact that this is infact a tree structure and we can use these words to distinguish between the different levels of nesting for:
+- Projects
+- Comments
+- Collapsed Status
+- Tasks(?)
+
 ###  White Space
 A note on the usage of whitespace before we continue. 
 Users will notice a distinct lack of meaning placed on the whitespace for the specification. Specifically, while white space can be used during the implementation phase to increase visual clarity for the reader based on these rules, this specification will largely ignore the need for whitespace for the sake of specification compliance
@@ -54,6 +68,9 @@ The list must always start with the inbox project since it is garunteed to exist
 Meaning the beginning of each file will start with the following line:
 `# Inbox`
 
+More importantly, when we think about the lack of whitespace, we will see this throughout the various notation levels to distinguish between the various nesting levels for various concepts
+Meaning, instead of relying on whitespace to tell if a comment is under a project or the child project, we will use the recurring notation instead so a comment for a root project is `+` while the comment for a child project is `++` and so on.
+
 ## Hierarchy
 One of the primary features given by todoist is the ability to define a nested hierarchy of projects, giving users the ability to nest several projects under a single project
 
@@ -65,25 +82,22 @@ This was chosen because the projects are often going to be shown as a small spli
 ### Collapsed Projects
 the specification should support both an expanded and collapsed variant of a project list, using the `>` character to denote a collapsed project and the `v` character to denote an expanded project
 - Projects with no children should lack this icon entirely and simply start with two `<SPC>`(Space) characters followed by the appropriate project icon, or nothing at all if more white space is desired
+- if we are talking about whether or not childen projects are collapsed, they will be represented by multiple `>` or `v` characters respectively
 
 Therefore, the following is a valid project with a child:
 `v # Parent Project`
 `  ## Child Project`
 - notice that this continues until the leaf project which has no children and therefore, does not contain the collapsed character
 
-While this is also valid:
-`v # Parent Project`
-`## Child Project`
-
 However, if this project were collapsed it would simply be expressed as:
 `> # Parent Project`
 - This allows the reader to know there is atleast one child project without needing to explicitly expand a node
 
 Therefore, this shows a good example of a complex project hierarchy:
-`> # Grandparent Project`
-`> ## Parent Project`
-`  ### Child Project`
-`v ## Aunt Project`
+`v # Grandparent Project`
+`vv ## Parent Project`
+`>>> ### Child Project`
+`>> ## Aunt Project`
 
 ### Comments
 Todoist Projects can have 0 or more comments attached to them after creation
@@ -92,15 +106,20 @@ Todoist Projects can have 0 or more comments attached to them after creation
 comments are represented by the `+` character, followed by the comment string, and should mirror the hierarchy level of the parent project to ensure visual consistency
 
 So a single level project with a single comment might look like:
-`# Project`
+`# v Project`
 `+ This is a comment`
 
 While a comment for a child project might look like :
 `v # Project`
-`  ## Child Project`
-`  ++ This is a comment`
+`vv ## Child Project`
+`++ This is a comment`
 
 Like projects, comments should be shown using the collapsed character when relevant so that users can see if a parent has either a child project or comment attached to it
+
+### An explanation for the multiple collapsed icons
+In order to support an optional collapsed icon, we must then allow for the possibility of a project with no children and this ambiguity can leading to parsing errors
+
+To counter this, a collapsed icon must match the level of repition of the project icon in order to make it dis-ambiguous as to what level the comment represents
 ## Archived and Deleted Projects
 Deleted Projects can be preserved in the project list for historical purposes, and are denoted by the `x` character before the project icon
 
@@ -111,7 +130,7 @@ While an archived project would look like:
 `a# Archived Project`
 
 ## Markdown In Project Descriptions and Comments
-Todoinst supports a subset of the markdown specification in both the project description as well as the comments themselves, and therefore, these fields should keep in lock-step with the list of [https://www.markdownguide.org/tools/todoist/](The list of supported Markdown)
+Todoist supports a subset of the markdown specification in both the project description as well as the comments themselves, and therefore, these fields should keep in lock-step with the list of [https://www.markdownguide.org/tools/todoist/](The list of supported Markdown)
 
 Anything New?
 

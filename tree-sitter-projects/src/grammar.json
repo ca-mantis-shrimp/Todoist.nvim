@@ -5,12 +5,24 @@
       "type": "REPEAT",
       "content": {
         "type": "SYMBOL",
-        "name": "project"
+        "name": "root_project"
       }
     },
-    "project": {
+    "root_project": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "root_collapsed_icon"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "STRING",
           "value": "#"
@@ -40,6 +52,18 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "child_collapsed_icon"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": "##"
         },
@@ -67,6 +91,18 @@
     "grandchild_project": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "grandchild_collapsed_icon"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "STRING",
           "value": "###"
@@ -96,6 +132,18 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "great_grandchild_collapsed_icon"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": "####"
         },
@@ -123,6 +171,18 @@
     "leaf_project": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "leaf_collapsed_icon"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "STRING",
           "value": "#####"
@@ -157,7 +217,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "comment"
+          "name": "root_comment"
         }
       ]
     },
@@ -200,7 +260,7 @@
         }
       ]
     },
-    "comment": {
+    "root_comment": {
       "type": "SEQ",
       "members": [
         {
@@ -268,6 +328,111 @@
     "text": {
       "type": "PATTERN",
       "value": "[a-zA-Z0-9_ ]+"
+    },
+    "root_collapsed_icon": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "root_collapsed"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "root_not_collapsed"
+        }
+      ]
+    },
+    "child_collapsed_icon": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "child_collapsed"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "child_not_collapsed"
+        }
+      ]
+    },
+    "grandchild_collapsed_icon": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "grandchild_collapsed"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "grandchild_not_collapsed"
+        }
+      ]
+    },
+    "great_grandchild_collapsed_icon": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "great_grandchild_collapsed"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "great_grandchild_not_collapsed"
+        }
+      ]
+    },
+    "leaf_collapsed_icon": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "leaf_collapsed"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "leaf_not_collapsed"
+        }
+      ]
+    },
+    "root_collapsed": {
+      "type": "STRING",
+      "value": "> "
+    },
+    "root_not_collapsed": {
+      "type": "STRING",
+      "value": "v "
+    },
+    "child_collapsed": {
+      "type": "STRING",
+      "value": ">> "
+    },
+    "child_not_collapsed": {
+      "type": "STRING",
+      "value": "vv "
+    },
+    "grandchild_collapsed": {
+      "type": "STRING",
+      "value": ">>> "
+    },
+    "grandchild_not_collapsed": {
+      "type": "STRING",
+      "value": "vvv "
+    },
+    "great_grandchild_collapsed": {
+      "type": "STRING",
+      "value": ">>>> "
+    },
+    "great_grandchild_not_collapsed": {
+      "type": "STRING",
+      "value": "vvvv "
+    },
+    "leaf_collapsed": {
+      "type": "STRING",
+      "value": ">>>>> "
+    },
+    "leaf_not_collapsed": {
+      "type": "STRING",
+      "value": "vvvvv "
     }
   },
   "extras": [

@@ -2,8 +2,7 @@
   "id" : 1,
   "name" : "Name",
   "description" : "Description",
-  "lastModifiedDate" : "2024-02-01T04:03:56Z",
-  "lastModifiedAgent" : "structurizr-javascript",
+  "lastModifiedDate" : "2024-02-03T21:20:21Z",
   "properties" : {
     "structurizr.dsl" : "d29ya3NwYWNlIHsKICAgIG1vZGVsIHsKICAgICAgICB1c2VyID0gcGVyc29uICJOZW92aW0gRW5qb3llciIKICAgICAgICBuZW92aW1fcGxhdGZvcm0gPSBzb2Z0d2FyZVN5c3RlbSAiTmVvdmltIiB7CiAgICAgICAgICAgIGVkaXRvciA9IGNvbnRhaW5lciAiTmVvdmltIEJhc2UiIHsKICAgICAgICAgICAgICAgIHVzZXIgLT4gdGhpcyAiVXNlcyIKICAgICAgICAgICAgfQogICAgICAgICAgICBwbHVnaW4gPSBjb250YWluZXIgIlRvZG9pc3QubnZpbSIgewogICAgICAgICAgICAgICAgaW5pdCA9IGNvbXBvbmVudCAiaW5pdGFsaXphdGlvbiIKICAgICAgICAgICAgICAgIGFwaSA9IGNvbXBvbmVudCAiQVBJIgogICAgICAgICAgICAgICAgY29uZmlnID0gY29tcG9uZW50ICJDb25maWd1cmF0aW9uIgogICAgICAgICAgICAgICAgcmVxdWVzdCA9IGNvbXBvbmVudCAiUXVlcnkiIAogICAgICAgICAgICAgICAgZGljdGlvbmFyeV9tb2RlbCA9IGNvbXBvbmVudCAiTW9kZWwiCiAgICAgICAgICAgICAgICB0cmVlID0gY29tcG9uZW50ICJUcmVlIgogICAgICAgICAgICAgICAgYnVmZmVyID0gY29tcG9uZW50ICJCdWZmZXIiCiAgICAgICAgICAgICAgICB3aW5kb3cgPSBjb21wb25lbnQgIldpbmRvdyIKICAgICAgICAgICAgICAgIGNvbW1hbmRzID0gY29tcG9uZW50ICJDb21tYW5kcyIKICAgICAgICAgICAgICAgIGZpbGV0eXBlID0gY29tcG9uZW50ICJGaWxldHlwZSIgCiAgICAgICAgICAgICAgICBwcm9qZWN0X3NwZWMgPSBjb21wb25lbnQgIlByb2plY3QgTGlzdCBTcGVjIgogICAgICAgICAgICAgICAgdHJlZXNpdHRlcl9wYXJzZXIgPSBjb21wb25lbnQgIlByb2plY3QgTGlzdCBUcmVlU2l0dGVyIgoKICAgICAgICAgICAgICAgIGluaXQgLT4gYXBpICJjYWxscyIKICAgICAgICAgICAgICAgIGFwaSAtPiBjb25maWcgIkltcG9ydHMiCiAgICAgICAgICAgICAgICBhcGkgLT4gcmVxdWVzdCAiSW1wb3J0cyIKICAgICAgICAgICAgICAgIGFwaSAtPiBkaWN0aW9uYXJ5X21vZGVsICJJbXBvcnRzIgogICAgICAgICAgICAgICAgYXBpIC0+IHRyZWUgIkltcG9ydHMiCiAgICAgICAgICAgICAgICBhcGkgLT4gYnVmZmVyICJJbXBvcnRzIgogICAgICAgICAgICAgICAgYXBpIC0+IHdpbmRvdyAiSW1wb3J0cyIKICAgICAgICAgICAgICAgIGJ1ZmZlciAtPiBmaWxldHlwZSAiYXBwbGllcyBmaWxldHlwZSwgYXV0b21hdGljYWxseSBzZXR0aW5nIG9mZiBjdXN0b20gc2V0dGluZ3MiCiAgICAgICAgICAgICAgICB0cmVlc2l0dGVyX3BhcnNlciAtPiBwcm9qZWN0X3NwZWMgImNvbmZvcm1zIHRvIHNwZWNpZmllZCBmb3JtYXQiCiAgICAgICAgICAgICAgICBmaWxldHlwZSAtPiB0cmVlc2l0dGVyX3BhcnNlciAiYXBwbGllcyBoaWdobGlnaHQgZ3JvdXBzIHRvIHF1ZXJ5IG91dHB1dHMiCiAgICAgICAgICAgICAgICBjb21tYW5kcyAtPiBhcGkgImNhbGxzIgoKICAgICAgICAgICAgICAgIHJlcXVlc3QgLT4gY29uZmlnICAiaW1wbGljaXRseSB0YWtlcyBBUEkga2V5IGZyb20gY29uZmlnIE9iamVjdCIKICAgICAgICAgICAgICAgIGRpY3Rpb25hcnlfbW9kZWwgLT4gcmVxdWVzdCAibXVzdCB1bmRlcnN0YW5kIGhvdyB0byBjb252ZXJ0IEpTT04gcmVzcG9uc2UgaW50byBkaWN0aW9uYXJ5IgogICAgICAgICAgICAgICAgdHJlZSAtPiBkaWN0aW9uYXJ5X21vZGVsICJjb252ZXJ0cyBkaWN0aW9uYXJ5IGludG8gdHJlZSwgYW5kIGxpbmVzIGJhc2VkIG9uIHRoYXQiCiAgICAgICAgICAgICAgICBidWZmZXIgLT4gdHJlZSAicmVwcmVzZW50cyB0cmVlIGluIGJ1ZmZlciBhcyBsaW5lcyBvZiB0ZXh0IgogICAgICAgICAgICAgICAgd2luZG93IC0+IGJ1ZmZlciAicmVwcmVzZW50cyBidWZmZXIgaW4gd2luZG93LCBlaXRoZXIgc3BsaXQgb3IgZmxvYXRpbmciCgoKICAgICAgICAgICAgICAgIGVkaXRvciAtPiB0aGlzICJVdGlsaXplcyBDb21tYW5kcyIKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIH0KCiAgICB2aWV3cyB7CiAgICAgICAgc3lzdGVtQ29udGV4dCBuZW92aW1fcGxhdGZvcm0gewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICB9CgogICAgICAgIGNvbnRhaW5lciBuZW92aW1fcGxhdGZvcm0gewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICB9CgogICAgICAgIGNvbXBvbmVudCBwbHVnaW4gewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICB9CgogICAgICAgIHRoZW1lIGRlZmF1bHQKICAgIH0KCn0K"
   },
@@ -17,20 +16,20 @@
       },
       "name" : "Neovim Enjoyer",
       "relationships" : [ {
+        "id" : "4",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "5f8c7a14-6c9c-4840-afc3-1a7cff6a64a0"
+        },
+        "sourceId" : "1",
+        "destinationId" : "3",
+        "description" : "Uses"
+      }, {
         "id" : "5",
         "sourceId" : "1",
         "destinationId" : "2",
         "description" : "Uses",
         "linkedRelationshipId" : "4"
-      }, {
-        "id" : "4",
-        "tags" : "Relationship",
-        "properties" : {
-          "structurizr.dsl.identifier" : "30c71b74-3d2e-4998-bb45-4cfcc51228cf"
-        },
-        "sourceId" : "1",
-        "destinationId" : "3",
-        "description" : "Uses"
       } ],
       "location" : "Unspecified"
     } ],
@@ -43,6 +42,24 @@
       "name" : "Neovim",
       "location" : "Unspecified",
       "containers" : [ {
+        "id" : "3",
+        "tags" : "Element,Container",
+        "properties" : {
+          "structurizr.dsl.identifier" : "editor"
+        },
+        "name" : "Neovim Base",
+        "relationships" : [ {
+          "id" : "35",
+          "tags" : "Relationship",
+          "properties" : {
+            "structurizr.dsl.identifier" : "da55c046-51c7-4246-991d-6c234d193b00"
+          },
+          "sourceId" : "3",
+          "destinationId" : "6",
+          "description" : "Utilizes Commands"
+        } ],
+        "documentation" : { }
+      }, {
         "id" : "6",
         "tags" : "Element,Container",
         "properties" : {
@@ -50,176 +67,6 @@
         },
         "name" : "Todoist.nvim",
         "components" : [ {
-          "id" : "10",
-          "tags" : "Element,Component",
-          "properties" : {
-            "structurizr.dsl.identifier" : "request"
-          },
-          "name" : "Query",
-          "relationships" : [ {
-            "id" : "30",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "a4017653-5549-4066-9f14-977598e731d8"
-            },
-            "sourceId" : "10",
-            "destinationId" : "9",
-            "description" : "implicitly takes API key from config Object"
-          } ],
-          "documentation" : { }
-        }, {
-          "id" : "14",
-          "tags" : "Element,Component",
-          "properties" : {
-            "structurizr.dsl.identifier" : "window"
-          },
-          "name" : "Window",
-          "relationships" : [ {
-            "id" : "34",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "900d8085-2c18-4bf5-bf02-08ba54a2f990"
-            },
-            "sourceId" : "14",
-            "destinationId" : "13",
-            "description" : "represents buffer in window, either split or floating"
-          } ],
-          "documentation" : { }
-        }, {
-          "id" : "8",
-          "tags" : "Element,Component",
-          "properties" : {
-            "structurizr.dsl.identifier" : "api"
-          },
-          "name" : "API",
-          "relationships" : [ {
-            "id" : "21",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "664e7e1a-3694-4090-a93c-cede2b102fc7"
-            },
-            "sourceId" : "8",
-            "destinationId" : "10",
-            "description" : "Imports"
-          }, {
-            "id" : "24",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "1efa5807-0c53-43cf-bfe7-1244cb6a5f99"
-            },
-            "sourceId" : "8",
-            "destinationId" : "13",
-            "description" : "Imports"
-          }, {
-            "id" : "25",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "e929913b-4dd2-40d9-811a-bcc0a842d92c"
-            },
-            "sourceId" : "8",
-            "destinationId" : "14",
-            "description" : "Imports"
-          }, {
-            "id" : "23",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "d84d1737-3eb2-43c6-85a6-cc21ba72c295"
-            },
-            "sourceId" : "8",
-            "destinationId" : "12",
-            "description" : "Imports"
-          }, {
-            "id" : "22",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "b862eee2-f46c-4551-b0f3-75abd8d05b38"
-            },
-            "sourceId" : "8",
-            "destinationId" : "11",
-            "description" : "Imports"
-          }, {
-            "id" : "20",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "244afee9-d31f-49bf-9561-09df20c6667d"
-            },
-            "sourceId" : "8",
-            "destinationId" : "9",
-            "description" : "Imports"
-          } ],
-          "documentation" : { }
-        }, {
-          "id" : "17",
-          "tags" : "Element,Component",
-          "properties" : {
-            "structurizr.dsl.identifier" : "project_spec"
-          },
-          "name" : "Project List Spec",
-          "documentation" : { }
-        }, {
-          "id" : "13",
-          "tags" : "Element,Component",
-          "properties" : {
-            "structurizr.dsl.identifier" : "buffer"
-          },
-          "name" : "Buffer",
-          "relationships" : [ {
-            "id" : "26",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "04a86649-9d96-4707-a260-474587aaef5a"
-            },
-            "sourceId" : "13",
-            "destinationId" : "16",
-            "description" : "applies filetype, automatically setting off custom settings"
-          }, {
-            "id" : "33",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "bbe64115-8e51-4e67-935a-ccc79aab3870"
-            },
-            "sourceId" : "13",
-            "destinationId" : "12",
-            "description" : "represents tree in buffer as lines of text"
-          } ],
-          "documentation" : { }
-        }, {
-          "id" : "15",
-          "tags" : "Element,Component",
-          "properties" : {
-            "structurizr.dsl.identifier" : "commands"
-          },
-          "name" : "Commands",
-          "relationships" : [ {
-            "id" : "29",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "819d3b68-4683-40f6-99a5-65857a8a6072"
-            },
-            "sourceId" : "15",
-            "destinationId" : "8",
-            "description" : "calls"
-          } ],
-          "documentation" : { }
-        }, {
-          "id" : "7",
-          "tags" : "Element,Component",
-          "properties" : {
-            "structurizr.dsl.identifier" : "init"
-          },
-          "name" : "initalization",
-          "relationships" : [ {
-            "id" : "19",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "15fbd56b-9240-4a31-a92c-deef42c2a9c9"
-            },
-            "sourceId" : "7",
-            "destinationId" : "8",
-            "description" : "calls"
-          } ],
-          "documentation" : { }
-        }, {
           "id" : "18",
           "tags" : "Element,Component",
           "properties" : {
@@ -230,29 +77,11 @@
             "id" : "27",
             "tags" : "Relationship",
             "properties" : {
-              "structurizr.dsl.identifier" : "789169ac-b8e9-4504-9afc-1e21ad2849f3"
+              "structurizr.dsl.identifier" : "bad5bd16-8391-4b47-8304-df128642f54b"
             },
             "sourceId" : "18",
             "destinationId" : "17",
             "description" : "conforms to specified format"
-          } ],
-          "documentation" : { }
-        }, {
-          "id" : "11",
-          "tags" : "Element,Component",
-          "properties" : {
-            "structurizr.dsl.identifier" : "dictionary_model"
-          },
-          "name" : "Model",
-          "relationships" : [ {
-            "id" : "31",
-            "tags" : "Relationship",
-            "properties" : {
-              "structurizr.dsl.identifier" : "092bbd5b-09e4-4f9f-999f-ba5687941e63"
-            },
-            "sourceId" : "11",
-            "destinationId" : "10",
-            "description" : "must understand how to convert JSON response into dictionary"
           } ],
           "documentation" : { }
         }, {
@@ -266,7 +95,7 @@
             "id" : "28",
             "tags" : "Relationship",
             "properties" : {
-              "structurizr.dsl.identifier" : "adc04ef7-d66d-485b-b689-245b8deae812"
+              "structurizr.dsl.identifier" : "5e831c74-eeaa-4b22-9de1-893f85c7400c"
             },
             "sourceId" : "16",
             "destinationId" : "18",
@@ -284,11 +113,56 @@
             "id" : "32",
             "tags" : "Relationship",
             "properties" : {
-              "structurizr.dsl.identifier" : "3e705891-8c1d-4814-a208-a42fd96b2f40"
+              "structurizr.dsl.identifier" : "dc4af050-a673-466c-9349-b032d256be11"
             },
             "sourceId" : "12",
             "destinationId" : "11",
             "description" : "converts dictionary into tree, and lines based on that"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "10",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "request"
+          },
+          "name" : "Query",
+          "relationships" : [ {
+            "id" : "30",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "9b7056ed-7051-4b44-8f6c-1d01a5e94694"
+            },
+            "sourceId" : "10",
+            "destinationId" : "9",
+            "description" : "implicitly takes API key from config Object"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "13",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "buffer"
+          },
+          "name" : "Buffer",
+          "relationships" : [ {
+            "id" : "26",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "a8930fac-820c-4255-98a3-ed9ce9757827"
+            },
+            "sourceId" : "13",
+            "destinationId" : "16",
+            "description" : "applies filetype, automatically setting off custom settings"
+          }, {
+            "id" : "33",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "a7a0263d-4f04-41e0-b37c-47d20f92afbc"
+            },
+            "sourceId" : "13",
+            "destinationId" : "12",
+            "description" : "represents tree in buffer as lines of text"
           } ],
           "documentation" : { }
         }, {
@@ -299,24 +173,149 @@
           },
           "name" : "Configuration",
           "documentation" : { }
-        } ],
-        "documentation" : { }
-      }, {
-        "id" : "3",
-        "tags" : "Element,Container",
-        "properties" : {
-          "structurizr.dsl.identifier" : "editor"
-        },
-        "name" : "Neovim Base",
-        "relationships" : [ {
-          "id" : "35",
-          "tags" : "Relationship",
+        }, {
+          "id" : "11",
+          "tags" : "Element,Component",
           "properties" : {
-            "structurizr.dsl.identifier" : "01e6e72d-07f6-4172-908c-53873cb5892a"
+            "structurizr.dsl.identifier" : "dictionary_model"
           },
-          "sourceId" : "3",
-          "destinationId" : "6",
-          "description" : "Utilizes Commands"
+          "name" : "Model",
+          "relationships" : [ {
+            "id" : "31",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "28de142c-3119-4187-97be-fffcc663c367"
+            },
+            "sourceId" : "11",
+            "destinationId" : "10",
+            "description" : "must understand how to convert JSON response into dictionary"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "15",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "commands"
+          },
+          "name" : "Commands",
+          "relationships" : [ {
+            "id" : "29",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "95bf76b6-a12a-4524-a911-9c704ec17220"
+            },
+            "sourceId" : "15",
+            "destinationId" : "8",
+            "description" : "calls"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "7",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "init"
+          },
+          "name" : "initalization",
+          "relationships" : [ {
+            "id" : "19",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "6ddcd226-f9d7-43a4-b5c7-58d0674d36f3"
+            },
+            "sourceId" : "7",
+            "destinationId" : "8",
+            "description" : "calls"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "8",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "api"
+          },
+          "name" : "API",
+          "relationships" : [ {
+            "id" : "20",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "b53b1372-bae0-4364-a26b-1e8d21cdb4b3"
+            },
+            "sourceId" : "8",
+            "destinationId" : "9",
+            "description" : "Imports"
+          }, {
+            "id" : "21",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "fee9d43c-3cbd-4ec1-88d8-687c35614aec"
+            },
+            "sourceId" : "8",
+            "destinationId" : "10",
+            "description" : "Imports"
+          }, {
+            "id" : "22",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "a911b7fd-af50-4412-85a6-0926b09178f1"
+            },
+            "sourceId" : "8",
+            "destinationId" : "11",
+            "description" : "Imports"
+          }, {
+            "id" : "23",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "ab83a31f-dd4a-4366-ab99-b9340f3b7c0d"
+            },
+            "sourceId" : "8",
+            "destinationId" : "12",
+            "description" : "Imports"
+          }, {
+            "id" : "24",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "7a4f2667-fe4c-4e35-a934-4a9dc165497f"
+            },
+            "sourceId" : "8",
+            "destinationId" : "13",
+            "description" : "Imports"
+          }, {
+            "id" : "25",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "a369eb68-603e-4afb-813e-ea241615a0ea"
+            },
+            "sourceId" : "8",
+            "destinationId" : "14",
+            "description" : "Imports"
+          } ],
+          "documentation" : { }
+        }, {
+          "id" : "17",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "project_spec"
+          },
+          "name" : "Project List Spec",
+          "documentation" : { }
+        }, {
+          "id" : "14",
+          "tags" : "Element,Component",
+          "properties" : {
+            "structurizr.dsl.identifier" : "window"
+          },
+          "name" : "Window",
+          "relationships" : [ {
+            "id" : "34",
+            "tags" : "Relationship",
+            "properties" : {
+              "structurizr.dsl.identifier" : "3cefb1d0-c46f-4f2b-8cca-dd1cb274ab49"
+            },
+            "sourceId" : "14",
+            "destinationId" : "13",
+            "description" : "represents buffer in window, either split or floating"
+          } ],
+          "documentation" : { }
         } ],
         "documentation" : { }
       } ],
@@ -430,9 +429,9 @@
       }, {
         "id" : "21"
       }, {
-        "id" : "20"
-      }, {
         "id" : "31"
+      }, {
+        "id" : "20"
       }, {
         "id" : "30"
       }, {
@@ -452,9 +451,9 @@
       }, {
         "id" : "34"
       }, {
-        "id" : "22"
-      }, {
         "id" : "33"
+      }, {
+        "id" : "22"
       }, {
         "id" : "19"
       } ]
@@ -464,7 +463,6 @@
       "styles" : { },
       "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ],
       "terminology" : { },
-      "metadataSymbols" : "SquareBrackets",
       "lastSavedView" : "Component-001"
     }
   }

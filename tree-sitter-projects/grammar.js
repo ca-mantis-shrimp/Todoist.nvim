@@ -2,33 +2,38 @@ module.exports = grammar({
   name: 'projects',
 
   rules: {
-    source_file: $ => repeat($.project),
+    source_file: $ => repeat($.root_project),
 
-    project: $ => seq(
+    root_project: $ => seq(
+      optional($.root_collapsed_icon),
       '#',
       $.text,
       optional(repeat($.project_children))
     ),
 
     child_project: $ => seq(
+      optional($.child_collapsed_icon),
       '##',
       $.text,
       optional(repeat($.project_grandchildren))
     ),
 
     grandchild_project: $ => seq(
+      optional($.grandchild_collapsed_icon),
       '###',
       $.text,
       optional(repeat($.project_great_grandchildren))
     ),
 
     great_grandchild_project: $ => seq(
+      optional($.great_grandchild_collapsed_icon),
       '####',
       $.text,
       optional(repeat($.leaf_children))
     ),
 
     leaf_project: $ => seq(
+      optional($.leaf_collapsed_icon),
       '#####',
       $.text,
       optional(repeat($.leaf_comment))
@@ -36,7 +41,7 @@ module.exports = grammar({
 
     project_children: $ => choice(
         $.child_project,
-        $.comment
+        $.root_comment
       ),
 
     project_grandchildren: $ => choice(
@@ -54,7 +59,7 @@ module.exports = grammar({
       $.great_grandchild_comment
     ),
 
-    comment: $ => seq(
+    root_comment: $ => seq(
       '+',
       $.text
     ),
@@ -80,6 +85,44 @@ module.exports = grammar({
     ),
 
     text: $ => /[a-zA-Z0-9_ ]+/,
+
+    root_collapsed_icon: $ => choice(
+      $.root_collapsed,
+      $.root_not_collapsed
+    ),
+
+    child_collapsed_icon: $ => choice(
+      $.child_collapsed,
+      $.child_not_collapsed
+    ),
+
+    grandchild_collapsed_icon: $ => choice(
+      $.grandchild_collapsed,
+      $.grandchild_not_collapsed
+    ),
+
+    great_grandchild_collapsed_icon: $ => choice(
+      $.great_grandchild_collapsed,
+      $.great_grandchild_not_collapsed
+    ),
+    leaf_collapsed_icon: $ => choice(
+      $.leaf_collapsed,
+      $.leaf_not_collapsed
+    ),
+    root_collapsed: $ => '> ',
+    root_not_collapsed: $ => 'v ',
+
+    child_collapsed: $ => '>> ',
+    child_not_collapsed: $ => 'vv ',
+
+    grandchild_collapsed: $ => '>>> ',
+    grandchild_not_collapsed: $ => 'vvv ',
+
+    great_grandchild_collapsed: $ => '>>>> ',
+    great_grandchild_not_collapsed: $ => 'vvvv ',
+
+    leaf_collapsed: $ => '>>>>> ',
+    leaf_not_collapsed: $ => 'vvvvv ',
 
   }
 });

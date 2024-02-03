@@ -1,5 +1,24 @@
 [
   {
+    "type": "child_collapsed_icon",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "child_collapsed",
+          "named": true
+        },
+        {
+          "type": "child_not_collapsed",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "child_comment",
     "named": true,
     "fields": {},
@@ -23,6 +42,10 @@
       "required": true,
       "types": [
         {
+          "type": "child_collapsed_icon",
+          "named": true
+        },
+        {
           "type": "project_grandchildren",
           "named": true
         },
@@ -34,7 +57,7 @@
     }
   },
   {
-    "type": "comment",
+    "type": "grandchild_collapsed_icon",
     "named": true,
     "fields": {},
     "children": {
@@ -42,7 +65,11 @@
       "required": true,
       "types": [
         {
-          "type": "text",
+          "type": "grandchild_collapsed",
+          "named": true
+        },
+        {
+          "type": "grandchild_not_collapsed",
           "named": true
         }
       ]
@@ -72,11 +99,34 @@
       "required": true,
       "types": [
         {
+          "type": "grandchild_collapsed_icon",
+          "named": true
+        },
+        {
           "type": "project_great_grandchildren",
           "named": true
         },
         {
           "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "great_grandchild_collapsed_icon",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "great_grandchild_collapsed",
+          "named": true
+        },
+        {
+          "type": "great_grandchild_not_collapsed",
           "named": true
         }
       ]
@@ -105,6 +155,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "great_grandchild_collapsed_icon",
+          "named": true
+        },
         {
           "type": "leaf_children",
           "named": true
@@ -136,6 +190,25 @@
     }
   },
   {
+    "type": "leaf_collapsed_icon",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "leaf_collapsed",
+          "named": true
+        },
+        {
+          "type": "leaf_not_collapsed",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "leaf_comment",
     "named": true,
     "fields": {},
@@ -159,26 +232,11 @@
       "required": true,
       "types": [
         {
-          "type": "leaf_comment",
+          "type": "leaf_collapsed_icon",
           "named": true
         },
         {
-          "type": "text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "project",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "project_children",
+          "type": "leaf_comment",
           "named": true
         },
         {
@@ -201,7 +259,7 @@
           "named": true
         },
         {
-          "type": "comment",
+          "type": "root_comment",
           "named": true
         }
       ]
@@ -246,6 +304,63 @@
     }
   },
   {
+    "type": "root_collapsed_icon",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "root_collapsed",
+          "named": true
+        },
+        {
+          "type": "root_not_collapsed",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "root_comment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "root_project",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "project_children",
+          "named": true
+        },
+        {
+          "type": "root_collapsed_icon",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -254,7 +369,7 @@
       "required": false,
       "types": [
         {
-          "type": "project",
+          "type": "root_project",
           "named": true
         }
       ]
@@ -299,6 +414,46 @@
   {
     "type": "+++++",
     "named": false
+  },
+  {
+    "type": "child_collapsed",
+    "named": true
+  },
+  {
+    "type": "child_not_collapsed",
+    "named": true
+  },
+  {
+    "type": "grandchild_collapsed",
+    "named": true
+  },
+  {
+    "type": "grandchild_not_collapsed",
+    "named": true
+  },
+  {
+    "type": "great_grandchild_collapsed",
+    "named": true
+  },
+  {
+    "type": "great_grandchild_not_collapsed",
+    "named": true
+  },
+  {
+    "type": "leaf_collapsed",
+    "named": true
+  },
+  {
+    "type": "leaf_not_collapsed",
+    "named": true
+  },
+  {
+    "type": "root_collapsed",
+    "named": true
+  },
+  {
+    "type": "root_not_collapsed",
+    "named": true
   },
   {
     "type": "text",

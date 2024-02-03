@@ -1,0 +1,78 @@
+===============
+Happy Path Test
+===============
+v # Test Root Project 
++ Test Root Comment
+vv ## Test Child Project
+++ Test Child Comment
+vvv ### Test Grandchild Project
++++ Test Grandchild Comment
+vvvv #### Test Great Grandchild Project
+++++ Test Great Grandchild Comment
+vvvvv ##### Test Leaf Project
++++++ Test Leaf Comment
+v # Test Root Project 2
++ Test Root Comment 2
+>> ## Test Sub Collapsed Project
+> # Test Collapsed Project
+# Test No Child Project
+
+---
+
+(source_file
+  (root_project
+    (root_collapsed_icon
+      (root_not_collapsed))
+    (text)
+    (project_children
+      (root_comment
+        (text)))
+    (project_children
+      (child_project
+        (child_collapsed_icon
+          (child_not_collapsed))
+        (text)
+        (project_grandchildren
+          (child_comment
+            (text)))
+        (project_grandchildren
+          (grandchild_project
+            (grandchild_collapsed_icon
+              (grandchild_not_collapsed))
+            (text)
+            (project_great_grandchildren
+              (grandchild_comment
+                (text)))
+            (project_great_grandchildren
+              (great_grandchild_project
+                (great_grandchild_collapsed_icon
+                  (great_grandchild_not_collapsed))
+                (text)
+                (leaf_children
+                  (great_grandchild_comment
+                    (text)))
+                (leaf_children
+                  (leaf_project
+                    (leaf_collapsed_icon
+                      (leaf_not_collapsed))
+                    (text)
+                    (leaf_comment
+                      (text)))))))))))
+  (root_project
+    (root_collapsed_icon
+      (root_not_collapsed))
+    (text)
+    (project_children
+      (root_comment
+        (text)))
+    (project_children
+      (child_project
+        (child_collapsed_icon
+          (child_collapsed))
+        (text))))
+  (root_project
+    (root_collapsed_icon
+      (root_collapsed))
+        (text))
+      (root_project
+    (text)))

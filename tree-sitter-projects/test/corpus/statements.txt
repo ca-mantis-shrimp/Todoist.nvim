@@ -1,89 +1,52 @@
-=============
-Basic Project
-=============
-
-# test project
-
+============
+Full Test
+============
+# Test Root Project
++ Test Root Comment
+## Test Child Project
+++ Test Child Comment
+### Test Grandchild Project
++++ Test Grandchild Comment
+#### Test Great Grandchild Project
+++++ Test Great Grandchild Comment
+##### Test Leaf Project
++++++ Test Leaf Comment
+# Test Root Project 2
++ Test Root Comment 2
 ---
 
-(source_file 
-  (project 
-    (text)))
-
-=================
-Basic Sub-Project
-=================
-
-# Test Parent
-## Test Child
-
----
 (source_file
   (project
     (text)
     (project_children
+      (comment
+        (text)))
+    (project_children
       (child_project
-        (text)))))
-
-============
-Two Projects
-============
-
-# Test Project 1
-# Test Project 2
-
----
-(source_file
-  (project
-    (text))
-  (project
-    (text)))
-
-====================
-Project With Comment
-====================
-
-# Test Project
-+ Test Comment
-
----
-(source_file
+        (text)
+        (project_grandchildren
+          (child_comment
+            (text)))
+        (project_grandchildren
+          (grandchild_project
+            (text)
+            (project_great_grandchildren
+              (grandchild_comment
+                (text)))
+            (project_great_grandchildren
+              (great_grandchild_project
+                (text)
+                (leaf_children
+                  (great_grandchild_comment
+                    (text)))
+                (leaf_children
+                  (leaf_project
+                    (text)
+                    (leaf_comment
+                          (text)))))))))))
   (project
     (text)
     (project_children
       (comment
         (text)))))
 
-==========================
-Project with Child Project
-==========================
-
-# Test Parent
-## Test Child
-
----
-(source_file
-  (project
-    (text)
-    (project_children
-      (child_project
-        (text)))))
-
-=======================================
-Project With Child Project with Comment
-=======================================
-# Test Parent
-## Test Child
-++ Test Child Comment
-
----
-
-(source_file
-  (project
-    (text)
-    (project_children
-      (child_project
-        (text)
-        (project_grandchildren
-          (child_comment
-            (text)))))))

@@ -74,6 +74,77 @@
         {
           "type": "SYMBOL",
           "name": "text"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "project_great_grandchildren"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "great_grandchild_project": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "####"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "leaf_children"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "leaf_project": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "#####"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "leaf_comment"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -103,6 +174,32 @@
         }
       ]
     },
+    "project_great_grandchildren": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "great_grandchild_project"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "grandchild_comment"
+        }
+      ]
+    },
+    "leaf_children": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "leaf_project"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "great_grandchild_comment"
+        }
+      ]
+    },
     "comment": {
       "type": "SEQ",
       "members": [
@@ -122,6 +219,45 @@
         {
           "type": "STRING",
           "value": "++"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        }
+      ]
+    },
+    "grandchild_comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "+++"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        }
+      ]
+    },
+    "great_grandchild_comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "++++"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        }
+      ]
+    },
+    "leaf_comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "+++++"
         },
         {
           "type": "SYMBOL",

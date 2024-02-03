@@ -18,7 +18,20 @@ module.exports = grammar({
 
     grandchild_project: $ => seq(
       '###',
-      $.text
+      $.text,
+      optional(repeat($.project_great_grandchildren))
+    ),
+
+    great_grandchild_project: $ => seq(
+      '####',
+      $.text,
+      optional(repeat($.leaf_children))
+    ),
+
+    leaf_project: $ => seq(
+      '#####',
+      $.text,
+      optional(repeat($.leaf_comment))
     ),
 
     project_children: $ => choice(
@@ -31,6 +44,16 @@ module.exports = grammar({
       $.child_comment
     ),
 
+    project_great_grandchildren: $ => choice(
+      $.great_grandchild_project,
+      $.grandchild_comment
+    ),
+
+    leaf_children: $ => choice(
+      $.leaf_project,
+      $.great_grandchild_comment
+    ),
+
     comment: $ => seq(
       '+',
       $.text
@@ -38,6 +61,21 @@ module.exports = grammar({
 
     child_comment: $ => seq(
       '++',
+      $.text
+    ),
+
+    grandchild_comment: $ => seq(
+      '+++',
+      $.text
+    ),
+
+    great_grandchild_comment: $ => seq(
+      '++++',
+      $.text
+    ),
+
+    leaf_comment: $ => seq(
+      '+++++',
       $.text
     ),
 

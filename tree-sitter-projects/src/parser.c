@@ -22,11 +22,11 @@ enum {
   anon_sym_POUND_POUND_POUND = 3,
   anon_sym_POUND_POUND_POUND_POUND = 4,
   anon_sym_POUND_POUND_POUND_POUND_POUND = 5,
-  anon_sym_PLUS = 6,
-  anon_sym_PLUS_PLUS = 7,
-  anon_sym_PLUS_PLUS_PLUS = 8,
-  anon_sym_PLUS_PLUS_PLUS_PLUS = 9,
-  anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS = 10,
+  anon_sym_PLUS_PLUS = 6,
+  anon_sym_PLUS_PLUS_PLUS = 7,
+  anon_sym_PLUS_PLUS_PLUS_PLUS = 8,
+  anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS = 9,
+  anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS = 10,
   sym_text = 11,
   sym_collapsed = 12,
   sym_not_collapsed = 13,
@@ -62,11 +62,11 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_POUND_POUND_POUND] = "###",
   [anon_sym_POUND_POUND_POUND_POUND] = "####",
   [anon_sym_POUND_POUND_POUND_POUND_POUND] = "#####",
-  [anon_sym_PLUS] = "+",
   [anon_sym_PLUS_PLUS] = "++",
   [anon_sym_PLUS_PLUS_PLUS] = "+++",
   [anon_sym_PLUS_PLUS_PLUS_PLUS] = "++++",
   [anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS] = "+++++",
+  [anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS] = "++++++",
   [sym_text] = "text",
   [sym_collapsed] = "collapsed",
   [sym_not_collapsed] = "not_collapsed",
@@ -102,11 +102,11 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_POUND_POUND_POUND] = anon_sym_POUND_POUND_POUND,
   [anon_sym_POUND_POUND_POUND_POUND] = anon_sym_POUND_POUND_POUND_POUND,
   [anon_sym_POUND_POUND_POUND_POUND_POUND] = anon_sym_POUND_POUND_POUND_POUND_POUND,
-  [anon_sym_PLUS] = anon_sym_PLUS,
   [anon_sym_PLUS_PLUS] = anon_sym_PLUS_PLUS,
   [anon_sym_PLUS_PLUS_PLUS] = anon_sym_PLUS_PLUS_PLUS,
   [anon_sym_PLUS_PLUS_PLUS_PLUS] = anon_sym_PLUS_PLUS_PLUS_PLUS,
   [anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS] = anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
+  [anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS] = anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS,
   [sym_text] = sym_text,
   [sym_collapsed] = sym_collapsed,
   [sym_not_collapsed] = sym_not_collapsed,
@@ -160,10 +160,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [anon_sym_PLUS] = {
-    .visible = true,
-    .named = false,
-  },
   [anon_sym_PLUS_PLUS] = {
     .visible = true,
     .named = false,
@@ -177,6 +173,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS] = {
+    .visible = true,
+    .named = false,
+  },
+  [anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS] = {
     .visible = true,
     .named = false,
   },
@@ -357,9 +357,9 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
   eof = lexer->eof(lexer);
   switch (state) {
     case 0:
-      if (eof) ADVANCE(5);
-      if (lookahead == '#') ADVANCE(6);
-      if (lookahead == '+') ADVANCE(11);
+      if (eof) ADVANCE(6);
+      if (lookahead == '#') ADVANCE(7);
+      if (lookahead == '+') ADVANCE(5);
       if (lookahead == '>') ADVANCE(1);
       if (lookahead == 'v') ADVANCE(2);
       if (lookahead == '\t' ||
@@ -368,58 +368,57 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == ' ') SKIP(0)
       END_STATE();
     case 1:
-      if (lookahead == ' ') ADVANCE(19);
-      END_STATE();
-    case 2:
       if (lookahead == ' ') ADVANCE(20);
       END_STATE();
+    case 2:
+      if (lookahead == ' ') ADVANCE(21);
+      END_STATE();
     case 3:
-      if (lookahead == ' ') ADVANCE(22);
+      if (lookahead == ' ') ADVANCE(23);
       if (lookahead == '>') ADVANCE(1);
-      if (lookahead == 'v') ADVANCE(16);
+      if (lookahead == 'v') ADVANCE(17);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r') SKIP(3)
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(18);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(19);
       END_STATE();
     case 4:
-      if (lookahead == ' ') ADVANCE(17);
+      if (lookahead == ' ') ADVANCE(18);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r') SKIP(4)
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(18);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(19);
       END_STATE();
     case 5:
-      ACCEPT_TOKEN(ts_builtin_sym_end);
+      if (lookahead == '+') ADVANCE(12);
       END_STATE();
     case 6:
-      ACCEPT_TOKEN(anon_sym_POUND);
-      if (lookahead == '#') ADVANCE(7);
+      ACCEPT_TOKEN(ts_builtin_sym_end);
       END_STATE();
     case 7:
-      ACCEPT_TOKEN(anon_sym_POUND_POUND);
+      ACCEPT_TOKEN(anon_sym_POUND);
       if (lookahead == '#') ADVANCE(8);
       END_STATE();
     case 8:
-      ACCEPT_TOKEN(anon_sym_POUND_POUND_POUND);
+      ACCEPT_TOKEN(anon_sym_POUND_POUND);
       if (lookahead == '#') ADVANCE(9);
       END_STATE();
     case 9:
-      ACCEPT_TOKEN(anon_sym_POUND_POUND_POUND_POUND);
+      ACCEPT_TOKEN(anon_sym_POUND_POUND_POUND);
       if (lookahead == '#') ADVANCE(10);
       END_STATE();
     case 10:
-      ACCEPT_TOKEN(anon_sym_POUND_POUND_POUND_POUND_POUND);
+      ACCEPT_TOKEN(anon_sym_POUND_POUND_POUND_POUND);
+      if (lookahead == '#') ADVANCE(11);
       END_STATE();
     case 11:
-      ACCEPT_TOKEN(anon_sym_PLUS);
-      if (lookahead == '+') ADVANCE(12);
+      ACCEPT_TOKEN(anon_sym_POUND_POUND_POUND_POUND_POUND);
       END_STATE();
     case 12:
       ACCEPT_TOKEN(anon_sym_PLUS_PLUS);
@@ -435,48 +434,52 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 15:
       ACCEPT_TOKEN(anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS);
+      if (lookahead == '+') ADVANCE(16);
       END_STATE();
     case 16:
-      ACCEPT_TOKEN(sym_text);
-      if (lookahead == ' ') ADVANCE(21);
-      if (('0' <= lookahead && lookahead <= '9') ||
-          ('A' <= lookahead && lookahead <= 'Z') ||
-          lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(18);
+      ACCEPT_TOKEN(anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS);
       END_STATE();
     case 17:
       ACCEPT_TOKEN(sym_text);
-      if (lookahead == ' ') ADVANCE(17);
+      if (lookahead == ' ') ADVANCE(22);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(18);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(19);
       END_STATE();
     case 18:
+      ACCEPT_TOKEN(sym_text);
+      if (lookahead == ' ') ADVANCE(18);
+      if (('0' <= lookahead && lookahead <= '9') ||
+          ('A' <= lookahead && lookahead <= 'Z') ||
+          lookahead == '_' ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(19);
+      END_STATE();
+    case 19:
       ACCEPT_TOKEN(sym_text);
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(18);
-      END_STATE();
-    case 19:
-      ACCEPT_TOKEN(sym_collapsed);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(19);
       END_STATE();
     case 20:
-      ACCEPT_TOKEN(sym_not_collapsed);
+      ACCEPT_TOKEN(sym_collapsed);
       END_STATE();
     case 21:
+      ACCEPT_TOKEN(sym_not_collapsed);
+      END_STATE();
+    case 22:
       ACCEPT_TOKEN(sym_not_collapsed);
       if (lookahead == ' ' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(18);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(19);
       END_STATE();
-    case 22:
+    case 23:
       ACCEPT_TOKEN(sym_no_children);
-      if (lookahead == ' ') ADVANCE(22);
+      if (lookahead == ' ') ADVANCE(23);
       END_STATE();
     default:
       return false;
@@ -549,11 +552,11 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_POUND_POUND_POUND] = ACTIONS(1),
     [anon_sym_POUND_POUND_POUND_POUND] = ACTIONS(1),
     [anon_sym_POUND_POUND_POUND_POUND_POUND] = ACTIONS(1),
-    [anon_sym_PLUS] = ACTIONS(1),
     [anon_sym_PLUS_PLUS] = ACTIONS(1),
     [anon_sym_PLUS_PLUS_PLUS] = ACTIONS(1),
     [anon_sym_PLUS_PLUS_PLUS_PLUS] = ACTIONS(1),
     [anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS] = ACTIONS(1),
+    [anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS] = ACTIONS(1),
     [sym_collapsed] = ACTIONS(1),
     [sym_not_collapsed] = ACTIONS(1),
   },
@@ -573,7 +576,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(11), 1,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
     ACTIONS(13), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
     STATE(6), 2,
       sym_leaf_children,
       aux_sym_great_grandchild_project_repeat1,
@@ -585,16 +588,16 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
   [27] = 6,
     ACTIONS(7), 1,
       ts_builtin_sym_end,
     ACTIONS(11), 1,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
     ACTIONS(13), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
     STATE(5), 2,
       sym_leaf_children,
       aux_sym_great_grandchild_project_repeat1,
@@ -606,14 +609,14 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
   [54] = 6,
     ACTIONS(11), 1,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
     ACTIONS(13), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(15), 1,
       ts_builtin_sym_end,
     STATE(2), 2,
@@ -627,14 +630,14 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
   [81] = 6,
     ACTIONS(11), 1,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
     ACTIONS(13), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(19), 1,
       ts_builtin_sym_end,
     STATE(6), 2,
@@ -648,16 +651,16 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
   [108] = 6,
     ACTIONS(23), 1,
       ts_builtin_sym_end,
     ACTIONS(27), 1,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
     ACTIONS(30), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
     STATE(6), 2,
       sym_leaf_children,
       aux_sym_great_grandchild_project_repeat1,
@@ -669,12 +672,12 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
   [135] = 4,
     ACTIONS(37), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(33), 2,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
@@ -686,13 +689,13 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
   [157] = 4,
     ACTIONS(43), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(39), 2,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
@@ -704,13 +707,13 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
   [179] = 4,
     ACTIONS(37), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(46), 2,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
@@ -722,13 +725,13 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
   [201] = 4,
     ACTIONS(37), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(46), 2,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
@@ -740,13 +743,13 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
   [223] = 4,
     ACTIONS(37), 1,
-      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(50), 2,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
@@ -758,17 +761,17 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
   [245] = 6,
     ACTIONS(54), 1,
       ts_builtin_sym_end,
     ACTIONS(58), 1,
       anon_sym_POUND_POUND_POUND_POUND,
     ACTIONS(60), 1,
-      anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
     STATE(15), 2,
       sym_project_great_grandchildren,
       aux_sym_grandchild_project_repeat1,
@@ -779,13 +782,13 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
   [270] = 6,
     ACTIONS(58), 1,
       anon_sym_POUND_POUND_POUND_POUND,
     ACTIONS(60), 1,
-      anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(62), 1,
       ts_builtin_sym_end,
     STATE(14), 2,
@@ -798,15 +801,15 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
   [295] = 6,
     ACTIONS(66), 1,
       ts_builtin_sym_end,
     ACTIONS(70), 1,
       anon_sym_POUND_POUND_POUND_POUND,
     ACTIONS(73), 1,
-      anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
     STATE(14), 2,
       sym_project_great_grandchildren,
       aux_sym_grandchild_project_repeat1,
@@ -817,13 +820,13 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
   [320] = 6,
     ACTIONS(58), 1,
       anon_sym_POUND_POUND_POUND_POUND,
     ACTIONS(60), 1,
-      anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(76), 1,
       ts_builtin_sym_end,
     STATE(14), 2,
@@ -836,13 +839,13 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
   [345] = 6,
     ACTIONS(58), 1,
       anon_sym_POUND_POUND_POUND_POUND,
     ACTIONS(60), 1,
-      anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(76), 1,
       ts_builtin_sym_end,
     STATE(13), 2,
@@ -855,29 +858,29 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
   [370] = 2,
     ACTIONS(80), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(82), 8,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
   [386] = 6,
     ACTIONS(84), 1,
       ts_builtin_sym_end,
     ACTIONS(88), 1,
       anon_sym_POUND_POUND_POUND,
     ACTIONS(90), 1,
-      anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
     STATE(20), 2,
       sym_project_grandchildren,
       aux_sym_child_project_repeat1,
@@ -887,25 +890,25 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(86), 3,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [409] = 2,
     ACTIONS(92), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(94), 7,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
   [424] = 6,
     ACTIONS(88), 1,
       anon_sym_POUND_POUND_POUND,
     ACTIONS(90), 1,
-      anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
     ACTIONS(96), 1,
       ts_builtin_sym_end,
     STATE(23), 2,
@@ -917,12 +920,12 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(98), 3,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [447] = 6,
     ACTIONS(88), 1,
       anon_sym_POUND_POUND_POUND,
     ACTIONS(90), 1,
-      anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
     ACTIONS(96), 1,
       ts_builtin_sym_end,
     STATE(24), 2,
@@ -934,27 +937,27 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(98), 3,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [470] = 2,
     ACTIONS(100), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(102), 7,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
       anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
   [485] = 6,
     ACTIONS(104), 1,
       ts_builtin_sym_end,
     ACTIONS(108), 1,
       anon_sym_POUND_POUND_POUND,
     ACTIONS(111), 1,
-      anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
     STATE(23), 2,
       sym_project_grandchildren,
       aux_sym_child_project_repeat1,
@@ -964,12 +967,12 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(106), 3,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [508] = 6,
     ACTIONS(88), 1,
       anon_sym_POUND_POUND_POUND,
     ACTIONS(90), 1,
-      anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
     ACTIONS(114), 1,
       ts_builtin_sym_end,
     STATE(23), 2,
@@ -981,7 +984,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(116), 3,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [531] = 6,
     ACTIONS(118), 1,
       ts_builtin_sym_end,
@@ -990,7 +993,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(122), 1,
       anon_sym_POUND_POUND,
     ACTIONS(124), 1,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
     STATE(30), 2,
       sym_project_children,
       aux_sym_root_project_repeat1,
@@ -1005,7 +1008,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(122), 1,
       anon_sym_POUND_POUND,
     ACTIONS(124), 1,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
     STATE(27), 2,
       sym_project_children,
       aux_sym_root_project_repeat1,
@@ -1016,7 +1019,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(122), 1,
       anon_sym_POUND_POUND,
     ACTIONS(124), 1,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
     ACTIONS(126), 1,
       ts_builtin_sym_end,
     ACTIONS(128), 1,
@@ -1031,7 +1034,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(122), 1,
       anon_sym_POUND_POUND,
     ACTIONS(124), 1,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
     ACTIONS(130), 1,
       ts_builtin_sym_end,
     ACTIONS(132), 1,
@@ -1046,13 +1049,13 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(134), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(136), 5,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
   [628] = 6,
     ACTIONS(138), 1,
       ts_builtin_sym_end,
@@ -1061,7 +1064,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(142), 1,
       anon_sym_POUND_POUND,
     ACTIONS(145), 1,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
     STATE(30), 2,
       sym_project_children,
       aux_sym_root_project_repeat1,
@@ -1072,31 +1075,31 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(148), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND_POUND,
-      anon_sym_PLUS_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS_PLUS,
     ACTIONS(150), 5,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS,
       anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
   [662] = 2,
     ACTIONS(152), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
     ACTIONS(154), 3,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [673] = 2,
     ACTIONS(156), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND_POUND,
-      anon_sym_PLUS_PLUS,
+      anon_sym_PLUS_PLUS_PLUS,
     ACTIONS(158), 3,
       anon_sym_POUND,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [684] = 3,
     ACTIONS(160), 1,
       sym_text,
@@ -1148,14 +1151,14 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(172), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [753] = 2,
     ACTIONS(178), 1,
       anon_sym_POUND,
     ACTIONS(176), 3,
       ts_builtin_sym_end,
       anon_sym_POUND_POUND,
-      anon_sym_PLUS,
+      anon_sym_PLUS_PLUS,
   [762] = 3,
     ACTIONS(180), 1,
       ts_builtin_sym_end,

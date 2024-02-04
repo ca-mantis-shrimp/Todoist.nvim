@@ -60,27 +60,27 @@ module.exports = grammar({
     ),
 
     root_comment: $ => seq(
-      '+',
-      $.text
-    ),
-
-    child_comment: $ => seq(
       '++',
       $.text
     ),
 
-    grandchild_comment: $ => seq(
+    child_comment: $ => seq(
       '+++',
       $.text
     ),
 
-    great_grandchild_comment: $ => seq(
+    grandchild_comment: $ => seq(
       '++++',
       $.text
     ),
 
-    leaf_comment: $ => seq(
+    great_grandchild_comment: $ => seq(
       '+++++',
+      $.text
+    ),
+
+    leaf_comment: $ => seq(
+      '++++++',
       $.text
     ),
 

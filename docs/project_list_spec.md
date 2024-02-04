@@ -103,18 +103,19 @@ Therefore, this shows a good example of a complex project hierarchy:
 Todoist Projects can have 0 or more comments attached to them after creation
 - While a buffer is unable to represent pictures and voice recordings (as of this writing), it should be able to represent string comments with ease
 
-comments are represented by the `+` character, followed by the comment string, and should mirror the hierarchy level of the parent project to ensure visual consistency
+comments are represented by atleast two instances of the `+` character, followed by the comment string, and should mirror the hierarchy level of the parent project to ensure visual consistency
 
 So a single level project with a single comment might look like:
 `#v Project`
-`+ This is a comment`
+`++ This is a comment`
 
 While a comment for a child project might look like :
 `#v Project`
 `##v Child Project`
-`++ This is a comment`
+`+++ This is a comment`
+`##> Project with Hidden Comment`
 
-Like projects, comments should be shown using the collapsed character when relevant so that users can see if a parent has either a child project or comment attached to it
+Like projects, comments should be shown hidden using the collapsed character of the parent project when relevant so that users can see if a parent has either a child project or comment attached to it
 
 ### An explanation for the multiple collapsed icons
 In order to support an optional collapsed icon, we must then allow for the possibility of a project with no children and this ambiguity can leading to parsing errors

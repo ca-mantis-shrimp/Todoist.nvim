@@ -2,16 +2,16 @@ M = {}
 
 local util = require("Todoist.util")
 
-local function calculate_indentation(node)
-	return vim.fn["repeat"]("| ", node.depth + 1)
+local function calculate_icon_depth(node, icon)
+	return vim.fn["repeat"](icon, node.depth + 1)
 end
 
 local function get_collapsed_icon(node)
 	if util.length(node.children) > 0 then
 		if node.collapsed then
-			return "> "
+			return ">"
 		else
-			return "v "
+			return "v"
 		end
 	else
 		return ""
@@ -19,29 +19,29 @@ local function get_collapsed_icon(node)
 end
 
 local function get_project_icon(node)
-	if node.archived then
-		return "-> "
-	else
-		return " * "
-	end
+	return "#"
+end
+
+local function get_project_note_icon(node)
+	return "+"
 end
 
 local function get_task_icon(node)
 	if node.checked then
-		return "[x] "
+		return "[x]"
 	else
-		return "[ ] "
+		return "[ ]"
 	end
 end
 
-local icon_calculators = { project = get_project_icon, task = get_task_icon }
+local icon_calculators = { project = get_project_icon, project_note = get_project_note_icon, task = get_task_icon }
 
 local function add_buffer_lines_from_node(lines, node)
-	local indentation = calculate_indentation(node)
 	local icon = icon_calculators[node.type](node)
+	local depth_display = calculate_icon_depth(node, icon)
 	local collapsed_icon = get_collapsed_icon(node)
 
-	table.insert(lines, indentation .. collapsed_icon .. icon .. node.name)
+	table.insert(lines, depth_display .. collapsed_icon .. " " .. node.name)
 
 	if util.length(node.children) == 0 or node.collapsed then
 		return lines

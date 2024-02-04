@@ -13,7 +13,7 @@ Happy Path Test
 +++++ Test Leaf Comment
 + Extra Root Comment
 #v Test Root Project 2
-+ Test Root Comment 2
++ Test Root Project 2 Comment
 ##> Test Sub Collapsed Project
 #> Test Collapsed Project
 # Test No Child Project

@@ -1,0 +1,20 @@
+{
+  "projects": [
+    {
+      "is_archived": false,
+      "color": "lime_green",
+      "shared": false,
+      "inbox_project": true,
+      "id": "220474322",
+      "collapsed": false,
+      "child_order": 0,
+      "name": "Inbox",
+      "is_deleted": false,
+      "parent_id": null,
+      "view_style": "list"
+    }
+  ],
+  "full_sync": true,
+  "temp_id_mapping": {},
+  "sync_token": "kMiTgSIk6QGD83xqMJ9ILknYyEsOoLXyFCnnXvkb4mb0oCK0-IwpKfdGvrcf"
+}

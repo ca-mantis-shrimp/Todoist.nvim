@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Example API Response",
+  "type": "object",
+  "properties": {
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "is_archived": { "type": "boolean" },
+          "color": { "type": "string" },
+          "shared": { "type": "boolean" },
+          "inbox_project": { "type": "boolean" },
+          "id": { "type": "string" },
+          "collapsed": { "type": "boolean" },
+          "child_order": { "type": "integer" },
+          "name": { "type": "string" },
+          "is_deleted": { "type": "boolean" },
+          "parent_id": { 
+            "type": ["string", "null"]
+          },
+          "view_style": { "type": "string" }
+        },
+        "required": ["is_archived", "color", "shared", "inbox_project", "id", "collapsed", "child_order", "name", "is_deleted", "view_style"],
+        "additionalProperties": true
+      }
+    },
+    "full_sync": { "type": "boolean" },
+    "temp_id_mapping": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "sync_token": { "type": "string" }
+  },
+  "required": ["full_sync", "temp_id_mapping", "sync_token"],
+  "additionalProperties": true
+}

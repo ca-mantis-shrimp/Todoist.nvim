@@ -18,6 +18,17 @@ local function add_projects_to_nodes(projects, nodes)
 	end
 end
 
+local function add_project_notes_to_nodes(project_notes, nodes)
+	for _, note in ipairs(project_notes) do
+		nodes[tonumber(note.id)] = {
+			name = note.content,
+			parent_id = tonumber(note.project_id),
+			is_deleted = note.is_deleted,
+			type = "project_note",
+		}
+	end
+end
+
 local function add_tasks_to_nodes(tasks, nodes)
 	for _, task in ipairs(tasks) do
 		nodes[tonumber(task.id)] = {
@@ -42,11 +53,20 @@ local function add_tasks_to_nodes(tasks, nodes)
 	end
 end
 
-M.create_node_dictionary = function(types)
+M.create_task_node_dictionary = function(types)
 	local nodes = {}
 
 	add_projects_to_nodes(types.projects, nodes)
 	add_tasks_to_nodes(types.items, nodes)
+
+	return nodes
+end
+
+M.create_project_node_dictionary = function(types)
+	local nodes = {}
+
+	add_projects_to_nodes(types.projects, nodes)
+	add_project_notes_to_nodes(types.project_notes, nodes)
 
 	return nodes
 end

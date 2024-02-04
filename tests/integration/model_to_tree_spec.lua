@@ -136,7 +136,7 @@ describe("integration between todoist model and the tree converter", function()
 			},
 		}
 
-		local nodes = model.create_node_dictionary(todoist_items)
+		local nodes = model.create_task_node_dictionary(todoist_items)
 
 		local new_tree = tree.create_tree(nodes)
 		local tree_lines = tree_display.get_buffer_lines_from_tree(new_tree)

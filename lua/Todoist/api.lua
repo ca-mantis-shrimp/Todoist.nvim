@@ -12,7 +12,7 @@ M = {}
 M.show_project_list = function()
 	local response = query.get_all_projects(config.api_key, curl)
 
-	local items = model.create_node_dictionary(response)
+	local items = model.create_task_node_dictionary(response)
 
 	local todoist_tree = tree.create_tree(items)
 

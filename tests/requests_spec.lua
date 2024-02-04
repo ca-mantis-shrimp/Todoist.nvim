@@ -8,7 +8,7 @@ mock_curl.request = function(request_table)
 			full_synce = true,
 			temp_id_mapping = {},
 			projects = { { id = 1, name = "test_project" } },
-			notes = {},
+			project_notes = {},
 			tasks = {},
 		}
 	else
@@ -30,7 +30,7 @@ describe("unit tests for todoist requests", function()
 				full_synce = true,
 				temp_id_mapping = {},
 				projects = { { id = 1, name = "test_project" } },
-				notes = {},
+				project_notes = {},
 				tasks = {},
 			}),
 			vim.inspect(projects)
@@ -56,7 +56,7 @@ describe("unit tests for todoist requests", function()
 			temp_id_mapping = {},
 			projects = { { id = 1, name = "test_project" } },
 			items = { { id = 1, content = "test_task" } },
-			notes = { { id = 1, content = "test comment" } },
+			project_notes = { { id = 1, content = "test comment" } },
 		}
 
 		local reduced_response = requests.reduce_response(response)
@@ -65,7 +65,7 @@ describe("unit tests for todoist requests", function()
 			vim.inspect({
 				projects = { { id = 1, name = "test_project" } },
 				items = { { id = 1, content = "test_task" } },
-				notes = { { id = 1, content = "test comment" } },
+				project_notes = { { id = 1, content = "test comment" } },
 			}),
 			vim.inspect(reduced_response)
 		)

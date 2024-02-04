@@ -1,23 +1,24 @@
 local model = require("Todoist.model")
+local test_project = {
+	{
+		is_archived = false,
+		color = "lime_green",
+		shared = false,
+		inbox_project = true,
+		id = "220474322",
+		collapsed = false,
+		child_order = 0,
+		name = "Inbox",
+		is_deleted = false,
+		parent_id = nil,
+		view_style = "list",
+	},
+}
 
 describe("converting Todoist Data into the Node Model", function()
-	it("can convert a dictionary of types into a dictionary of nodes", function()
+	it("can convert a dictionary of tasks and projects into a dictionary of nodes", function()
 		local todoist_list = {
-			projects = {
-				{
-					is_archived = false,
-					color = "lime_green",
-					shared = false,
-					inbox_project = true,
-					id = "220474322",
-					collapsed = false,
-					child_order = 0,
-					name = "Inbox",
-					is_deleted = false,
-					parent_id = nil,
-					view_style = "list",
-				},
-			},
+			projects = test_project,
 			items = {
 				{
 					user_id = 1,
@@ -45,7 +46,7 @@ describe("converting Todoist Data into the Node Model", function()
 			},
 		}
 
-		local converted_nodes = model.create_node_dictionary(todoist_list)
+		local converted_nodes = model.create_task_node_dictionary(todoist_list)
 
 		local expected_nodes = {
 			[220474322] = {
@@ -84,5 +85,44 @@ describe("converting Todoist Data into the Node Model", function()
 		}
 
 		assert.are.equal(vim.inspect(expected_nodes), vim.inspect(converted_nodes))
+	end)
+	it("can convert a list of projects and comments as nodes", function()
+		local types = {
+			projects = test_project,
+			project_notes = {
+				{
+					content = "test comment",
+					id = "2992679862",
+					project_id = "220474322",
+					is_deleted = false,
+				},
+			},
+		}
+
+		local converted_nodes = model.create_project_node_dictionary(types)
+
+		local expected_nodes = {
+			[220474322] = {
+				name = "Inbox",
+				parent_id = nil,
+				inbox_project = true,
+				collapsed = false,
+				color = "lime_green",
+				child_order = 0,
+				is_archived = false,
+				is_deleted = false,
+				view_style = "list",
+				children = {},
+				type = "project",
+			},
+			[2992679862] = {
+				name = "test comment",
+				parent_id = 220474322,
+				is_deleted = false,
+				type = "project_note",
+			},
+		}
+
+		assert.are.same(vim.inspect(expected_nodes), vim.inspect(converted_nodes))
 	end)
 end)

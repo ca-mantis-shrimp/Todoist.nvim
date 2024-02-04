@@ -86,7 +86,7 @@ describe("converting Todoist Data into the Node Model", function()
 
 		assert.are.equal(vim.inspect(expected_nodes), vim.inspect(converted_nodes))
 	end)
-	it("can convert a list of projects and comments as nodes", function()
+	it("can convert a dictionary of projects and comments as nodes", function()
 		local types = {
 			projects = test_project,
 			project_notes = {

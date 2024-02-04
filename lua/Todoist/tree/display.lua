@@ -3,7 +3,7 @@ M = {}
 local util = require("Todoist.util")
 
 local function calculate_indentation(node)
-	return vim.fn["repeat"]("| ", node.depth * 1)
+	return vim.fn["repeat"]("| ", node.depth + 1)
 end
 
 local function get_collapsed_icon(node)

@@ -1,6 +1,6 @@
 local config = require("Todoist.config")
 local curl = require("plenary.curl")
-local query = require("Todoist.query")
+local request_utilities = require("Todoist.request_utilities")
 local model = require("Todoist.model")
 local tree = require("Todoist.tree")
 local tree_display = require("Todoist.tree.display")
@@ -9,10 +9,28 @@ local window = require("Todoist.window")
 
 M = {}
 
-M.show_project_list = function()
-	local response = query.get_all_projects(config.api_key, curl)
+M.show_project_task_list = function()
+	local todoist_items =
+		request_utilities.process_response(curl.request(request_utilities.create_sync_request(config.api_key)))
 
-	local items = model.create_task_node_dictionary(response)
+	local items = model.create_task_node_dictionary(todoist_items)
+
+	local todoist_tree = tree.create_tree(items)
+
+	local tree_lines = tree_display.get_buffer_lines_from_tree(todoist_tree)
+
+	local buffer_id = buffer.create_buffer_with_lines(false, true, tree_lines)
+
+	local window_id = window.create_floating_window(buffer_id)
+
+	return window_id
+end
+
+M.show_project_overview_list = function()
+	local todoist_items =
+		request_utilities.process_response(curl.request(request_utilities.create_sync_request(config.api_key)))
+
+	local items = model.create_project_node_dictionary(todoist_items)
 
 	local todoist_tree = tree.create_tree(items)
 

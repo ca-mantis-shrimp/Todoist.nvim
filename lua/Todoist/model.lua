@@ -1,7 +1,7 @@
 M = {}
 
 local function add_projects_to_nodes(projects, nodes)
-	for _, project in ipairs(projects) do
+	for _, project in pairs(projects) do
 		nodes[tonumber(project.id)] = {
 			name = project.name,
 			parent_id = tonumber(project.parent_id) or nil, -- captures the parent id if a subproject, sets nil otherwise
@@ -19,7 +19,7 @@ local function add_projects_to_nodes(projects, nodes)
 end
 
 local function add_project_notes_to_nodes(project_notes, nodes)
-	for _, note in ipairs(project_notes) do
+	for _, note in pairs(project_notes) do
 		nodes[tonumber(note.id)] = {
 			name = note.content,
 			parent_id = tonumber(note.project_id),
@@ -30,7 +30,7 @@ local function add_project_notes_to_nodes(project_notes, nodes)
 end
 
 local function add_tasks_to_nodes(tasks, nodes)
-	for _, task in ipairs(tasks) do
+	for _, task in pairs(tasks) do
 		nodes[tonumber(task.id)] = {
 			name = task.content,
 			description = task.description,

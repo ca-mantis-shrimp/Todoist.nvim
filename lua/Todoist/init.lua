@@ -11,7 +11,7 @@ function M.setup(opts)
 end
 
 function M.get_all_projects()
-	api.show_project_list()
+	api.show_project_task_list()
 end
 
 return M

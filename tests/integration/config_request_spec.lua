@@ -1,5 +1,5 @@
 local config = require("Todoist.config")
-local query = require("Todoist.query")
+local request = require("Todoist.request")
 local curl = require("plenary.curl")
 
 describe("integrating the curl wrapper with the config module", function()
@@ -8,7 +8,7 @@ describe("integrating the curl wrapper with the config module", function()
 		local opts = { api_key = "e0007362ae4002e7ce38bc9cf5f17b71f3fc6750", default_window_type = "float" }
 		config.config(opts)
 
-		local projects = query.get_all_projects(config.api_key, curl)
+		local projects = curl.request(request.create_sync_request(config.api_key))
 
 		assert(projects.full_sync)
 	end)
@@ -17,7 +17,7 @@ describe("integrating the curl wrapper with the config module", function()
 		local opts = { api_key = "bad key", default_window_type = "float" }
 		config.config(opts)
 
-		local error = query.get_all_projects(config.api_key, curl)
+		local error = curl.request(request.create_sync_request(config.api_key))
 
 		assert(error.status == 403)
 	end)
@@ -25,13 +25,14 @@ describe("integrating the curl wrapper with the config module", function()
 	it("should be able to extract todoist types from response", function()
 		local opts = { api_key = "e0007362ae4002e7ce38bc9cf5f17b71f3fc6750", default_window_type = "float" }
 
-		local projects = query.get_all_projects(opts.api_key, curl)
+		local projects = curl.request(request.create_sync_request(opts.api_key))
 
-		local reduced_response = query.reduce_response(projects)
+		local reduced_response = request.reduce_response(projects)
 
 		assert(
 			#reduced_response.projects > 0
 				and #reduced_response.items > 0
+				and #reduced_response.project_notes > 0
 				and reduced_response.full_sync == nil
 				and reduced_response.temp_id_mapping == nil
 		)

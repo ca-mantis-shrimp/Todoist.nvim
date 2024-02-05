@@ -38,6 +38,12 @@ describe("putting the tree into a buffer", function()
 				children = {},
 				type = "task",
 			},
+			[2992679862] = {
+				name = "Test Comment",
+				parent_id = 220474322,
+				is_deleted = false,
+				type = "project_note",
+			},
 		}
 
 		local new_tree = tree.create_tree(nodes)

@@ -7,7 +7,7 @@ local function calculate_icon_depth(node, icon)
 end
 
 local function get_collapsed_icon(node)
-	if util.length(node.children) > 0 then
+	if node.children ~= nil and util.length(node.children) > 0 then
 		if node.collapsed then
 			return ">"
 		else
@@ -43,7 +43,7 @@ local function add_buffer_lines_from_node(lines, node)
 
 	table.insert(lines, depth_display .. collapsed_icon .. " " .. node.name)
 
-	if util.length(node.children) == 0 or node.collapsed then
+	if node.children == nil or util.length(node.children) == 0 or node.collapsed then
 		return lines
 	else
 		for _, child in pairs(node.children) do

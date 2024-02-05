@@ -2,9 +2,10 @@ M = {}
 
 local function set_node_depth_from_root(node, depth)
 	node.depth = depth
-
-	for _, child in pairs(node.children) do
-		set_node_depth_from_root(child, depth + 1)
+	if node.children ~= nil then
+		for _, child in pairs(node.children) do
+			set_node_depth_from_root(child, depth + 1)
+		end
 	end
 end
 

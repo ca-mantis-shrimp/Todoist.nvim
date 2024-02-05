@@ -1,10 +1,11 @@
 local config = require("Todoist.config")
 
 describe("initial plugin config", function()
-	it("should return the default if a key is not available from the given options", function()
-		local expected_default = ""
+	it("should return error if a key is not available from the given options", function()
+		local status, error = pcall(config.config, {})
 
-		assert.are.equal(expected_default, config.api_key)
+		assert.are.equal(error, "api_key required for Todoist.nvim to work")
+		assert(status == false)
 	end)
 
 	it("should set the options for the module with the table in question", function()

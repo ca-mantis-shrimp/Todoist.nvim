@@ -7,6 +7,12 @@ local M = {}
 function M.setup(opts)
 	config.config(opts)
 
+	vim.filetype.add({
+		extension = {
+			projects = "projects",
+		},
+	})
+
 	commands.create_all_projects_window_command()
 end
 

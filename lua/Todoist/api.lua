@@ -21,7 +21,7 @@ M.show_project_task_list = function()
 
 	local buffer_id = buffer.create_buffer_with_lines(false, true, tree_lines)
 
-	local window_id = window.create_floating_window(buffer_id)
+	local window_id = window.create_split_window(buffer_id)
 
 	return window_id
 end
@@ -38,7 +38,7 @@ M.show_project_overview_list = function()
 
 	local buffer_id = buffer.create_buffer_with_lines(false, true, tree_lines)
 
-	local window_id = window.create_floating_window(buffer_id)
+	local window_id = window.create_split_window(buffer_id)
 
 	return window_id
 end

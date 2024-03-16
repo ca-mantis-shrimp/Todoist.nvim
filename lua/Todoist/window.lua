@@ -1,13 +1,9 @@
 local M = {}
 
-M.create_floating_window = function(buffer_id)
+M.create_split_window = function(buffer_id)
 	local window = vim.api.nvim_open_win(buffer_id, true, {
-		relative = "editor",
-		width = 100,
-		height = 100,
-		row = 5,
-		col = 5,
-		style = "minimal",
+		split = "left",
+		win = 0,
 	})
 
 	return window

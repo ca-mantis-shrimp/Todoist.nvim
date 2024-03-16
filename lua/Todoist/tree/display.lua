@@ -6,18 +6,6 @@ local function calculate_icon_depth(node, icon)
 	return vim.fn["repeat"](icon, node.depth + 1)
 end
 
-local function get_collapsed_icon(node)
-	if node.children ~= nil and util.length(node.children) > 0 then
-		if node.collapsed then
-			return ">"
-		else
-			return "v"
-		end
-	else
-		return ""
-	end
-end
-
 local function get_project_icon(node)
 	return "#"
 end
@@ -39,11 +27,10 @@ local icon_calculators = { project = get_project_icon, project_note = get_projec
 local function add_buffer_lines_from_node(lines, node)
 	local icon = icon_calculators[node.type](node)
 	local depth_display = calculate_icon_depth(node, icon)
-	local collapsed_icon = get_collapsed_icon(node)
 
-	table.insert(lines, depth_display .. collapsed_icon .. " " .. node.name)
+	table.insert(lines, depth_display .. " " .. node.name)
 
-	if node.children == nil or util.length(node.children) == 0 or node.collapsed then
+	if node.children == nil or util.length(node.children) == 0 then
 		return lines
 	else
 		for _, child in pairs(node.children) do

@@ -40,9 +40,10 @@ describe("displaying the todoist tree as buffer lines", function()
 		local buffer_lines = tree_converter.get_buffer_lines_from_tree(projects)
 
 		local expected_output = {
-			"#v Inbox",
+			"# Inbox",
 			"[ ][ ] Test Task",
-			"#> Test Project",
+			"# Test Project",
+			"[ ][ ] Test Task",
 		}
 
 		assert.are.equal(vim.inspect(buffer_lines), vim.inspect(expected_output))
@@ -92,8 +93,9 @@ describe("displaying the todoist tree as buffer lines", function()
 		local buffer_lines = tree_converter.get_buffer_lines_from_tree(projects)
 
 		local expected_output = {
-			"#> Inbox",
-			"#v Test Project",
+			"# Inbox",
+			"++ Test Hidden Comment",
+			"# Test Project",
 			"++ Test Comment",
 			"## Test Child Project",
 		}

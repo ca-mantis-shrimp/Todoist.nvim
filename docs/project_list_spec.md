@@ -40,7 +40,6 @@ To that point, since Todoist only allows 5 levels of nesting when it comes to pr
 The first and last levels are calling back to the fact that this is infact a tree structure and we can use these words to distinguish between the different levels of nesting for:
 - Projects
 - Comments
-- Collapsed Status
 - Tasks(?)
 
 ###  White Space
@@ -79,26 +78,6 @@ We will be using increasing orders of the `#` character to denote that a `##` pr
 
 This was chosen because the projects are often going to be shown as a small split on either side of the screen, so taking an approach that utilized primarily white space would be harder to parse and would waste precious screen real-estate
 
-### Collapsed Projects
-the specification should support both an expanded and collapsed variant of a project list, using the `>` character to denote a collapsed project and the `v` character to denote an expanded project
-- Projects with no children should lack this icon entirely and simply start with two `<SPC>`(Space) characters followed by the appropriate project icon, or nothing at all if more white space is desired
-- This icon must show up immediately after the last `#` character of the project to ensure visual consistency
-
-Therefore, the following is a valid project with a child:
-`#v Parent Project`
-`## Child Project`
-- notice that this continues until the leaf project which has no children and therefore, does not contain the collapsed character
-
-However, if this project were collapsed it would simply be expressed as:
-`#> Parent Project`
-- This allows the reader to know there is atleast one child project without needing to explicitly expand a node
-
-Therefore, this shows a good example of a complex project hierarchy:
-`#v Grandparent Project`
-`##v Parent Project`
-`###> Child Project`
-`##> Aunt Project`
-
 ### Comments
 Todoist Projects can have 0 or more comments attached to them after creation
 - While a buffer is unable to represent pictures and voice recordings (as of this writing), it should be able to represent string comments with ease
@@ -106,14 +85,14 @@ Todoist Projects can have 0 or more comments attached to them after creation
 comments are represented by atleast two instances of the `+` character, followed by the comment string, and should mirror the hierarchy level of the parent project to ensure visual consistency
 
 So a single level project with a single comment might look like:
-`#v Project`
+`# Project`
 `++ This is a comment`
 
 While a comment for a child project might look like :
-`#v Project`
-`##v Child Project`
+`# Project`
+`## Child Project`
 `+++ This is a comment`
-`##> Project with Hidden Comment`
+`## Project with Hidden Comment`
 
 Like projects, comments should be shown hidden using the collapsed character of the parent project when relevant so that users can see if a parent has either a child project or comment attached to it
 

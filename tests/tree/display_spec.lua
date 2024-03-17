@@ -41,9 +41,9 @@ describe("displaying the todoist tree as buffer lines", function()
 
 		local expected_output = {
 			"# Inbox",
-			"[ ][ ] Test Task",
+			"[ ] Test Task",
 			"# Test Project",
-			"[ ][ ] Test Task",
+			"[ ] Test Task",
 		}
 
 		assert.are.equal(vim.inspect(buffer_lines), vim.inspect(expected_output))
@@ -94,9 +94,9 @@ describe("displaying the todoist tree as buffer lines", function()
 
 		local expected_output = {
 			"# Inbox",
-			"++ Test Hidden Comment",
+			"+ Test Hidden Comment",
 			"# Test Project",
-			"++ Test Comment",
+			"+ Test Comment",
 			"## Test Child Project",
 		}
 

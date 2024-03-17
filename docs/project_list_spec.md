@@ -68,7 +68,7 @@ Meaning the beginning of each file will start with the following line:
 `# Inbox`
 
 More importantly, when we think about the lack of whitespace, we will see this throughout the various notation levels to distinguish between the various nesting levels for various concepts
-Meaning, instead of relying on whitespace to tell if a comment is under a project or the child project, we will use the recurring notation instead so a comment for a root project is `+` while the comment for a child project is `++` and so on.
+Meaning, instead of relying on whitespace to tell if a project is under a project another project or is a new root-level project we will use recurring usage of the `#` icon
 
 ## Hierarchy
 One of the primary features given by todoist is the ability to define a nested hierarchy of projects, giving users the ability to nest several projects under a single project
@@ -82,24 +82,15 @@ This was chosen because the projects are often going to be shown as a small spli
 Todoist Projects can have 0 or more comments attached to them after creation
 - While a buffer is unable to represent pictures and voice recordings (as of this writing), it should be able to represent string comments with ease
 
-comments are represented by atleast two instances of the `+` character, followed by the comment string, and should mirror the hierarchy level of the parent project to ensure visual consistency
-
 So a single level project with a single comment might look like:
 `# Project`
-`++ This is a comment`
+`+ This is a comment`
 
 While a comment for a child project might look like :
 `# Project`
 `## Child Project`
-`+++ This is a comment`
-`## Project with Hidden Comment`
+`+ This is a comment`
 
-Like projects, comments should be shown hidden using the collapsed character of the parent project when relevant so that users can see if a parent has either a child project or comment attached to it
-
-### An explanation for the multiple collapsed icons
-In order to support an optional collapsed icon, we must then allow for the possibility of a project with no children and this ambiguity can leading to parsing errors
-
-To counter this, a collapsed icon must match the level of repition of the project icon in order to make it dis-ambiguous as to what level the comment represents
 ## Archived and Deleted Projects
 Deleted Projects can be preserved in the project list for historical purposes, and are denoted by the `x` character before the project icon
 
@@ -114,3 +105,19 @@ Todoist supports a subset of the markdown specification in both the project desc
 
 Anything New?
 
+## Sections
+Projects can also have a single layer of sections which will further break up the project into even smaller chunks.
+
+Practically, this is important for free users as the 5 project limit will make sections a much cleaner solution to organizing their work
+
+However, for the normal user, sections are better used as states for the different tasks as the task in question can only be in one section at a time
+
+To that note, we dont need to worry as much about layering, but we do want to support the ability to show sections properly so we are going to allow the different formats to conform to our standard format
+
+To do this, we represent the section using the `/` character before the text of the section
+
+so we have an example project below:
+`# Project`
+`/ Section`
+
+and can note that we will want sections to be below the project itself but it doesnt matter if the section is above or below the comments for the projects (although as a default we should prefer comments be shown above sections as they often relate to the overall project while sections are a lower-level concept)

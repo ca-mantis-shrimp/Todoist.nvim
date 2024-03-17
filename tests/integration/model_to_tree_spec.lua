@@ -146,8 +146,17 @@ describe("integration between todoist model and the tree converter", function()
 	end)
 	it("can create the project overview from tests tasks", function()
 		local project_overview = {
-
 			projects = sample_projects,
+			sections = {
+				{
+					id = "2326329411",
+					name = "Test Section",
+					parent_id = "2326329411",
+					is_deleted = false,
+					order = 1,
+					type = "section",
+				},
+			},
 			project_notes = {
 				{
 					content = "Hello 2",

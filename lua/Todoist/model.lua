@@ -29,6 +29,18 @@ local function add_project_notes_to_nodes(project_notes, nodes)
 	end
 end
 
+local function add_sections_to_nodes(sections, nodes)
+	for _, section in pairs(sections) do
+		nodes[tonumber(section.id)] = {
+			name = section.name,
+			parent_id = tonumber(section.project_id),
+			is_deleted = section.is_deleted,
+			order = section.order,
+			type = "project_note",
+		}
+	end
+end
+
 local function add_tasks_to_nodes(tasks, nodes)
 	for _, task in pairs(tasks) do
 		nodes[tonumber(task.id)] = {
@@ -66,6 +78,7 @@ M.create_project_node_dictionary = function(types)
 	local nodes = {}
 
 	add_projects_to_nodes(types.projects, nodes)
+	add_sections_to_nodes(types.sections, nodes)
 	add_project_notes_to_nodes(types.project_notes, nodes)
 
 	return nodes

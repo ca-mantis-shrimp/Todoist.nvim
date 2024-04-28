@@ -36,7 +36,7 @@ local function add_sections_to_nodes(sections, nodes)
 			parent_id = tonumber(section.project_id),
 			is_deleted = section.is_deleted,
 			order = section.order,
-			type = "project_note",
+			type = "section",
 		}
 	end
 end

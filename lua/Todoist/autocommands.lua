@@ -6,7 +6,8 @@ M.create_indent_autocmd = function(buffer)
 	-- Create an autocommand for `.projects` files
 	vim.api.nvim_create_autocmd("BufEnter", {
 		group = "AutoIndentProjects",
-		buffer = buffer,
+		pattern = "*.projects",
+		--buffer = buffer,
 		callback = function()
 			vim.cmd("normal gg=G")
 		end,

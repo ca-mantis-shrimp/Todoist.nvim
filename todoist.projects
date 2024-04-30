@@ -1,0 +1,72 @@
+# Inbox
+# Personal
+	## Maintinan Financial Independence
+		### Implement plain-text accounting system
+	## Care For Azula
+	## Practice Programming Craft
+		### Create Todoist.nvim
+			#### Define todoist treesitter grammer
+				+ https://tree-sitter.github.io/tree-sitter/creating-parsers
+		/ Active
+		### Get the homerow mods working for the ferris
+		### Create Ultimate Dev Environment
+			#### Configure Neovim
+			#### Create Python Dev Environment
+			#### Create Neovim Dev Container Config
+				+ I think once i can get a good dev container file working, we can just throw that into most any project and have a running dev container before the person even knows what to do with it.To do that though we may need some more tooling if we arent careful, although idk maybe if i am careful we dont even need that much although i still feel like that is a necessary piece of getting this working
+	## Review Someday/Maybes
+		### Food—recipes, menus, restaurants, wines
+		### Home Improvement Projects
+		### Books to Read
+			/ Meditation Books
+			/ Programming Books
+		### Movies/Shows to see
+		### Personal Shopping List
+		### Programming Ideas
+			#### Create ClearHead Intention Manager
+				+ This time has been really good for me getting to know what this project is about. This is going to utilize much of what I've been working on in a more formal sense to create my first new product class. the worlds first intention manager which will really just be the definition of my intention management framework
+				+ 221221UTDOWN SALThe way to get started is to quit talking and begin doingNOTESDefining Productivity, AKA, how would one characterize a prod active person?-marked by rapid change, Productive people go out. of their way to plan, implement, and react to the changes in their lifeI would also put intentionality in here, I don't feel someone can be Wels like lick to me, that intentionally productiveyfinally, I will push back on the notion that productivity only applies to career goals, but in fact, productivity can occur on any plane of the economic DonutvateindustryPovershootWe Want to bring the concepts of Ponut economics to modern Productivity 10-00 O DELEGATE*IMPORTANT 2 = QUESTION127Personalblic
+			#### ClearHead-Related-Readings
+			#### Develop and Integrate graph database interface
+				+ Things to get or build for your home Hobbies to take up Skills to learn Creative expressions to explore Clothes and accessories to buy Toys (hi-tech and otherwise!) to acquire Trips to take Organizations to join Service projects to contribute to Things to see and do
+		### trips to take
+	## Maintain Car
+		### Move Car Registration to California
+			+ for reference, the specific function we are doing is called "registring a non-resident vehicle": [https://www.dmv.ca.gov/portal/how-to-9-register-a-vehicle-from-out-of-state-nonresident-vehicle/](https://www.dmv.ca.gov/portal/how-to-9-register-a-vehicle-from-out-of-state-nonresident-vehicle/)
+	## Complete Divorce
+	## Maintain Apartment and Run Errands
+	## Maintain Daily Rituals
+	## Weekly Review
+		/ Get Creative
+		/ Get Current
+		/ Get Clear
+	## Maintain Health
+		### Fix my back
+		### Do Therapy
+# Work
+	## Get ServiceNow integration working with ADO
+	## Practice Periodic Review
+		### Weekly Review
+			/ Get Clear
+			/ Get Current
+			/ Get Creative
+	## Create Tax Availability Dashboard
+	## Get API Access to ServiceNow
+		+ guess its my baby now so i have to see it through to the end
+	## Someday/Maybe
+		### Read Recommended Books
+		### Create ITIL-pipe cli
+			#### Extend Extractor to Run a List of SQL files by Default
+			#### Create Mapper Module
+		### Create Postman Collection Proces
+		### Create ADO Extension for Neovim_
+	## Complete Pro-Bono Dashboard for Huckleberry
+		+ doug if possible next week
+		+ board is in may so we can test things in ma
+		+ harvey and lean this week
+		+ and we want leanne and harvery this week
+		+ pat will be after all this at the very end after the group meeting with lean, Zoraida, and melanie
+		+ and do sabina and mark by next week
+		+ mark sabina next week
+		+ leon and zoriada melanie can be one
+		+ we should also do a new timeline as well as other pieces in the new update deck that gets things up-to date

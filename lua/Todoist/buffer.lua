@@ -5,7 +5,7 @@ local function remove_newlines(lines)
 	end
 end
 
-M.create_buffer_with_lines = function(listed, scratch, lines)
+M.create_buffer_with_lines = function(listed, scratch, lines, buf_name)
 	local buffer_id = vim.api.nvim_create_buf(listed, scratch)
 
 	remove_newlines(lines)
@@ -13,6 +13,7 @@ M.create_buffer_with_lines = function(listed, scratch, lines)
 	vim.bo[buffer_id].filetype = "projects"
 
 	vim.api.nvim_buf_set_lines(buffer_id, 0, -1, true, lines)
+	vim.api.nvim_buf_set_name(buffer_id, buf_name)
 
 	return buffer_id
 end

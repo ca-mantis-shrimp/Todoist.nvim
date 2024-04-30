@@ -13,6 +13,8 @@ function M.setup(opts)
 		},
 	})
 
+	vim.fn.mkdir(vim.fn.stdpath("cache") .. "/Todoist", "p")
+
 	commands.create_all_projects_window_command()
 end
 

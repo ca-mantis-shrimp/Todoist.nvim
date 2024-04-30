@@ -121,3 +121,11 @@ so we have an example project below:
 `/ Section`
 
 and can note that we will want sections to be below the project itself but it doesnt matter if the section is above or below the comments for the projects (although as a default we should prefer comments be shown above sections as they often relate to the overall project while sections are a lower-level concept)
+## IDs
+Each project is given an ID from todoist and they will be necessary to communicate changes to and from the server around updates to specific items.
+
+As such, each item must be ended with the `${ID}` with the ID format being fluid to accomodate future changes to the schema
+
+Therefore, the proper layout for a project might be 
+`# Project Name $123456`
+`/ Comment $1734792`

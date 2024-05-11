@@ -15,7 +15,7 @@ local function get_project_note_icon(_)
 end
 
 local function get_section_icon(_)
-	return "/"
+	return "&"
 end
 
 local function get_task_icon(node)
@@ -38,9 +38,9 @@ local function add_buffer_lines_from_node(lines, node)
 	if node.type == "project" then
 		local depth_display = calculate_icon_depth(node, icon)
 
-		table.insert(lines, depth_display .. " " .. node.name)
+		table.insert(lines, depth_display .. " " .. node.name .. " |> " .. node.id)
 	else
-		table.insert(lines, icon .. " " .. node.name)
+		table.insert(lines, icon .. " " .. node.name .. " |> " .. node.id)
 	end
 
 	if node.children == nil or util.length(node.children) == 0 then

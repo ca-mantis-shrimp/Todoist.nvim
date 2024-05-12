@@ -69,7 +69,12 @@ Meaning the beginning of each file will start with the following line:
 `# Inbox`
 
 More importantly, when we think about the lack of whitespace, we will see this throughout the various notation levels to distinguish between the various nesting levels for various concepts
-Meaning, instead of relying on whitespace to tell if a comment is under a project or the child project, we will use the recurring notation instead so a comment for a root project is `+` while the comment for a child project is `++` and so on.
+Meaning, instead of relying on whitespace to tell if a comment is under a project or the child project, we will use the recurring notation instead so a comment for a root project is `+` while the comment for a child project is `+`, but is under a project with `##`
+
+## Finishing Projects and Documents
+Root projects should be finished with a `---` set of characters. this is for the use of syntax highlighting and making sure that we are able to parse a new root project as separate from a child project
+
+At the end of the document, we should have `***` as the final line as this will mark the end of the document and make it clear to any parser that we have no ambiguity
 
 ## Hierarchy
 One of the primary features given by todoist is the ability to define a nested hierarchy of projects, giving users the ability to nest several projects under a single project
@@ -79,26 +84,6 @@ We will be using increasing orders of the `#` character to denote that a `##` pr
 
 This was chosen because the projects are often going to be shown as a small split on either side of the screen, so taking an approach that utilized primarily white space would be harder to parse and would waste precious screen real-estate
 
-### Collapsed Projects
-the specification should support both an expanded and collapsed variant of a project list, using the `>` character to denote a collapsed project and the `v` character to denote an expanded project
-- Projects with no children should lack this icon entirely and simply start with two `<SPC>`(Space) characters followed by the appropriate project icon, or nothing at all if more white space is desired
-- This icon must show up immediately after the last `#` character of the project to ensure visual consistency
-
-Therefore, the following is a valid project with a child:
-`#v Parent Project`
-`## Child Project`
-- notice that this continues until the leaf project which has no children and therefore, does not contain the collapsed character
-
-However, if this project were collapsed it would simply be expressed as:
-`#> Parent Project`
-- This allows the reader to know there is atleast one child project without needing to explicitly expand a node
-
-Therefore, this shows a good example of a complex project hierarchy:
-`#v Grandparent Project`
-`##v Parent Project`
-`###> Child Project`
-`##> Aunt Project`
-
 ### Comments
 Todoist Projects can have 0 or more comments attached to them after creation
 - While a buffer is unable to represent pictures and voice recordings (as of this writing), it should be able to represent string comments with ease
@@ -106,14 +91,14 @@ Todoist Projects can have 0 or more comments attached to them after creation
 comments are represented by atleast two instances of the `+` character, followed by the comment string, and should mirror the hierarchy level of the parent project to ensure visual consistency
 
 So a single level project with a single comment might look like:
-`#v Project`
-`++ This is a comment`
+`# Project`
+`+ This is a comment`
 
 While a comment for a child project might look like :
-`#v Project`
-`##v Child Project`
-`+++ This is a comment`
-`##> Project with Hidden Comment`
+`# Project`
+`## Child Project`
+`+ This is a comment`
+`## Project with Hidden Comment`
 
 Like projects, comments should be shown hidden using the collapsed character of the parent project when relevant so that users can see if a parent has either a child project or comment attached to it
 

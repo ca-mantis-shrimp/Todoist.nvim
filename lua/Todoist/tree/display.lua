@@ -59,8 +59,9 @@ M.get_buffer_lines_from_tree = function(tree)
 
 	for _, node in pairs(tree) do
 		lines = add_buffer_lines_from_node(lines, node)
+		table.insert(lines, "---")
 	end
-
+	table.insert(lines, "***")
 	return lines
 end
 

@@ -38,9 +38,9 @@ local function add_buffer_lines_from_node(lines, node)
 	if node.type == "project" then
 		local depth_display = calculate_icon_depth(node, icon)
 
-		table.insert(lines, depth_display .. " " .. node.name .. " |> " .. node.id)
+		table.insert(lines, "|" .. node.id .. "|" .. depth_display .. " " .. node.name)
 	else
-		table.insert(lines, icon .. " " .. node.name .. " |> " .. node.id)
+		table.insert(lines, "|" .. node.id .. "|" .. icon .. " " .. node.name)
 	end
 
 	if node.children == nil or util.length(node.children) == 0 then

@@ -7,6 +7,14 @@ local M = {}
 function M.setup(opts)
 	config.config(opts)
 
+	vim.filetype.add({
+		extension = {
+			projects = "projects",
+		},
+	})
+
+	vim.fn.mkdir(vim.fn.stdpath("cache") .. "/Todoist", "p")
+
 	commands.create_all_projects_window_command()
 end
 

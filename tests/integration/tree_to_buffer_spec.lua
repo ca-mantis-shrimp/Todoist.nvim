@@ -44,6 +44,13 @@ describe("putting the tree into a buffer", function()
 				is_deleted = false,
 				type = "project_note",
 			},
+			[220185923] = {
+				order = 1,
+				name = "Test Comment",
+				parent_id = 220474322,
+				is_deleted = false,
+				type = "section",
+			},
 		}
 
 		local new_tree = tree.create_tree(nodes)

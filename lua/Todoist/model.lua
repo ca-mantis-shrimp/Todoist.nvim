@@ -12,6 +12,7 @@ local function add_projects_to_nodes(projects, nodes)
 			is_archived = project.is_archived,
 			is_deleted = project.is_deleted,
 			view_style = project.view_style,
+			id = tonumber(project.id),
 			children = {},
 			type = "project",
 		}
@@ -24,7 +25,21 @@ local function add_project_notes_to_nodes(project_notes, nodes)
 			name = note.content,
 			parent_id = tonumber(note.project_id),
 			is_deleted = note.is_deleted,
+			id = tonumber(note.id),
 			type = "project_note",
+		}
+	end
+end
+
+local function add_sections_to_nodes(sections, nodes)
+	for _, section in pairs(sections) do
+		nodes[tonumber(section.id)] = {
+			name = section.name,
+			parent_id = tonumber(section.project_id),
+			is_deleted = section.is_deleted,
+			id = tonumber(section.id),
+			order = section.order,
+			type = "section",
 		}
 	end
 end
@@ -44,6 +59,7 @@ local function add_tasks_to_nodes(tasks, nodes)
 			child_order = task.child_order,
 			collapsed = task.collapsed,
 			date_added = task.date_added,
+			id = tonumber(task.id),
 			in_history = task.in_history,
 			is_deleted = task.is_deleted,
 			sync_id = task.sync_id,
@@ -66,6 +82,7 @@ M.create_project_node_dictionary = function(types)
 	local nodes = {}
 
 	add_projects_to_nodes(types.projects, nodes)
+	add_sections_to_nodes(types.sections, nodes)
 	add_project_notes_to_nodes(types.project_notes, nodes)
 
 	return nodes

@@ -40,7 +40,6 @@ To that point, since Todoist only allows 5 levels of nesting when it comes to pr
 The first and last levels are calling back to the fact that this is infact a tree structure and we can use these words to distinguish between the different levels of nesting for:
 - Projects
 - Comments
-- Collapsed Status
 - Tasks(?)
 
 ###  White Space
@@ -88,8 +87,6 @@ This was chosen because the projects are often going to be shown as a small spli
 Todoist Projects can have 0 or more comments attached to them after creation
 - While a buffer is unable to represent pictures and voice recordings (as of this writing), it should be able to represent string comments with ease
 
-comments are represented by atleast two instances of the `+` character, followed by the comment string, and should mirror the hierarchy level of the parent project to ensure visual consistency
-
 So a single level project with a single comment might look like:
 `# Project`
 `+ This is a comment`
@@ -100,12 +97,6 @@ While a comment for a child project might look like :
 `+ This is a comment`
 `## Project with Hidden Comment`
 
-Like projects, comments should be shown hidden using the collapsed character of the parent project when relevant so that users can see if a parent has either a child project or comment attached to it
-
-### An explanation for the multiple collapsed icons
-In order to support an optional collapsed icon, we must then allow for the possibility of a project with no children and this ambiguity can leading to parsing errors
-
-To counter this, a collapsed icon must match the level of repition of the project icon in order to make it dis-ambiguous as to what level the comment represents
 ## Archived and Deleted Projects
 Deleted Projects can be preserved in the project list for historical purposes, and are denoted by the `x` character before the project icon
 
@@ -120,3 +111,27 @@ Todoist supports a subset of the markdown specification in both the project desc
 
 Anything New?
 
+## Sections
+Projects can also have a single layer of sections which will further break up the project into even smaller chunks.
+
+Practically, this is important for free users as the 5 project limit will make sections a much cleaner solution to organizing their work
+
+However, for the normal user, sections are better used as states for the different tasks as the task in question can only be in one section at a time
+
+To that note, we dont need to worry as much about layering, but we do want to support the ability to show sections properly so we are going to allow the different formats to conform to our standard format
+
+To do this, we represent the section using the `/` character before the text of the section
+
+so we have an example project below:
+`# Project`
+`/ Section`
+
+and can note that we will want sections to be below the project itself but it doesnt matter if the section is above or below the comments for the projects (although as a default we should prefer comments be shown above sections as they often relate to the overall project while sections are a lower-level concept)
+## IDs
+Each project is given an ID from todoist and they will be necessary to communicate changes to and from the server around updates to specific items.
+
+As such, each item must be ended with the `$>{ID}` with the ID format being fluid to accomodate future changes to the schema
+
+Therefore, the proper layout for a project might be 
+`# Project Name $>123456`
+`/ Comment $>1734792`

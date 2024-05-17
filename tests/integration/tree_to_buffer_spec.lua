@@ -7,6 +7,7 @@ describe("putting the tree into a buffer", function()
 	it("can translate a dictionary into a tree", function()
 		local nodes = {
 			[220474322] = {
+				id = 220474322,
 				name = "Inbox",
 				parent_id = nil,
 				inbox_project = true,
@@ -20,6 +21,7 @@ describe("putting the tree into a buffer", function()
 				type = "project",
 			},
 			[102835615] = {
+				id = 102835615,
 				name = "Task1",
 				description = "",
 				checked = 0,
@@ -39,12 +41,14 @@ describe("putting the tree into a buffer", function()
 				type = "task",
 			},
 			[2992679862] = {
+				id = 2992679862,
 				name = "Test Comment",
 				parent_id = 220474322,
 				is_deleted = false,
 				type = "project_note",
 			},
 			[220185923] = {
+				id = 220185923,
 				order = 1,
 				name = "Test Comment",
 				parent_id = 220474322,
@@ -56,7 +60,7 @@ describe("putting the tree into a buffer", function()
 		local new_tree = tree.create_tree(nodes)
 		local tree_lines = tree_display.get_buffer_lines_from_tree(new_tree)
 
-		local tree_buffer = buffer.create_buffer_with_lines(true, true, tree_lines)
+		local tree_buffer = buffer.create_buffer_with_lines(true, true, tree_lines, "test tree")
 
 		assert(tree_buffer ~= nil)
 	end)

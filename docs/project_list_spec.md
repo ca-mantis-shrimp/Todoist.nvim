@@ -70,11 +70,6 @@ Meaning the beginning of each file will start with the following line:
 More importantly, when we think about the lack of whitespace, we will see this throughout the various notation levels to distinguish between the various nesting levels for various concepts
 Meaning, instead of relying on whitespace to tell if a comment is under a project or the child project, we will use the recurring notation instead so a comment for a root project is `+` while the comment for a child project is `+`, but is under a project with `##`
 
-## Finishing Projects and Documents
-Root projects should be finished with a `---` set of characters. this is for the use of syntax highlighting and making sure that we are able to parse a new root project as separate from a child project
-
-At the end of the document, we should have `***` as the final line as this will mark the end of the document and make it clear to any parser that we have no ambiguity
-
 ## Hierarchy
 One of the primary features given by todoist is the ability to define a nested hierarchy of projects, giving users the ability to nest several projects under a single project
 
@@ -130,8 +125,8 @@ and can note that we will want sections to be below the project itself but it do
 ## IDs
 Each project is given an ID from todoist and they will be necessary to communicate changes to and from the server around updates to specific items.
 
-As such, each item must be ended with the `$>{ID}` with the ID format being fluid to accomodate future changes to the schema
+As such, each item must be ended with the `|>{ID}` with the ID format being fluid to accomodate future changes to the schema
 
 Therefore, the proper layout for a project might be 
-`# Project Name $>123456`
-`/ Comment $>1734792`
+`# Project Name |>123456`
+`/ Comment |>1734792`

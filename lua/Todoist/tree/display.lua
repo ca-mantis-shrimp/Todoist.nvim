@@ -38,9 +38,9 @@ local function add_buffer_lines_from_node(lines, node)
 	if node.type == "project" then
 		local depth_display = calculate_icon_depth(node, icon)
 
-		table.insert(lines, "|" .. node.id .. "|" .. depth_display .. " " .. node.name)
+		table.insert(lines, depth_display .. " " .. node.name .. "|>" .. node.id)
 	else
-		table.insert(lines, "|" .. node.id .. "|" .. icon .. " " .. node.name)
+		table.insert(lines, icon .. " " .. node.name .. "|>" .. node.id)
 	end
 
 	if node.children == nil or util.length(node.children) == 0 then
@@ -59,9 +59,7 @@ M.get_buffer_lines_from_tree = function(tree)
 
 	for _, node in pairs(tree) do
 		lines = add_buffer_lines_from_node(lines, node)
-		table.insert(lines, "---")
 	end
-	table.insert(lines, "***")
 	return lines
 end
 

@@ -85,7 +85,6 @@ M.create_project_node_dictionary = function(types)
 	add_sections_to_nodes(types.sections, nodes)
 	add_project_notes_to_nodes(types.project_notes, nodes)
 
-	nodes.sync_token = types.sync_token
 	return nodes
 end
 

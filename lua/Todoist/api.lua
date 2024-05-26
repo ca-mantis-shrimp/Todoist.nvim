@@ -24,6 +24,7 @@ M.show_project_overview_list = function()
 		---@diagnostic disable-next-line: need-check-nil
 		tree_file:write(line .. "\n")
 	end
+
 	local buffer_id = buffer.create_buffer_with_lines(
 		true,
 		false,

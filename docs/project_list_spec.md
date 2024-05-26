@@ -130,3 +130,14 @@ As such, each item must be ended with the `|>{ID}` with the ID format being flui
 Therefore, the proper layout for a project might be 
 `# Project Name |>123456`
 `/ Comment |>1734792`
+
+### Sync Token
+for this work we are using the sync api since it is specifically designed for use-cases like this where we the expectation of updating several pieces at once in rapid succession.
+
+To that end, we have the mechanism of a sync token, we recieve our first upon the first request to todoist and from that point on this token represents the current state of the server and gives us an easy mechanism to see if we are in the same state as the server. since we can check and if the sync token has changed since we last check then we know that we have new changes to push.
+
+in addition, when we ask for new updates, we have to provide the sync token with our request rather than the normal api token since this represents the total state of our server as well as the authetnication mechasim.
+
+This allows todoist to tell if we are out of sync and will give us a set of changes either error codes or the new state of the tree based on our requested update. this way we always know that we have an easy way to sync with the global state of the product
+
+to that end, we are going to allow for the creation of a sync token section that can be see as a sort of ID for the entire tree as this is how we are going to know that we are in sync with the globalstate and this way we know that all the data needed to request updates is present within the document itself

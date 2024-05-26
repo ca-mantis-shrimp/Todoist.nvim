@@ -31,7 +31,7 @@ M.show_project_overview_list = function()
 		vim.fn.stdpath("cache") .. "/Todoist/todoist_buffer.projects"
 	)
 
-	autocmd.create_indent_autocmd(buffer_id)
+	autocmd.create_indent_autocmd()
 
 	local window_id = window.create_split_window(buffer_id)
 

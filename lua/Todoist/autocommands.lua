@@ -1,13 +1,12 @@
 local M = {}
 --Ensure the autocommands group 'AutoIndentProjects' exists and is clear
-M.create_indent_autocmd = function(buffer)
+M.create_indent_autocmd = function()
 	vim.api.nvim_create_augroup("AutoIndentProjects", { clear = true })
 
 	-- Create an autocommand for `.projects` files
-	vim.api.nvim_create_autocmd("BufEnter", {
+	vim.api.nvim_create_autocmd("BufNew", {
 		group = "AutoIndentProjects",
 		pattern = "*.projects",
-		--buffer = buffer,
 		callback = function()
 			vim.cmd("normal gg=G")
 		end,

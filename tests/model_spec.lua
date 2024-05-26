@@ -129,4 +129,20 @@ describe("converting Todoist Data into the Node Model", function()
 
 		assert.are.same(vim.inspect(expected_nodes), vim.inspect(converted_nodes))
 	end)
+	it("can track the sync token associated with a response", function()
+		local response = {
+			sync_token = 2,
+			projects = {},
+			sections = {},
+			project_notes = {},
+		}
+
+		local expected_nodes = {
+			sync_token = 2,
+		}
+
+		local converted_nodes = model.create_project_node_dictionary(response)
+
+		assert.are.same(vim.inspect(expected_nodes), vim.inspect(converted_nodes))
+	end)
 end)

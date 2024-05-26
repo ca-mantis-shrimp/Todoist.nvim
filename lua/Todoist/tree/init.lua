@@ -1,6 +1,7 @@
 M = {}
 
 local function set_node_depth_from_root(node, depth)
+	assert(type(node) == "table", "Node needs to be a table something went wrong!", 2)
 	node.depth = depth
 	if node.children ~= nil then
 		for _, child in pairs(node.children) do

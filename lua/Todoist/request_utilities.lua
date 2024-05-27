@@ -56,6 +56,7 @@ function M.create_sync_request(api_key, sync_token, resource_types)
 			sync_token = sync_token or "*",
 			resource_types = create_resource_list_str(resource_types or { "projects", "items", "notes", "sections" }),
 		},
+		timeout = 100000,
 	}
 end
 

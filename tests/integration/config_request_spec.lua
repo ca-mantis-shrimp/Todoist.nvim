@@ -1,5 +1,5 @@
 local config = require("Todoist.config")
-local request = require("Todoist.request")
+local request = require("Todoist.request_utilities")
 local curl = require("plenary.curl")
 
 describe("integrating the curl wrapper with the config module", function()
@@ -8,7 +8,7 @@ describe("integrating the curl wrapper with the config module", function()
 		local opts = { api_key = "e0007362ae4002e7ce38bc9cf5f17b71f3fc6750", default_window_type = "float" }
 		config.config(opts)
 
-		local projects = curl.request(request.create_sync_request(config.api_key))
+		local projects = request.process_response(curl.request(request.create_sync_request(config.api_key)))
 
 		assert(projects.full_sync)
 	end)
@@ -17,24 +17,28 @@ describe("integrating the curl wrapper with the config module", function()
 		local opts = { api_key = "bad key", default_window_type = "float" }
 		config.config(opts)
 
-		local error = curl.request(request.create_sync_request(config.api_key))
+		local successful, result =
+			pcall(request.process_response, curl.request(request.create_sync_request(config.api_key)))
 
-		assert(error.status == 403)
+		assert(not successful)
+		assert.are.same(result, "Forbidden: The request was valid, but for something that is forbidden")
 	end)
 
 	it("should be able to extract todoist types from response", function()
 		local opts = { api_key = "e0007362ae4002e7ce38bc9cf5f17b71f3fc6750", default_window_type = "float" }
 
-		local projects = curl.request(request.create_sync_request(opts.api_key))
+		local successful, result =
+			pcall(request.process_response, curl.request(request.create_sync_request(opts.api_key)))
 
-		local reduced_response = request.reduce_response(projects)
+		local reduced_response = request.reduce_response(result)
 
+		assert(successful)
 		assert(
 			#reduced_response.projects > 0
 				and #reduced_response.items > 0
 				and #reduced_response.project_notes > 0
-				and reduced_response.full_sync == nil
-				and reduced_response.temp_id_mapping == nil
+				and not reduced_response.full_sync
+				and not reduced_response.temp_id_mapping
 		)
 	end)
 end)

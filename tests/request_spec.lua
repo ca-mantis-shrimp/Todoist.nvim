@@ -8,9 +8,9 @@ describe("unit tests for todoist requests", function()
 			request_generator.todoist_resource_types[3],
 		})
 
-		assert.are.same(sync_request.headers.Authorization, "Bearer good key")
-		assert.are.same(sync_request.data.sync_token, "*")
-		assert.are.same(sync_request.data.resource_types, '["projects", "items", "notes"]')
+		assert.are.equal(sync_request.headers.Authorization, "Bearer good key")
+		assert.are.equal(sync_request.data.sync_token, "*")
+		assert.are.equal(sync_request.data.resource_types, '["projects", "items", "notes"]')
 	end)
 
 	it("should be able to reduce a successful response down to a table with only todoist types", function()
@@ -24,7 +24,7 @@ describe("unit tests for todoist requests", function()
 
 		local reduced_response = request_generator.reduce_response(response)
 
-		assert.are.same(
+		assert.are.equal(
 			vim.inspect({
 				projects = { { id = 1, name = "test_project" } },
 				items = { { id = 1, content = "test_task" } },

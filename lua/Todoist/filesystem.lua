@@ -1,11 +1,10 @@
 local M = {}
 
 M.write_file = function(path, content)
-	local file, err = io.open(path, "w+")
-
-	assert(file, "invalid file for writing", err)
-
 	assert(type(content) == "table", "Content needs to be table of strings", tostring(content))
+
+	local file, err = io.open(path, "w+")
+	assert(file, err)
 
 	local index = 1
 	while index < #content do
@@ -21,7 +20,7 @@ M.read_file = function(path)
 	local lines = {}
 	local file, err = io.open(path, "r")
 
-	assert(file, "Error opening file: ", err)
+	assert(file, err)
 
 	for line in file:lines() do
 		table.insert(lines, line)

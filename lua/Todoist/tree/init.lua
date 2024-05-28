@@ -1,23 +1,29 @@
 M = {}
 
 local function set_node_depth_from_root(node, depth)
-	assert(type(node) == "table", "Node needs to be a table something went wrong!", 2)
+	assert(node, "Node cannot be nil")
+	assert(type(depth) == "number", "depth must be a number")
+
 	node.depth = depth
-	if node.children ~= nil then
+	if node.children then
 		for _, child in pairs(node.children) do
-			set_node_depth_from_root(child, depth + 1)
+			assert(pcall(set_node_depth_from_root, child, depth + 1))
 		end
 	end
 end
 
 local function set_tree_depth(tree)
+	assert(tree, "tree cannot be nil")
+
 	for _, root_node in pairs(tree) do
-		set_node_depth_from_root(root_node, 0)
+		assert(pcall(set_node_depth_from_root, root_node, 0))
 	end
 end
 
 M.create_tree = function(nodes)
 	local root_nodes = {}
+
+	assert(nodes, "nodes cannot be nil")
 
 	for id, node in pairs(nodes) do
 		if node.parent_id then
@@ -27,7 +33,7 @@ M.create_tree = function(nodes)
 		end
 	end
 
-	set_tree_depth(root_nodes)
+	assert(pcall(set_tree_depth, root_nodes))
 
 	return root_nodes
 end

@@ -74,11 +74,9 @@ function M.get_all_projects(api_key, request_engine)
 end
 
 function M.process_response(response)
-	if response.status == 200 then
-		return vim.json.decode(response.body)
-	else
-		error(M.response_status_codes[response.status], 2)
-	end
+	assert(response.status == 200, M.response_status_codes[response.status])
+
+	return vim.json.decode(response.body)
 end
 
 M.reduce_response = function(response)

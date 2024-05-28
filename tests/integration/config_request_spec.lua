@@ -21,7 +21,10 @@ describe("integrating the curl wrapper with the config module", function()
 			pcall(request.process_response, curl.request(request.create_sync_request(config.api_key)))
 
 		assert(not successful)
-		assert.are.same(result, "Forbidden: The request was valid, but for something that is forbidden")
+		assert.are.same(
+			result,
+			"./lua/Todoist/request_utilities.lua:77: Forbidden: The request was valid, but for something that is forbidden"
+		)
 	end)
 
 	it("should be able to extract todoist types from response", function()

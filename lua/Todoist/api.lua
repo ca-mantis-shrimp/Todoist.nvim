@@ -15,32 +15,24 @@ M.download_project_tree_to_file = function(path)
 	local request_successful, request_result =
 		pcall(request_utilities.process_response, curl.request(request_utilities.create_sync_request(config.api_key)))
 
-	if request_successful then
-		local key_val_conversion_successful, key_val_conversion_result =
-			pcall(model.create_project_node_dictionary, request_result)
+	assert(request_successful, request_result)
+	local key_val_conversion_successful, key_val_conversion_result =
+		pcall(model.create_project_node_dictionary, request_result)
 
-		if key_val_conversion_successful then
-			local tree_conversion_successful, tree_conversion_result =
-				pcall(tree.create_tree, key_val_conversion_result)
+	assert(key_val_conversion_successful, key_val_conversion_result)
+	local tree_conversion_successful, tree_conversion_result = pcall(tree.create_tree, key_val_conversion_result)
 
-			if tree_conversion_successful then
-				local line_extraction_successful, line_extraction_result =
-					pcall(tree_display.get_buffer_lines_from_tree, tree_conversion_result)
+	assert(tree_conversion_successful, tree_conversion_result)
+	local line_extraction_successful, line_extraction_result =
+		pcall(tree_display.get_buffer_lines_from_tree, tree_conversion_result)
 
-				if line_extraction_successful then
-					filesystem.write_file(path, line_extraction_result)
-				else
-					error(line_extraction_result)
-				end
-			else
-				error(tree_conversion_result)
-			end
-		else
-			error(key_val_conversion_result)
-		end
-	else
-		error(request_result)
-	end
+	assert(line_extraction_successful, line_extraction_result)
+	local file_writing_successful, _ = pcall(filesystem.write_file, path, line_extraction_result)
+
+	assert(
+		file_writing_successful,
+		"writing tree lines to file failed, ensure path is valid and opent to user for writing"
+	)
 end
 
 M.open_projects_file_as_buffer = function(path)

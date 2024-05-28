@@ -4,7 +4,7 @@ describe("initial plugin config", function()
 	it("should return error if a key is not available from the given options", function()
 		local status, error = pcall(config.config, {})
 
-		assert.are.equal(error, "api_key required for Todoist.nvim to work")
+		assert.are.equal(error, "./lua/Todoist/config.lua:4: api key is required for operation of Todoist.nvim")
 		assert(status == false)
 	end)
 

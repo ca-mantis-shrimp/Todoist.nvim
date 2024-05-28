@@ -1,18 +1,11 @@
-local util = require("Todoist.util")
 local M = {}
 
 M.write_file = function(path, content)
 	local file, err = io.open(path, "w+")
 
-	if not file then
-		error("Error opening file: " .. err)
-		return
-	end
+	assert(file, "invalid file for writing", err)
 
-	if not type(content) == "table" then
-		error("Content needs to be table of strings")
-		return
-	end
+	assert(type(content) == "table", "Content needs to be table of strings", tostring(content))
 
 	local index = 1
 	while index < #content do
@@ -28,10 +21,7 @@ M.read_file = function(path)
 	local lines = {}
 	local file, err = io.open(path, "r")
 
-	if not file then
-		error("Error opening file: " .. err)
-		return
-	end
+	assert(file, "Error opening file: ", err)
 
 	for line in file:lines() do
 		table.insert(lines, line)

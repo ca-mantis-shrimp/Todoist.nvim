@@ -43,8 +43,7 @@ local function add_buffer_lines_from_node(lines, node)
 	local icon = icon_calculators[node.type](node)
 
 	if node.type == "project" then
-		local depth_calculation_successful, depth_calculation_result = pcall(calculate_icon_depth, node, icon)
-		assert(depth_calculation_successful, depth_calculation_result)
+		local depth_calculation_result = calculate_icon_depth(node, icon)
 
 		table.insert(lines, depth_calculation_result .. " " .. node.name .. "|>" .. node.id)
 	else
@@ -63,8 +62,9 @@ end
 M.get_buffer_lines_from_tree = function(tree)
 	local lines = {}
 
+	assert(tree, "Tree cant be nil")
 	for _, node in pairs(tree) do
-		assert(pcall(add_buffer_lines_from_node, lines, node))
+		add_buffer_lines_from_node(lines, node)
 	end
 
 	return lines

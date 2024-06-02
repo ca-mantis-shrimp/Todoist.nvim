@@ -1,3 +1,4 @@
+local util = require("Todoist.util")
 local config = require("Todoist.config")
 local curl = require("plenary.curl")
 local request_utilities = require("Todoist.request_utilities")
@@ -12,21 +13,22 @@ M = {}
 
 M.download_project_tree_to_file = function(path)
 	assert(config.api_key, "API key must not be nil for request to work, be sure config was run before this")
-	local request_result =
+	local todoist_types =
 		request_utilities.process_response(curl.request(request_utilities.create_sync_request(config.api_key)))
 
-	local key_val_conversion_result = model.create_project_node_dictionary(request_result)
+	local item_list = model.create_project_node_dictionary(todoist_types)
 
-	local tree_conversion_result = tree.create_tree(key_val_conversion_result)
+	local project_tree = tree.create_tree(item_list)
+	local tree_lines = tree_display.get_buffer_lines_from_tree(project_tree)
 
-	local line_extraction_result = tree_display.get_buffer_lines_from_tree(tree_conversion_result)
+	tree_lines[util.length(tree_lines) + 1] = tostring("@" .. todoist_types.sync_token)
 
-	filesystem.write_file(path, line_extraction_result)
+	filesystem.write_file(path, tree_lines)
 end
 
 M.open_projects_file_as_buffer = function(path)
 	local tree_lines = filesystem.read_file(path)
-	local buffer_id = buffer.create_buffer_with_lines(true, false, tree_lines, "todoist_projects")
+	local buffer_id = buffer.create_buffer_with_lines(true, false, tree_lines, path)
 
 	autocmd.create_indent_autocmd()
 

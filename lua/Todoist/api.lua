@@ -26,13 +26,23 @@ M.download_project_tree_to_file = function(path)
 	filesystem.write_file(path, tree_lines)
 end
 
-M.open_projects_file_as_buffer = function(path)
+local open_projects_file_as_buffer = function(path)
 	local tree_lines = filesystem.read_file(path)
 	local buffer_id = buffer.create_buffer_with_lines(true, false, tree_lines, path)
 
 	autocmd.create_indent_autocmd()
 
 	return buffer_id
+end
+
+M.create_updates_from_project_trees = function()
+	local client_tree = vim.treesitter.get_parser()
+
+	local server_path = vim.fn.stdpath("cache") .. "/Todoist/server_todoist.projects"
+	local server_tree = vim.treesitter.get_parser(open_projects_file_as_buffer(server_path))
+
+	print(vim.inspect(client_tree))
+	print(vim.inspect(server_tree))
 end
 
 M.show_project_task_list = function()

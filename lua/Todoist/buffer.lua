@@ -13,7 +13,9 @@ M.create_buffer_with_lines = function(listed, scratch, lines, buf_name)
 	vim.bo[buffer_id].filetype = "projects"
 
 	vim.api.nvim_buf_set_lines(buffer_id, 0, -1, true, lines)
-	vim.api.nvim_buf_set_name(buffer_id, buf_name)
+	if not pcall(vim.api.nvim_buf_set_name, buffer_id, buf_name) then
+		return buffer_id
+	end
 
 	return buffer_id
 end

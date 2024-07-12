@@ -7,7 +7,6 @@ local tree = require("Todoist.tree")
 local tree_display = require("Todoist.tree.display")
 local buffer = require("Todoist.buffer")
 local window = require("Todoist.window")
-local autocmd = require("Todoist.autocommands")
 local filesystem = require("Todoist.filesystem")
 M = {}
 
@@ -29,8 +28,6 @@ end
 local open_projects_file_as_buffer = function(path)
 	local tree_lines = filesystem.read_file(path)
 	local buffer_id = buffer.create_buffer_with_lines(true, false, tree_lines, path)
-
-	autocmd.create_indent_autocmd()
 
 	return buffer_id
 end

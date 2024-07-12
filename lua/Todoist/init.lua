@@ -1,4 +1,5 @@
 local api = require("Todoist.api")
+local autocmd = require("Todoist.autocommands")
 local config = require("Todoist.config")
 local commands = require("Todoist.command")
 
@@ -16,6 +17,8 @@ function M.setup(opts)
 	vim.fn.mkdir(vim.fn.stdpath("cache") .. "/Todoist", "p")
 
 	commands.create_all_projects_command()
+
+	autocmd.create_indent_autocmd()
 end
 
 function M.get_all_projects()

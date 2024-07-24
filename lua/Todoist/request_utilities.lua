@@ -32,6 +32,38 @@ M.response_status_codes = {
 	[503] = "Service Unavailable: The server is currently unable to handle the request",
 }
 
+M.todoist_commands = {
+	["project_add"] = function(name, temp_id, uuid, parent, child_order, is_favorite)
+		local command_string = string.format(
+			[[{
+			"type": "project_add",
+			"temp_id": "%s",
+			"uuid": "%s",
+			"args": {
+				"name:" "%s"
+			]],
+			temp_id,
+			uuid,
+			name
+		)
+
+		if parent then
+			command_string = command_string .. string.format(',"parent": "%s"', parent)
+		end
+		if child_order then
+			command_string = command_string .. string.format(',"child_order": %s', child_order)
+		end
+		if is_favorite then
+			command_string = command_string .. string.format(',"is_favorite": %s', is_favorite)
+		end
+
+		command_string = command_string .. [[}
+		}]]
+
+		return command_string
+	end,
+}
+
 local function create_resource_list_str(resource_types)
 	local resource_list_str = "["
 

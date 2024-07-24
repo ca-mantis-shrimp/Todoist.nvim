@@ -27,19 +27,21 @@ end
 
 local open_projects_file_as_buffer = function(path)
 	local tree_lines = filesystem.read_file(path)
+
 	local buffer_id = buffer.create_buffer_with_lines(true, false, tree_lines, path)
 
 	return buffer_id
 end
 
-M.create_updates_from_project_trees = function()
-	local client_tree = vim.treesitter.get_parser()
+M.get_changes_in_buffer = function()
+	local client_lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	local client_string = vim.iter(client_lines):join("\n"):gsub("\t", "")
 
 	local server_path = vim.fn.stdpath("cache") .. "/Todoist/server_todoist.projects"
-	local server_tree = vim.treesitter.get_parser(open_projects_file_as_buffer(server_path))
+	local server_lines = vim.api.nvim_buf_get_lines(open_projects_file_as_buffer(server_path), 0, -1, false)
+	local server_string = vim.iter(server_lines):join("\n"):gsub("\t", "")
 
-	print(vim.inspect(client_tree))
-	print(vim.inspect(server_tree))
+	print(vim.inspect(vim.diff(server_string, client_string, { ignore_cr_at_eol = true })))
 end
 
 M.show_project_task_list = function()

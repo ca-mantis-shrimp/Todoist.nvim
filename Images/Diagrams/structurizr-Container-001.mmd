@@ -1,0 +1,21 @@
+graph TB
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["Neovim - Containers"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    1["<div style='font-weight: bold'>Neovim Enjoyer</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>"]
+    style 1 fill:#08427b,stroke:#052e56,color:#ffffff
+
+    subgraph 2 [Neovim]
+      style 2 fill:#ffffff,stroke:#0b4884,color:#0b4884
+
+      3("<div style='font-weight: bold'>Neovim Base</div><div style='font-size: 70%; margin-top: 0px'>[Container]</div>")
+      style 3 fill:#438dd5,stroke:#2e6295,color:#ffffff
+      6("<div style='font-weight: bold'>Todoist.nvim</div><div style='font-size: 70%; margin-top: 0px'>[Container]</div>")
+      style 6 fill:#438dd5,stroke:#2e6295,color:#ffffff
+    end
+
+    3-. "<div>Utilizes Commands</div><div style='font-size: 70%'></div>" .->6
+    1-. "<div>Uses</div><div style='font-size: 70%'></div>" .->3
+  end

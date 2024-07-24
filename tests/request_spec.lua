@@ -46,4 +46,23 @@ describe("unit tests for todoist requests", function()
 
 		assert(processed_response.full_sync)
 	end)
+
+	it("should be able to produce a project add command string", function()
+		local expected_string = [[{
+			"type": "project_add",
+			"temp_id": "4ff1e388-5ca6-453a-b0e8-662ebf373b6b",
+			"uuid": "32774db9-a1da-4550-8d9d-910372124fa4",
+			"args": {
+				"name": "Shopping List"
+			}
+		}]]
+
+		local command_string = request_generator.todoist_commands["project_add"](
+			"Shopping List",
+			"4ff1e388-5ca6-453a-b0e8-662ebf373b6b",
+			"32774db9-a1da-4550-8d9d-910372124fa4"
+		)
+
+		assert.are.same(expected_string, command_string)
+	end)
 end)

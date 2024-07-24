@@ -1,0 +1,52 @@
+graph TB
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["Neovim - Todoist.nvim - Components"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    subgraph 6 [Todoist.nvim]
+      style 6 fill:#ffffff,stroke:#2e6295,color:#2e6295
+
+      10("<div style='font-weight: bold'>Query</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 10 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      11("<div style='font-weight: bold'>Model</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 11 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      12("<div style='font-weight: bold'>Tree</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 12 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      13("<div style='font-weight: bold'>Buffer</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 13 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      14("<div style='font-weight: bold'>Window</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 14 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      15("<div style='font-weight: bold'>Commands</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 15 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      16("<div style='font-weight: bold'>Filetype</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 16 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      17("<div style='font-weight: bold'>Project List Spec</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 17 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      18("<div style='font-weight: bold'>Project List TreeSitter</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 18 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      7("<div style='font-weight: bold'>initalization</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 7 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      8("<div style='font-weight: bold'>API</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 8 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      9("<div style='font-weight: bold'>Configuration</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>")
+      style 9 fill:#85bbf0,stroke:#5d82a8,color:#000000
+    end
+
+    7-. "<div>calls</div><div style='font-size: 70%'></div>" .->8
+    8-. "<div>Imports</div><div style='font-size: 70%'></div>" .->9
+    8-. "<div>Imports</div><div style='font-size: 70%'></div>" .->10
+    8-. "<div>Imports</div><div style='font-size: 70%'></div>" .->11
+    8-. "<div>Imports</div><div style='font-size: 70%'></div>" .->12
+    8-. "<div>Imports</div><div style='font-size: 70%'></div>" .->13
+    8-. "<div>Imports</div><div style='font-size: 70%'></div>" .->14
+    13-. "<div>applies filetype,<br />automatically setting off<br />custom settings</div><div style='font-size: 70%'></div>" .->16
+    18-. "<div>conforms to specified format</div><div style='font-size: 70%'></div>" .->17
+    16-. "<div>applies highlight groups to<br />query outputs</div><div style='font-size: 70%'></div>" .->18
+    15-. "<div>calls</div><div style='font-size: 70%'></div>" .->8
+    10-. "<div>implicitly takes API key from<br />config Object</div><div style='font-size: 70%'></div>" .->9
+    11-. "<div>must understand how to<br />convert JSON response into<br />dictionary</div><div style='font-size: 70%'></div>" .->10
+    12-. "<div>converts dictionary into<br />tree, and lines based on that</div><div style='font-size: 70%'></div>" .->11
+    13-. "<div>represents tree in buffer as<br />lines of text</div><div style='font-size: 70%'></div>" .->12
+    14-. "<div>represents buffer in window,<br />either split or floating</div><div style='font-size: 70%'></div>" .->13
+  end

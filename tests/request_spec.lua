@@ -63,6 +63,6 @@ describe("unit tests for todoist requests", function()
 			"32774db9-a1da-4550-8d9d-910372124fa4"
 		)
 
-		assert.are.same(expected_string, command_string)
+		assert.are.same(vim.diff(expected_string, command_string), "")
 	end)
 end)

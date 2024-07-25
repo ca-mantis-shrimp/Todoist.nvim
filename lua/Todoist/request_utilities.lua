@@ -40,7 +40,7 @@ M.todoist_commands = {
 			"temp_id": "%s",
 			"uuid": "%s",
 			"args": {
-				"name:" "%s"
+				"name": "%s"
 			]],
 			temp_id,
 			uuid,

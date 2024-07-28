@@ -32,35 +32,43 @@ M.response_status_codes = {
 	[503] = "Service Unavailable: The server is currently unable to handle the request",
 }
 
+local generate_command_args_string = function(args)
+	local args_str = '"args": {'
+
+	for name, value in pairs(args) do
+		if type(value) == "string" then
+			args_str = args_str .. string.format('"%s": "%s"', name, value)
+		elseif not value then
+			goto continue
+		else
+			args_str = args_str .. string.format('"%s": %s', name, tostring(value))
+		end
+		if next(args, name) then
+			args_str = args_str .. ", "
+		end
+		::continue::
+	end
+
+	return args_str .. "}"
+end
+
 M.todoist_commands = {
-	["project_add"] = function(name, temp_id, uuid, parent, child_order, is_favorite)
-		local command_string = string.format(
-			[[{
-			"type": "project_add",
-			"temp_id": "%s",
-			"uuid": "%s",
-			"args": {
-				"name": "%s"
-			]],
-			temp_id,
-			uuid,
-			name
-		)
+	["project_add"] = function(name, temp_id, uuid, parent, child_order, is_favorite_req)
+		assert(name, "Must Have a Name for our new project!")
 
-		if parent then
-			command_string = command_string .. string.format(',"parent": "%s"', parent)
-		end
-		if child_order then
-			command_string = command_string .. string.format(',"child_order": %s', child_order)
-		end
-		if is_favorite then
-			command_string = command_string .. string.format(',"is_favorite": %s', is_favorite)
-		end
+		local command = {
+			type = "project_add",
+			temp_id = temp_id,
+			uuid = uuid,
+			args = {
+				name = name,
+				parent = parent,
+				child_order = child_order,
+				is_favorite = is_favorite_req,
+			},
+		}
 
-		command_string = command_string .. [[}
-		}]]
-
-		return command_string
+		return vim.json.encode(command)
 	end,
 }
 
@@ -114,5 +122,88 @@ end
 M.reduce_response = function(response)
 	return { ["projects"] = response.projects, ["items"] = response.items, ["project_notes"] = response.project_notes }
 end
+
+M.colors = {
+	berry_red = {
+		id = 30,
+		hex = "#b8256f",
+	},
+	red = {
+		id = 31,
+		hex = "#db4035",
+	},
+	oranges = {
+		id = 32,
+		hex = "#ff9933",
+	},
+	yellow = {
+		id = 33,
+		hex = "#fad000",
+	},
+	olive_green = {
+		id = 34,
+		hex = "#afb83b",
+	},
+	lime_green = {
+		id = 35,
+		hex = "#7ecc49",
+	},
+	green = {
+		id = 36,
+		hex = "#299438",
+	},
+	mint_green = {
+		id = 37,
+		hex = "#6accbc",
+	},
+	teal = {
+		id = 38,
+		hex = "#158fad",
+	},
+	sky_blue = {
+		id = 39,
+		hex = "#14aaf5",
+	},
+	light_blue = {
+		id = 40,
+		hex = "#96c3eb",
+	},
+	blue = {
+		id = 41,
+		hex = "#4073ff",
+	},
+	grape = {
+		id = 42,
+		hex = "#884dff",
+	},
+	violet = {
+		id = 43,
+		hex = "#af38eb",
+	},
+	lavender = {
+		id = 44,
+		hex = "#eb96eb",
+	},
+	magenta = {
+		id = 45,
+		hex = "#e05194",
+	},
+	salmon = {
+		id = 46,
+		hex = "#ff8d85",
+	},
+	charcoal = {
+		id = 47,
+		hex = "#808080",
+	},
+	grey = {
+		id = 48,
+		hex = "#b8b8b8",
+	},
+	taupe = {
+		id = 49,
+		hex = "#ccac93",
+	},
+}
 
 return M

@@ -48,9 +48,17 @@ describe("unit tests for todoist requests", function()
 	end)
 
 	it("should be able to produce a project add command string", function()
-		local expected_string =
-			[[{"type":"project_add","temp_id":"4ff1e388-5ca6-453a-b0e8-662ebf373b6b","uuid":"32774db9-a1da-4550-8d9d-910372124fa4","args":{"name":"Shopping List","parent": 4,"child_order":2,"is_favorite":false}}]]
-
+		local expected_json = {
+			type = "project_add",
+			temp_id = "4ff1e388-5ca6-453a-b0e8-662ebf373b6b",
+			uuid = "32774db9-a1da-4550-8d9d-910372124fa4",
+			args = {
+				name = "Shopping List",
+				parent = 4,
+				child_order = 2,
+				is_favorite = true,
+			},
+		}
 		local command_string = request_generator.todoist_commands["project_add"](
 			"Shopping List",
 			"4ff1e388-5ca6-453a-b0e8-662ebf373b6b",
@@ -60,6 +68,6 @@ describe("unit tests for todoist requests", function()
 			true
 		)
 
-		assert.are.same(expected_string, command_string)
+		assert.are.same(expected_json, vim.json.decode(command_string))
 	end)
 end)

@@ -17,6 +17,11 @@ M.download_project_tree_to_file = function(path)
 
 	local item_list = model.create_project_node_dictionary(todoist_types)
 
+	filesystem.write_file(
+		vim.fn.stdpath("cache") .. "/Todoist/server_items.json",
+		vim.split(vim.json.encode(item_list), "\n")
+	)
+
 	local project_tree = tree.create_tree(item_list)
 	local tree_lines = tree_display.get_buffer_lines_from_tree(project_tree)
 

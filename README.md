@@ -1,50 +1,105 @@
-# Todoist.nvim
-Plugin for managing Todoist through Neovim using a more vim-like syntax
+---
+title: README
+description: author: primary_desktop
+categories: created: 2024-07-27T19:41:58-0800
+updated: 2024-07-27T20:45:04-0800
+version: 1.1.1
+---
+# Todoist.Nvim
 
-My future intention is to create something where the average user can do their entire workflow completely from Neovim while having access to all Todoist features (excluding teams-related features)
+Todoist.nvim is an (relatively) unopinionated wrapper around the Todoists' Sync API with the ability for users to:
+- Review
+- Update
+- Create
+- And Delete
+  All todoist objects entirely from a Neovim buffer. Heavily inspired by oil.nvim, Todoist.nvim intends to leverage the users' existing knowledge of text editing and traditional file management techniques to create a fully-featured client into the Todoist Service.
 
-We do this by introducing a new filteype of `projects` and `tasks` and making views that users can interact with, similar to the layout of something like oil.nvim where users can utilize standard vim methods to interact with both Task and Project data, while still having the feeling of a normal buffer
+## Why do this?
+
+Todoist is my primary GTD-based productivity manager. In my humble opinion, it is the best private productivity service on the market currently, especially when considering the relatively low cost of the premium service, as well as the generous free tier.
+
+The only problem is that all work is intended to go through the traditional todoist web interface, and while this is fine on mobile, and the team has gone out of their way to be more keyboard-friendly than most web applications, I have still yearned for a way to manage my Todoist project structure from Neovim which is where the rest of my workflow lives.
+
+Specifically, I wanted to be able to easily create, update, and delete Todoist objects using the same techniques that i use within my editor to enable easier management than the traditional web format affords me (think deleting multiple projects at once)
+
+In addition, this felt like a good opportunity to leverage existing Neovim abstractions and mechanisms in service of something closer to a sub-application rather than a single filetype.
+
+Another smaller sub-project (pun-intended) that has arisen out of this has been the creation of a new `projects` filetype that allows for a compact, user-readable format to translate Todoist objects into. This is all powered using tree-sitter to handle everything from highlighting to folding. The spec, as well as the grammer itself was moved to another project to leave open the possibility of incorporating it into the main treesitter repository if there was enough interest.
+
 
 ## Installation
-The only things this plugins needs is plenary, nvim-treesitter, and your Todoist API key
 
+Efforts have been taken to keep the list of dependencies small:
+- plenary.nvim
+    - Handles both forging requests as well as supplying a test harness
+- tree-sitter-projects
+    - My custom treesitter grammer for the new `projects` filetype.
+    - necessary, since it provides highlighting, indentation, and folding rules which are the primary mechanisms used within the UI to help users manage list length
+
+This can all be done in your package manager of choice as this is all done from github repositories
+
+**Lazy**:
 ```lua
 {
-  "ca-mantis-shrimp/Todoist.nvim",
-  dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" }
-  config = {
-    api_key = vim.getenv("TODOIST_API_KEY")
-  }
+ "ca-mantis-shrimp/Todoist.nvim",
+ dependencies = {
+  "nvim-lua/plenary.nvim",
+  "ca-mantis-shrimp/tree-sitter-projects",
+ },
+ config = { api_key = vim.env.TODOIST_API_KEY },
 }
 ```
-As you can see, im using an environment variable to store the API key, you can do this by adding the following line to your init.vim or init.lua
+The only necessary part of configuration is supplying your Todoist API key. This can be extracted from the Todoist web api and from there, I recommend saving it to an environment variable(shown above), a secret manager, ANYTHING other than hard-coding this into your configuration as this is likely to get committed if you keep your configuration under version control 
 
- Ofcourse, best practice is to pipe the result of a query to your password manager of choice (for me, that's 1password, but this is all personal preference)
-
-For right now, we are also trying to support local treesitter parsers so after the plugin config you need to put this somewhere in your config:
+Until this repository gets pulled into the main treesitter one, treesitter needs to be configured to utilize the installed manually
 ```lua
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+-- Important for tree-sitter parsers installed after the original plugin
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 parser_config.projects = {
-  install_info = {
-    url = "~/Products/tree-sitter-projects",
-    files = {"src/parser.c"}, 
-    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
-    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
-  },
-  filetype = "projects"
+ install_info = {
+  url = vim.fn.stdpath("data") .. "/lazy/tree-sitter-projects",
+  files = { "src/parser.c" },
+ },
+ filetype = "projects",
 }
-
-vim.treesitter.language.register('projects', 'projects') 
 ```
-- This will add the custom parsers to your treesitter config 
-  - Notice in my example i have this within the "Products" folder but this should be updated to wherever you end up placing this file
-- and register the filetype `projects` to the parser
+If you want to this plugin as a dependency to treesitter, you can configure this parser upon installation of treesitter.
+Otherwise, this snippet above is the easiest way to ensure that the parser is configured properly and that all necessary hooks. 
+You know this worked because you will be able to run `TSInstall projects` successfully after initial configuration and can also use the normal Treesitter mechanisms to manage the parser like you would any other treesitter parser
 
-# Usage
-Currently the primary interface is surfaced through the new `TodoistGetProjects` command which will get all of the users projects as a new floating window
+With that, you should be ready to move onto workflow
 
-# Roadmap
-- [ ] add support for tasks in new `tasks` filetype
-- [ ] add support for updating, creating, and removing files from the project list
-- [ ] TreeSitter support for highlights as well as folding and manipulation of objects in-buffer
+## Workflow
+
+Out of the box, we have a few commands intended to run the entire workflow:
+- [x] `TodoistFullSync`
+- [ ] `TodoistIncrementalSync`
+- [x] `OpenTodoistProjectFile`
+- [ ] `TodoistSendCommands`
+
+
+```mermaid
+stateDiagram
+[*] --> Installation
+[*] --> MobileEdit
+
+Installation --> FullSync
+FullSync --> OpenProjectFile
+
+MobileEdit --> IncrementalSync
+OpenProjectFile --> UpdateBuffer
+UpdateBuffer --> SendCommands
+SendCommands --> IncrementalSync
+IncrementalSync --> UpdateBuffer
+```
+1. Your very first time you run the plugin on any machine, you should run `TodoistFullSync`, at which point, your entire Todoist structure will be downloaded via the Sync Api, and stored in your `cache` directory as dictated by neovim.
+2. Next, you can use `OpenTodoistProjectFile` to jump to the proper file to edit and review
+    1. You can also simply edit the file created at `XDG_CACHE_DIR/nvim/Todoist/client_todoist.projects`
+3. After you have made some changes to any items in the buffer, run `TodoistSendCommands` to have your commands sent to the server.
+    1. You may continue to make edits, sending commands every once in awhile and any failures will also be logged in the cache
+    2. whenever you are ready, simply run `TodoistIncrementalSync` to get the newest Todoist updates and have your changes properly reflected in the buffer
+4. Finally, `TodoistIncrementalSync` is useful when pulling changes that were put in
+    1. either through another device (IE mobile, the web portal, another device running this plugin, etc...)
+    2. or through the `TodoistSendCommands` command
+    3. However, `TodoistFullSync` can also serve as an emergency lever in the case of errors, as it will overwrite all existing data and ensure that you are up-to-date with the latest changes in your account

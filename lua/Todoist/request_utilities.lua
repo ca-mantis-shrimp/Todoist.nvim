@@ -88,8 +88,8 @@ local function create_resource_list_str(resource_types)
 	return resource_list_str
 end
 
-function M.create_sync_request(api_key, sync_token, resource_types)
-	return {
+function M.create_sync_request(api_key, sync_token, resource_types, commands)
+	local request_body = {
 		url = "https://api.todoist.com/sync/v9/sync",
 		headers = { Authorization = "Bearer " .. api_key },
 		data = {
@@ -98,6 +98,8 @@ function M.create_sync_request(api_key, sync_token, resource_types)
 		},
 		timeout = 100000,
 	}
+
+	return request_body
 end
 
 function M.get_all_projects(api_key, request_engine)

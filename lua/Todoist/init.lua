@@ -1,12 +1,12 @@
 local api = require("Todoist.api")
 local autocmd = require("Todoist.autocommands")
-local config = require("Todoist.config")
+local config_mod = require("Todoist.config")
 local commands = require("Todoist.command")
 
 local M = {}
 
 function M.setup(opts)
-	config.config(opts)
+	config_mod.config(opts)
 
 	vim.filetype.add({
 		extension = {
@@ -18,7 +18,9 @@ function M.setup(opts)
 
 	commands.create_all_projects_command()
 
-	autocmd.create_indent_autocmd()
+	if config_mod.indent_on_buf_enter then
+		autocmd.create_indent_autocmd()
+	end
 end
 
 function M.get_all_projects()

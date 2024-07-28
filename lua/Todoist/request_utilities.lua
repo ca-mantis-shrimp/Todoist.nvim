@@ -68,19 +68,6 @@ function M.create_sync_request(api_key, sync_token, resource_types, commands)
 	return request_body
 end
 
-function M.get_all_projects(api_key, request_engine)
-	local sync_response = request_engine.request({
-		url = "https://api.todoist.com/sync/v9/sync",
-		headers = { Authorization = "Bearer " .. api_key },
-		data = {
-			sync_token = "*",
-			resource_types = '["projects", "items", "notes"]',
-		},
-	})
-
-	return vim.json.decode(sync_response.body)
-end
-
 function M.process_response(response)
 	assert(response.status == 200, M.response_status_codes[response.status])
 
@@ -90,88 +77,5 @@ end
 M.reduce_response = function(response)
 	return { ["projects"] = response.projects, ["items"] = response.items, ["project_notes"] = response.project_notes }
 end
-
-M.colors = {
-	berry_red = {
-		id = 30,
-		hex = "#b8256f",
-	},
-	red = {
-		id = 31,
-		hex = "#db4035",
-	},
-	oranges = {
-		id = 32,
-		hex = "#ff9933",
-	},
-	yellow = {
-		id = 33,
-		hex = "#fad000",
-	},
-	olive_green = {
-		id = 34,
-		hex = "#afb83b",
-	},
-	lime_green = {
-		id = 35,
-		hex = "#7ecc49",
-	},
-	green = {
-		id = 36,
-		hex = "#299438",
-	},
-	mint_green = {
-		id = 37,
-		hex = "#6accbc",
-	},
-	teal = {
-		id = 38,
-		hex = "#158fad",
-	},
-	sky_blue = {
-		id = 39,
-		hex = "#14aaf5",
-	},
-	light_blue = {
-		id = 40,
-		hex = "#96c3eb",
-	},
-	blue = {
-		id = 41,
-		hex = "#4073ff",
-	},
-	grape = {
-		id = 42,
-		hex = "#884dff",
-	},
-	violet = {
-		id = 43,
-		hex = "#af38eb",
-	},
-	lavender = {
-		id = 44,
-		hex = "#eb96eb",
-	},
-	magenta = {
-		id = 45,
-		hex = "#e05194",
-	},
-	salmon = {
-		id = 46,
-		hex = "#ff8d85",
-	},
-	charcoal = {
-		id = 47,
-		hex = "#808080",
-	},
-	grey = {
-		id = 48,
-		hex = "#b8b8b8",
-	},
-	taupe = {
-		id = 49,
-		hex = "#ccac93",
-	},
-}
 
 return M

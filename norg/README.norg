@@ -4,7 +4,7 @@ description:
 authors: primary_desktop
 categories: 
 created: 2024-07-27T19:41:58-0800
-updated: 2024-07-27T22:22:50-0800
+updated: 2024-07-27T23:41:51-0800
 version: 1.1.1
 @end
 * Todoist.Nvim
@@ -108,9 +108,13 @@ version: 1.1.1
 
 *** Sharpening your workflow
     To facilitate more rapid workflows, users are encouraged to decide the automation format that works best for them.
+    - The most common option would be to create an autocommand to both send update commands and an incremental sync whenever the user saves the buffer
+    -- This works the most like the oil workflow, but the buffer is completely replaced each time the file is saved, leading to a risk that unsaved changes are lost without care being taken.
+    - Another option would be to save all the commands as hotkeys, choosing to activate one at a time to keep complete control over the above process while still being faster than normally
+    - And for those whom this is STILL not enough control, you can instead use the underlying `api` lua module to define custom plugins or workflows using the underlying lua api rather than the commands as they are defined
+    -- useful if you have need of edge cases like saving the state of Todoist in a different place to version-control the file itself (not recommended unless you know that is what you need)
 
-    The default approach would likely be to perform both a send and incremental sync command at the same time whenever the user saves the buffer.
-
+Overall, my hope is that users feel they have the tools needed 
 ** Architecture
    Todoist has done a good job of implementing a REST api workflow that minimizes the amount of requests that need to be sent as  a client, and the fact that we are working with the sync api ensures that we have all the context necessary whenever we are working with our Todoist state
 
@@ -125,3 +129,6 @@ version: 1.1.1
     NeovimClient->>TodoistServer: Sends Incremental Sync Request
     TodoistServer-->>NeovimClient: Sends Incremental Sync Response
     @end
+    - both the requests and responses are logged in the cache directory to help in cases where debugging is necessary
+    -- requests are saved as scripts so that users can run the queries directly and check for errors
+    -- While responses are logged as json files to enable proper review of the responses for errors when necessary

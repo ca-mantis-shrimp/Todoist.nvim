@@ -10,7 +10,10 @@ describe("unit tests for todoist requests", function()
 
 		assert.are.equal(sync_request.headers.Authorization, "Bearer good key")
 		assert.are.equal(sync_request.data.sync_token, "*")
-		assert.are.equal(sync_request.data.resource_types, '["projects", "items", "notes"]')
+		assert.are.equal(
+			vim.inspect(vim.json.decode(sync_request.data.resource_types)),
+			vim.inspect(vim.json.decode('["projects", "items", "notes"]'))
+		)
 	end)
 
 	it("should be able to reduce a successful response down to a table with only todoist types", function()

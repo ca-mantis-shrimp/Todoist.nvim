@@ -4,7 +4,7 @@ description:
 authors: primary_desktop
 categories: 
 created: 2024-07-27T19:41:58-0800
-updated: 2024-07-27T20:45:04-0800
+updated: 2024-07-27T22:22:50-0800
 version: 1.1.1
 @end
 * Todoist.Nvim
@@ -73,7 +73,7 @@ version: 1.1.1
    - (x) `OpenTodoistProjectFile`
    - ( ) `TodoistSendCommands`
 
-
+   Here is a visualization of the workflow from start to finish assuming you are working from a new machine:
    @code mermaid
    stateDiagram
    [*] --> Installation
@@ -98,3 +98,30 @@ version: 1.1.1
    ~~ either through another device (IE mobile, the web portal, another device running this plugin, etc...)
    ~~ or through the `TodoistSendCommands` command
    ~~ However, `TodoistFullSync` can also serve as an emergency lever in the case of errors, as it will overwrite all existing data and ensure that you are up-to-date with the latest changes in your account
+
+   If all goes well, you will spend the majority of your time in that loop in the workflow, updating your Todoist projects, sending your updates as commands, and requesting incremental syncs occasionally when you have more internet connection
+
+   This workflow is intended to meet a few requirements:
+   - Allows users control over the workflow, choosing whether they want to make many updates at once or send many small chunks of updates
+   - emphasis on incremental syncing facilitates an offline-first workflow to make it easier to work on your task list when away from internet
+   - Making these as commands allows the user to decide when they do each part of the process and allows a few escape hatches with the use of full syncs when necessary
+
+*** Sharpening your workflow
+    To facilitate more rapid workflows, users are encouraged to decide the automation format that works best for them.
+
+    The default approach would likely be to perform both a send and incremental sync command at the same time whenever the user saves the buffer.
+
+** Architecture
+   Todoist has done a good job of implementing a REST api workflow that minimizes the amount of requests that need to be sent as  a client, and the fact that we are working with the sync api ensures that we have all the context necessary whenever we are working with our Todoist state
+
+*** Modeling the relationship
+    The relationship flow can be seen below:
+    @code mermaid
+    sequenceDiagram
+    NeovimClient->>TodoistServer: Sends Full Sync Request
+    TodoistServer-->>NeovimClient: Sends Full Sync Response
+    NeovimClient->>TodoistServer: Sends Update Commands Request
+    TodoistServer-->>NeovimClient: Sends Command Result Response
+    NeovimClient->>TodoistServer: Sends Incremental Sync Request
+    TodoistServer-->>NeovimClient: Sends Incremental Sync Response
+    @end

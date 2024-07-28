@@ -32,26 +32,6 @@ M.response_status_codes = {
 	[503] = "Service Unavailable: The server is currently unable to handle the request",
 }
 
-local generate_command_args_string = function(args)
-	local args_str = '"args": {'
-
-	for name, value in pairs(args) do
-		if type(value) == "string" then
-			args_str = args_str .. string.format('"%s": "%s"', name, value)
-		elseif not value then
-			goto continue
-		else
-			args_str = args_str .. string.format('"%s": %s', name, tostring(value))
-		end
-		if next(args, name) then
-			args_str = args_str .. ", "
-		end
-		::continue::
-	end
-
-	return args_str .. "}"
-end
-
 M.todoist_commands = {
 	["project_add"] = function(name, temp_id, uuid, parent, child_order, is_favorite_req)
 		assert(name, "Must Have a Name for our new project!")
@@ -72,32 +52,18 @@ M.todoist_commands = {
 	end,
 }
 
-local function create_resource_list_str(resource_types)
-	local resource_list_str = "["
-
-	for i, resource_type in pairs(resource_types) do
-		resource_list_str = resource_list_str .. '"' .. resource_type .. '"'
-
-		if i < #resource_types then
-			resource_list_str = resource_list_str .. ", "
-		end
-	end
-
-	resource_list_str = resource_list_str .. "]"
-
-	return resource_list_str
-end
-
 function M.create_sync_request(api_key, sync_token, resource_types, commands)
 	local request_body = {
 		url = "https://api.todoist.com/sync/v9/sync",
 		headers = { Authorization = "Bearer " .. api_key },
 		data = {
 			sync_token = sync_token or "*",
-			resource_types = create_resource_list_str(resource_types or { "projects", "items", "notes", "sections" }),
+			resource_types = vim.json.encode(resource_types or { "projects", "items", "notes", "sections" }),
 		},
 		timeout = 100000,
 	}
+
+	request_body.data.commands = commands
 
 	return request_body
 end

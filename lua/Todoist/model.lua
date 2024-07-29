@@ -97,11 +97,12 @@ M.create_task_node_dictionary = function(types)
 	return nodes
 end
 
----@param types {table} #Dictionary of types with type name as key
+---@param nodes table<integer, table> #Dictionary of types with type name as key
+---@param types table<string, table> #Dictionary of types with type name as key
 ---@return table<integer, table>|nil #errors if empty
-M.create_project_node_dictionary = function(types)
+M.create_project_node_dictionary = function(nodes, types)
 	assert(types, "dictionary source cannot be nil")
-	local nodes = {}
+	assert(nodes, "nodes cannot be nil")
 
 	local project_add_successful, project_add_results = pcall(add_projects_to_nodes, types.projects, nodes)
 	if not project_add_successful then

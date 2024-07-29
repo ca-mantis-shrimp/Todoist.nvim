@@ -101,7 +101,7 @@ describe("converting Todoist Data into the Node Model", function()
 			sections = {},
 		}
 
-		local converted_nodes = model.create_project_node_dictionary(types)
+		local converted_nodes = model.create_project_node_dictionary({}, types)
 
 		local expected_nodes = {
 			[220474322] = {

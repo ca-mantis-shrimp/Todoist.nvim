@@ -16,7 +16,7 @@ function M.setup(opts)
 
 	vim.fn.mkdir(vim.fn.stdpath("cache") .. "/Todoist", "p")
 
-	commands.create_all_projects_command()
+	commands.create_all_project_commands()
 
 	if config_mod.indent_on_buf_enter then
 		autocmd.create_indent_autocmd()

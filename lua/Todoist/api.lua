@@ -10,12 +10,12 @@ local window = require("Todoist.window")
 local filesystem = require("Todoist.filesystem")
 M = {}
 
-M.download_project_tree_to_file = function(path)
+M.download_project_tree_to_file = function()
 	assert(config.api_key, "API key must not be nil for request to work, be sure config was run before this")
 	local todoist_types =
 		request_utilities.process_response(curl.post(request_utilities.create_sync_request(config.api_key)))
 
-	local item_list = model.create_project_node_dictionary(todoist_types)
+	local item_list = model.create_project_node_dictionary({}, todoist_types)
 
 	filesystem.write_file(
 		vim.fn.stdpath("cache") .. "/Todoist/server_items.json",
@@ -27,7 +27,7 @@ M.download_project_tree_to_file = function(path)
 
 	tree_lines[util.length(tree_lines) + 1] = tostring("@" .. todoist_types.sync_token)
 
-	filesystem.write_file(path, tree_lines)
+	return tree_lines
 end
 
 local open_projects_file_as_buffer = function(path)

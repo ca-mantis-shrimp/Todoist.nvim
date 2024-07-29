@@ -8,12 +8,12 @@ local tree_display = require("Todoist.tree.display")
 local buffer = require("Todoist.buffer")
 local window = require("Todoist.window")
 local filesystem = require("Todoist.filesystem")
-M = {}
+local M = {}
 
-M.download_project_tree_to_file = function()
+M.download_project_tree_to_file = function(sync_token)
 	assert(config.api_key, "API key must not be nil for request to work, be sure config was run before this")
 	local todoist_types =
-		request_utilities.process_response(curl.post(request_utilities.create_sync_request(config.api_key)))
+		request_utilities.process_response(curl.post(request_utilities.create_sync_request(config.api_key, sync_token)))
 
 	local item_list = model.create_project_node_dictionary({}, todoist_types)
 

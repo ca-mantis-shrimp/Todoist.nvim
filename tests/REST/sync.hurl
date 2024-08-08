@@ -1,7 +1,7 @@
-GET https://api.todoist.com/rest/v2/projects 
-Authorization: Bearer e0007362ae4002e7ce38bc9cf5f17b71f3fc6750
+POST https://api.todoist.com/sync/v9/sync 
+Authorization: Bearer {{TODOIST_TEST_API_KEY}}
+[QueryStringParams]
+sync_token: "*"
+resource_types: ["projects"]
 
-HTTP 200
 
-[Asserts]
-jsonpath "$" count == 2

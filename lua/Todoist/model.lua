@@ -38,6 +38,7 @@ local function add_project_notes_to_nodes(project_notes, nodes)
 			type = "project_note",
 		}
 	end
+	return nodes
 end
 
 ---@param sections table[] #list of projects

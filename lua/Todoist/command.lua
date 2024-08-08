@@ -8,7 +8,7 @@ M.create_all_project_commands = function()
 		local server_project_file_path = vim.fn.stdpath("cache") .. "/Todoist/server_todoist.projects"
 		local client_project_file_path = vim.fn.stdpath("cache") .. "/Todoist/client_todoist.projects"
 
-		tree_lines = api.download_project_tree_to_file()
+		local tree_lines = api.download_project_tree_to_file()
 
 		filesystem.write_file(server_project_file_path, tree_lines)
 		filesystem.write_file(client_project_file_path, tree_lines)

@@ -13,7 +13,7 @@ local M = {}
 M.download_project_tree_minimal = function()
 	assert(config.api_key, "API key must not be nil for request to work, be sure config was run before this")
 	local todoist_types =
-		request_utilities.process_response(curl.post(request_utilities.create_sync_request(config.api_key, sync_token)))
+		request_utilities.process_response(curl.post(request_utilities.create_sync_request(config.api_key)))
 
 	local item_list = model.create_project_node_dictionary({}, todoist_types)
 

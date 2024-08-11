@@ -4,7 +4,7 @@ description:
 authors: primary_desktop
 categories: 
 created: 2024-07-27T19:41:58-0800
-updated: 2024-07-27T23:41:51-0800
+updated: 2024-08-10T17:39:45-0800
 version: 1.1.1
 @end
 * Todoist.Nvim
@@ -37,14 +37,15 @@ version: 1.1.1
 
    *Lazy*:
    @code lua
-   {
-	   "ca-mantis-shrimp/Todoist.nvim",
-	   dependencies = {
-		   "nvim-lua/plenary.nvim",
-		   "ca-mantis-shrimp/tree-sitter-projects",
-	   },
-	   config = { api_key = vim.env.TODOIST_API_KEY },
-   }
+   return { 
+      {"nvim-lua/plenary.nvim", lazy = true},
+      {
+	 "ca-mantis-shrimp/Todoist.nvim",
+	 dependencies = {
+	    "ca-mantis-shrimp/tree-sitter-projects",
+	 },
+	 config = { api_key = vim.env.TODOIST_API_KEY },
+      }}
    @end
    The only necessary part of configuration is supplying your Todoist API key. This can be extracted from the Todoist web api and from there, I recommend saving it to an environment variable(shown above), a secret manager, ANYTHING other than hard-coding this into your configuration as this is likely to get committed if you keep your configuration under version control 
 

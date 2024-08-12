@@ -1,9 +1,9 @@
-local jsonschema = require("jsonschema")
+local schema = require("jsonschema")
 
 describe("jsonschema testing", function()
 	it("shoudl validate a basic schema", function()
 		-- Note: Cache the result of the schema compilation as this is quite expensive
-		local myvalidator = jsonschema.generate_validator({
+		local myvalidator = schema.generate_validator({
 			type = "object",
 			properties = {
 				foo = { type = "string" },

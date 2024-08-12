@@ -44,3 +44,5 @@ data/*
 diagrams/.structurizr/*
 Session.vim
 todoist_projects
+
+.tests

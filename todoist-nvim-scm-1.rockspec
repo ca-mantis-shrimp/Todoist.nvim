@@ -1,5 +1,5 @@
 rockspec_format = "3.0"
-package = "todoist.nvim"
+package = "todoist-nvim"
 version = "scm-1"
 
 description = {

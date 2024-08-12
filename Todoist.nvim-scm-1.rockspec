@@ -13,6 +13,7 @@ source = {
 	url = "git://github.com/ca-mantis-shrimp/Todoist.nvim",
 }
 dependencies = {
+	"lua == 5.1",
 	"jsonschema ~> 0.9.7",
 }
 
